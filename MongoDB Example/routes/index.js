@@ -38,7 +38,7 @@ router.get('/delete', async function(req, res, next) {
 
   console.log(req.query)
 
-  const found = await Kitten.deleteMany(req.query);
+  const found = await Kitten.findOneAndDelete(req.query);
 
   res.send(found)
 })
