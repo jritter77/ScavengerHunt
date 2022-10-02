@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  
+  form(id='deleteUserForm')
+    h1 Delete a user entry
+
+    p Username
+    input(name='username')
+
+
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
+  
+  script.
+    async function deleteUser() {
+
+      const form = document.getElementById('deleteUserForm');
+      const formData = new FormData(form);
+
+      const payload = {}
+
+      for (const [key, value] of formData) {
+        payload[key] = value
+        }
+
+      result = await axios.delete('./users', {
+        data: payload
+      })
+
+      document.body.innerHTML = result.data
+    }
+
+
+  
+  button(onclick='deleteUser()') Submit

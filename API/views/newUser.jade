@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  
+  form(id='newUserForm')
+
+    h1 New User Form
+
+    p Username
+    input(name='username')
+
+    p Password
+    input(name='password')
+
+    p Confirm Password
+    input(name='confirmPass')
+
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
+  
+  script.
+    async function newUser() {
+
+      const form = document.getElementById('newUserForm');
+      const formData = new FormData(form);
+
+      const payload = {}
+
+      for (const [key, value] of formData) {
+        payload[key] = value
+        }
+        
+      result = await axios.post('./users', payload)
+
+      document.body.innerHTML = result.data
+    }
+
+
+  
+  button(onclick='newUser()') Submit
