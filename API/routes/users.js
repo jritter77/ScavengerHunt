@@ -58,13 +58,13 @@ router.post("/", ensureToken, async function (req, res, next) {
 router.delete("/", async function (req, res, next) {
   const result = await User.findOneAndDelete(req.body);
 
-  res.send(`<h1>${result.username} has been deleted from the database!`);
+  res.send(`<h1>${result.username} has been deleted from the database!</h1>`);
 });
 
 router.put("/", async function (req, res, next) {
   const result = await User.findOneAndUpdate(req.body.user, req.body.attr);
 
-  res.send(`<h1>${result.username} has been updated!`);
+  res.send(`<h1>${result.username} has been updated!</h1>`);
 });
 
 initDb();
