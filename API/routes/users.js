@@ -55,7 +55,7 @@ router.post("/", async function (req, res, next) {
   res.send(`<h1>${user.username} was added to database!</h1>`);
 });
 
-router.delete("/", async function (req, res, next) {
+router.delete("/", ensureToken, async function (req, res, next) {
   const result = await User.findOneAndDelete(req.body);
 
   res.send(`<h1>${result.username} has been deleted from the database!</h1>`);
