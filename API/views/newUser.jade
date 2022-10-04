@@ -30,7 +30,11 @@ block content
         payload[key] = value
         }
         
-      result = await axios.post('./users', payload)
+      result = await axios.post('./users', payload,{
+        headers: {
+          'Authorization': `token ${localStorage.getItem('token')}`
+        }
+      })
 
       document.body.innerHTML = result.data
     }

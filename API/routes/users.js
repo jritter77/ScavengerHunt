@@ -1,6 +1,9 @@
 let express = require("express");
+const { JsonWebTokenError } = require("jsonwebtoken");
 let router = express.Router();
 let mongoose = require("mongoose");
+let jwt = require("jsonwebtoken");
+const { ensureToken } = require("../methods");
 
 let User;
 
@@ -32,7 +35,19 @@ router.get("/", async function (req, res, next) {
   res.send(found);
 });
 
-router.post("/", async function (req, res, next) {
+router.post("/login", async function (req, res, next) {
+  const user = await User.findOne({ username: req.body.username });
+
+  if (user.password === req.body.password) {
+    console.log("success!");
+    const token = jwt.sign(user.username, process.env.SECRET);
+    res.send(token);
+  } else {
+    console.log("Invalid credentials");
+  }
+});
+
+router.post("/", ensureToken, async function (req, res, next) {
   const user = new User(req.body);
 
   await user.save();

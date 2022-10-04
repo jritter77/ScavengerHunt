@@ -3,11 +3,15 @@ let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
+let jwt = require("jsonwebtoken");
+let dotenv = require("dotenv");
 
 let indexRouter = require("./routes/index");
 let usersRouter = require("./routes/users");
 
 let app = express();
+
+dotenv.config();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
