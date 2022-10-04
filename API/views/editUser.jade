@@ -35,7 +35,11 @@ block content
         }
       }
 
-      result = await axios.put('./users', payload)
+      result = await axios.put('./users', payload, {
+        headers: {
+          'Authorization': `token ${localStorage.getItem('token')}`
+        }
+      })
 
       document.body.innerHTML = result.data
     }

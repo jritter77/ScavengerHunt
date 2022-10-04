@@ -47,7 +47,7 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-router.post("/", ensureToken, async function (req, res, next) {
+router.post("/", async function (req, res, next) {
   const user = new User(req.body);
 
   await user.save();
@@ -61,7 +61,7 @@ router.delete("/", async function (req, res, next) {
   res.send(`<h1>${result.username} has been deleted from the database!</h1>`);
 });
 
-router.put("/", async function (req, res, next) {
+router.put("/", ensureToken, async function (req, res, next) {
   const result = await User.findOneAndUpdate(req.body.user, req.body.attr);
 
   res.send(`<h1>${result.username} has been updated!</h1>`);
