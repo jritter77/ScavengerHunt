@@ -7,42 +7,42 @@ block content
     h1 New Hunt Form
 
     p Title
-    input(id='title')
+    input(name='title')
 
     p Description
-    textarea(id="description", cols="30", rows="10")
+    textarea(name="description", cols="30", rows="10")
 
     p Clue List
     
     div
       span Clue 1:
-      input(class='clue')
+      input(name='clue1[]')
       span Answer 1:
-      input(class='answer')
+      input(name='clue1[]')
       span Type 1:
-      select(class="type")
+      select(name="clue1[]")
         option(value='text') Text
         option(value='checkbox') Checkbox
         option(value='image') Image
 
     div
       span Clue 2:
-      input(class='clue')
+      input(name='clue2[]')
       span Answer 2:
-      input(class='answer')
+      input(name='clue2[]')
       span Type 2:
-      select(class="type")
+      select(name="clue2[]")
         option(value='text') Text
         option(value='checkbox') Checkbox
         option(value='image') Image
 
     div
       span Clue 3:
-      input(class='clue')
+      input(name='clue3[]')
       span Answer 3:
-      input(class='answer')
+      input(name='clue3[]')
       span Type 3:
-      select(class="type")
+      select(name="clue3[]")
         option(value='text') Text
         option(value='checkbox') Checkbox
         option(value='image') Image
@@ -55,28 +55,37 @@ block content
   script.
     async function newHunt() {
 
-      const title = document.getElementById('title');
-      const desc = document.getElementById('description');
-      const clues = document.querySelector('div');
+      const form = document.getElementById('newHuntForm');
+      const formData = new FormData(form);
 
-      payload = {
-        title: title.value,
-        description: desc.value,
-        clues: [],
-      }
 
-      for (let clue of clues) {
-        let inputs = div.querySelector('input');
+      const payload = {clueList: []};
 
-        let clue  = {}
+      let clueList = {};
 
-        for (let input of inputs) {
-          clue[input.class] = input.value;
+      for (const [key, value] of formData) {
+
+        if (key.includes('[]')) {
+          let k = key.replace('[]', '');
+
+          if (clueList[k] !== undefined) {
+            clueList[k].push(value);
+          }
+          else {
+            clueList[k] = [value];
+          }
         }
+        else {
+          payload[key] = value;
 
-        payload.clues.append(clue);
+        }
       }
-        
+
+      for (let c in clueList) {
+        payload.clueList.push({clue: clueList[c][0], answer: clueList[c][1], type: clueList[c][2]});
+      }
+
+      
       result = await axios.post('./hunts', payload)
 
       document.body.innerHTML = result.data

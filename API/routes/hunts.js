@@ -15,7 +15,7 @@ async function initDb() {
 
     clueList: Array,
 
-    rating: Array,
+    ratings: Array,
     downloads: Number,
   });
 
