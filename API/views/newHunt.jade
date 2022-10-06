@@ -1,0 +1,87 @@
+extends layout
+
+block content
+  
+  form(id='newHuntForm')
+
+    h1 New Hunt Form
+
+    p Title
+    input(id='title')
+
+    p Description
+    textarea(id="description", cols="30", rows="10")
+
+    p Clue List
+    
+    div
+      span Clue 1:
+      input(class='clue')
+      span Answer 1:
+      input(class='answer')
+      span Type 1:
+      select(class="type")
+        option(value='text') Text
+        option(value='checkbox') Checkbox
+        option(value='image') Image
+
+    div
+      span Clue 2:
+      input(class='clue')
+      span Answer 2:
+      input(class='answer')
+      span Type 2:
+      select(class="type")
+        option(value='text') Text
+        option(value='checkbox') Checkbox
+        option(value='image') Image
+
+    div
+      span Clue 3:
+      input(class='clue')
+      span Answer 3:
+      input(class='answer')
+      span Type 3:
+      select(class="type")
+        option(value='text') Text
+        option(value='checkbox') Checkbox
+        option(value='image') Image
+
+
+
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
+  
+  script.
+    async function newHunt() {
+
+      const title = document.getElementById('title');
+      const desc = document.getElementById('description');
+      const clues = document.querySelector('div');
+
+      payload = {
+        title: title.value,
+        description: desc.value,
+        clues: [],
+      }
+
+      for (let clue of clues) {
+        let inputs = div.querySelector('input');
+
+        let clue  = {}
+
+        for (let input of inputs) {
+          clue[input.class] = input.value;
+        }
+
+        payload.clues.append(clue);
+      }
+        
+      result = await axios.post('./hunts', payload)
+
+      document.body.innerHTML = result.data
+    }
+
+
+  
+  button(onclick='newHunt()') Submit

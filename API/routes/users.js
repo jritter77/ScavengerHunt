@@ -1,5 +1,4 @@
 let express = require("express");
-const { JsonWebTokenError } = require("jsonwebtoken");
 let router = express.Router();
 let mongoose = require("mongoose");
 let jwt = require("jsonwebtoken");
@@ -14,7 +13,6 @@ async function initDb() {
     username: String,
     password: String,
     isAdmin: Boolean,
-    apiKey: String,
 
     activityLog: Object,
 
