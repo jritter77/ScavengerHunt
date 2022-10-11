@@ -53,7 +53,6 @@ router.delete("/", ensureToken, async function (req, res, next) {
 
 // Edit Current User
 router.put("/", ensureToken, async function (req, res, next) {
-  console.log(req.body)
   const result = await User.findOneAndUpdate(req.body.user, req.body.attr);
 
   res.send(`<h1>${result.username} has been updated!</h1>`);
@@ -79,14 +78,12 @@ router.post("/login", async function (req, res, next) {
 
 // Create New Friend Request
 router.post("/friends", ensureToken, async function (req, res, next) {
-  const sender = req.body.sender
-  const receiver = req.body.receiver
-
-  const recipient = await mongoose.findOne({username: receiver})
+  const sender = await mongoose.findOne({username: req.body.user});
+  const recipient = await mongoose.findOne({username: req.body.receiver})
 
   if (recipient) {
 
-    recipient.friendRequests.push({sender: sender});
+    recipient.friendRequests.push({_id: sender._id, username: sender.username});
 
     const result = await mongoose.findOneAndUpdate(
       {_id: recipient._id},

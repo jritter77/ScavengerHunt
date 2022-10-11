@@ -32,7 +32,6 @@ router.get("/", async function (req, res, next) {
 router.post("/", async function (req, res, next) {
   const hunt = new Hunt(req.body);
 
-  console.log(req.body);
 
   await hunt.save();
 
