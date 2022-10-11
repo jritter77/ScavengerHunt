@@ -3,16 +3,16 @@ extends layout
 block content
   
   form(id='editUserForm')
-    h1 Edit a user entry
+    h1 Edit Current User
 
-    p Username
+    p New Username
     input(name='username')
 
-    p Password
-    input(name='password')
+    p New Password
+    input(name='password', type='password')
 
-    p Confirm Password 
-    input(name='confirmPass')
+    p Confirm New Password 
+    input(name='confirmPass', type='password')
 
 
 
@@ -24,22 +24,14 @@ block content
       const form = document.getElementById('editUserForm');
       const formData = new FormData(form);
 
-      const payload = {user: {}, attr: {}}
+      const payload = {attr: {}}
 
       for (const [key, value] of formData) {
-        if (key === 'username') {
-            payload.user[key] = value
-        }
-        else {
             payload.attr[key] = value
         }
-      }
+      
 
-      result = await axios.put('./users', payload, {
-        headers: {
-          'Authorization': `token ${localStorage.getItem('token')}`
-        }
-      })
+      result = await axios.put('./users', payload)
 
       document.body.innerHTML = result.data
     }

@@ -2,11 +2,9 @@ extends layout
 
 block content
   
-  form(id='deleteUserForm')
-    h1 Delete a user entry
+  h1 Delete Current User
 
-    p Username
-    input(name='username')
+    
 
 
 
@@ -15,22 +13,11 @@ block content
   script.
     async function deleteUser() {
 
-      const form = document.getElementById('deleteUserForm');
-      const formData = new FormData(form);
-
-      const payload = {}
-
-      for (const [key, value] of formData) {
-        payload[key] = value
-        }
-
-      result = await axios.delete('./users', {
-        data: payload
-      })
+      result = await axios.delete('./users');
 
       document.body.innerHTML = result.data
     }
 
 
   
-  button(onclick='deleteUser()') Submit
+  button(onclick='deleteUser()') Confirm Delete User

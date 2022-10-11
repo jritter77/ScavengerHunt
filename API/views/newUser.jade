@@ -10,10 +10,12 @@ block content
     input(name='username')
 
     p Password
-    input(name='password')
+    input(name='password', type='password')
 
     p Confirm Password
-    input(name='confirmPass')
+    input(name='confirmPass', type='password')
+
+    p(id='feedback', style={color: 'red'})
 
 
   script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
@@ -24,15 +26,22 @@ block content
       const form = document.getElementById('newUserForm');
       const formData = new FormData(form);
 
-      const payload = {}
+      if (formData.get('password') === formData.get('confirmPass')) {
+        const payload = {}
 
-      for (const [key, value] of formData) {
-        payload[key] = value
+        for (const [key, value] of formData) {
+          payload[key] = value
         }
-        
-      result = await axios.post('./users', payload)
+          
+        result = await axios.post('./users', payload);
 
-      document.body.innerHTML = result.data
+        document.body.innerHTML = result.data;
+      }
+      else {
+        document.getElementById('feedback').innerHTML = 'Passwords Do Not Match';
+      }
+
+      
     }
 
 

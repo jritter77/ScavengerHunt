@@ -26,25 +26,14 @@ async function initDb() {
   User = mongoose.models.User || mongoose.model("User", UserSchema);
 }
 
-/* GET user/s */
-router.get("/", async function (req, res, next) {
+// GET all users matching query
+router.get("/", ensureToken, async function (req, res, next) {
   const found = await User.find(req.query);
 
   res.send(found);
 });
 
-router.post("/login", async function (req, res, next) {
-  const user = await User.findOne({ username: req.body.username });
-
-  if (user.password === req.body.password) {
-    console.log("success!");
-    const token = jwt.sign(user.username, process.env.SECRET);
-    res.send(token);
-  } else {
-    console.log("Invalid credentials");
-  }
-});
-
+// Create New User 
 router.post("/", async function (req, res, next) {
   const user = new User(req.body);
 
@@ -53,17 +42,65 @@ router.post("/", async function (req, res, next) {
   res.send(`<h1>${user.username} was added to database!</h1>`);
 });
 
+// Delete Current User
 router.delete("/", ensureToken, async function (req, res, next) {
-  const result = await User.findOneAndDelete(req.body);
+  const result = await User.findOneAndDelete(req.body.user);
+
+  res.clearCookie('JWT');
 
   res.send(`<h1>${result.username} has been deleted from the database!</h1>`);
 });
 
+// Edit Current User
 router.put("/", ensureToken, async function (req, res, next) {
+  console.log(req.body)
   const result = await User.findOneAndUpdate(req.body.user, req.body.attr);
 
   res.send(`<h1>${result.username} has been updated!</h1>`);
 });
+
+
+
+// Login Route
+router.post("/login", async function (req, res, next) {
+  const user = await User.findOne({ username: req.body.username });
+
+  if (user && user.password === req.body.password) {
+    const token = jwt.sign({id: user._id}, process.env.SECRET);
+    res.cookie('JWT', token, {httpOnly: true});
+    res.send('<h1>Cookie has been sent!</h1>');
+  } else {
+    res.send("<h1>Invalid credentials</h1>");
+  }
+});
+
+
+
+
+// Create New Friend Request
+router.post("/friends", ensureToken, async function (req, res, next) {
+  const sender = req.body.sender
+  const receiver = req.body.receiver
+
+  const recipient = await mongoose.findOne({username: receiver})
+
+  if (recipient) {
+
+    recipient.friendRequests.push({sender: sender});
+
+    const result = await mongoose.findOneAndUpdate(
+      {_id: recipient._id},
+      {friendRequests: recipient.friendRequests}
+    ) 
+
+    res.send(result);
+
+  }
+  else {
+    res.send(receiver + 'is not a valid user.')
+  }
+});
+
 
 initDb();
 

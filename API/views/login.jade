@@ -10,8 +10,14 @@ block content
     input(name='username')
 
     p Password
-    input(name='password')
+    input(name='password', type='password')
 
+  button(onclick='login()') Submit
+
+
+
+  div
+    a(href='/newUser') Create New User
 
   script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
   
@@ -29,9 +35,8 @@ block content
         
       result = await axios.post('./users/login', payload)
 
-      localStorage.setItem('token', result.data);
+      document.body.innerHTML = result.data;
     }
 
 
   
-  button(onclick='login()') Submit

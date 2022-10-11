@@ -1,20 +1,20 @@
 let jwt = require("jsonwebtoken");
 
 module.exports.ensureToken = function (req, res, next) {
-  const bearerHeader = req.headers["authorization"];
+  const cookies = req.cookies;
 
-  if (typeof bearerHeader !== "undefined") {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
+  if (cookies.JWT) {
+  
+    jwt.verify(cookies.JWT, process.env.SECRET, (err, result) => {
 
-    jwt.verify(bearerToken, process.env.SECRET, (err, result) => {
       if (err) {
-        res.sendStatus(403);
+        res.redirect(403, '/login');
       } else {
+        req.body.user = {_id: result.id};
         next();
       }
     });
   } else {
-    res.sendStatus(403);
+    res.redirect(403, '/login');
   }
 };

@@ -3,7 +3,7 @@ const { ensureToken } = require("../methods");
 var router = express.Router();
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", ensureToken, function (req, res, next) {
   res.render("index", { title: "Lookout! API" });
 });
 
@@ -11,11 +11,11 @@ router.get("/newUser", function (req, res, next) {
   res.render("newUser");
 });
 
-router.get("/deleteUser", function (req, res, next) {
+router.get("/deleteUser", ensureToken, function (req, res, next) {
   res.render("deleteUser");
 });
 
-router.get("/editUser", function (req, res, next) {
+router.get("/editUser", ensureToken, function (req, res, next) {
   res.render("editUser");
 });
 
@@ -23,7 +23,7 @@ router.get("/login", function (req, res, next) {
   res.render("login");
 });
 
-router.get("/newHunt", function (req, res, next) {
+router.get("/newHunt", ensureToken, function (req, res, next) {
   res.render("newHunt");
 });
 

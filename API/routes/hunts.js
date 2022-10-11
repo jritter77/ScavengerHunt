@@ -46,7 +46,7 @@ router.delete("/", ensureToken, async function (req, res, next) {
 });
 
 router.put("/", ensureToken, async function (req, res, next) {
-  const result = await Hunt.findOneAndUpdate(req.body.user, req.body.attr);
+  const result = await Hunt.findOneAndUpdate(req.body.hunt, req.body.attr);
 
   res.send(`<h1>${result.title} has been updated!</h1>`);
 });
