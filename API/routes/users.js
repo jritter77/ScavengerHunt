@@ -2,24 +2,17 @@ let express = require("express");
 let router = express.Router();
 let jwt = require("jsonwebtoken");
 const { ensureToken } = require("../methods");
-
 const User = require('../models/Users');
 
 
 
-// GET all users matching query
+// GET user according to query
 router.get("/", ensureToken, async function (req, res, next) {
-  const found = await User.find(req.query);
+  const users = await User.find(req.query, {username:1});
 
-  res.send(found);
+  res.send(users);
 });
 
-// GET all users matching query
-router.get("/current", ensureToken, async function (req, res, next) {
-  const found = await User.findOne(req.body.user);
-
-  res.send(found);
-});
 
 // Create New User 
 router.post("/", async function (req, res, next) {
@@ -43,9 +36,11 @@ router.delete("/", ensureToken, async function (req, res, next) {
 
 // Edit Current User
 router.put("/", ensureToken, async function (req, res, next) {
-  const result = await User.findOneAndUpdate(req.body.user, req.body.attr);
-
-  res.send(`<h1>${result.username} has been updated!</h1>`);
+  const user = await User.findOne(req.body.user);
+  user.changeCredentials(req.body.attr);
+  await user.save();
+  
+  res.send(`<h1>${user.username} has been updated!</h1>`);
 });
 
 

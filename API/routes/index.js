@@ -31,4 +31,8 @@ router.get("/addFriend", ensureToken, function(req, res, next) {
   res.render("newFriendRequest");
 })
 
+router.get("/viewFriends", ensureToken, function(req, res, next) {
+  res.render("viewFriends");
+})
+
 module.exports = router;

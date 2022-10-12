@@ -17,6 +17,16 @@ const UserSchema = mongoose.Schema({
     sharedHunts: Array,
 });
 
+UserSchema.methods.changeCredentials = function({username, password}) {
+    this.username = username;
+    this.setPassword(password);
+}
+
+
+UserSchema.methods.acceptFriendRequest = function(request) {
+    this.friends.push(request.id);
+    this.friendRequests.remove(request);
+}
 
 UserSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
