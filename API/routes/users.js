@@ -1,30 +1,11 @@
 let express = require("express");
 let router = express.Router();
-let mongoose = require("mongoose");
 let jwt = require("jsonwebtoken");
 const { ensureToken } = require("../methods");
 
-let User;
+const User = require('../models/Users');
 
-async function initDb() {
-  await mongoose.connect("mongodb://localhost:27017/LookoutDB");
 
-  const UserSchema = mongoose.Schema({
-    username: String,
-    password: String,
-    isAdmin: Boolean,
-
-    activityLog: Object,
-
-    huntHistory: Object,
-    friends: Array,
-    friendRequests: Array,
-    groupInvites: Array,
-    sharedHunts: Array,
-  });
-
-  User = mongoose.models.User || mongoose.model("User", UserSchema);
-}
 
 // GET all users matching query
 router.get("/", ensureToken, async function (req, res, next) {
@@ -33,9 +14,18 @@ router.get("/", ensureToken, async function (req, res, next) {
   res.send(found);
 });
 
+// GET all users matching query
+router.get("/current", ensureToken, async function (req, res, next) {
+  const found = await User.findOne(req.body.user);
+
+  res.send(found);
+});
+
 // Create New User 
 router.post("/", async function (req, res, next) {
   const user = new User(req.body);
+
+  user.setPassword(req.body.password);
 
   await user.save();
 
@@ -59,12 +49,11 @@ router.put("/", ensureToken, async function (req, res, next) {
 });
 
 
-
 // Login Route
 router.post("/login", async function (req, res, next) {
   const user = await User.findOne({ username: req.body.username });
 
-  if (user && user.password === req.body.password) {
+  if (user.validPassword(req.body.password)) {
     const token = jwt.sign({id: user._id}, process.env.SECRET);
     res.cookie('JWT', token, {httpOnly: true});
     res.send('<h1>Cookie has been sent!</h1>');
@@ -74,31 +63,5 @@ router.post("/login", async function (req, res, next) {
 });
 
 
-
-
-// Create New Friend Request
-router.post("/friends", ensureToken, async function (req, res, next) {
-  const sender = await mongoose.findOne({username: req.body.user});
-  const recipient = await mongoose.findOne({username: req.body.receiver})
-
-  if (recipient) {
-
-    recipient.friendRequests.push({_id: sender._id, username: sender.username});
-
-    const result = await mongoose.findOneAndUpdate(
-      {_id: recipient._id},
-      {friendRequests: recipient.friendRequests}
-    ) 
-
-    res.send(result);
-
-  }
-  else {
-    res.send(receiver + 'is not a valid user.')
-  }
-});
-
-
-initDb();
 
 module.exports = router;

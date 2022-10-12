@@ -24,11 +24,11 @@ block content
         payload[key] = value
         }
         
-      result = await axios.post('./users/friends', payload)
+      result = await axios.post('./friends', {receiver: payload})
 
-      document.body.innerHTML = result.data
+      document.body.innerHTML = result.data;
     }
 
 
   
-  button(onclick='newUser()') Submit
+  button(onclick='newFriendRequest()') Send Request

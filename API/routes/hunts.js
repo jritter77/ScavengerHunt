@@ -1,45 +1,26 @@
 let express = require("express");
 let router = express.Router();
-let mongoose = require("mongoose");
 const { ensureToken } = require("../methods");
+const Hunt = require("../models/Hunts");
 
-let Hunt;
-
-async function initDb() {
-  await mongoose.connect("mongodb://localhost:27017/LookoutDB");
-
-  const HuntSchema = mongoose.Schema({
-    author: String,
-    title: String,
-    description: String,
-
-    clueList: Array,
-
-    ratings: Array,
-    downloads: Number,
-  });
-
-  Hunt = mongoose.models.Hunt || mongoose.model("Hunt", HuntSchema);
-}
 
 /* GET hunt/s */
-router.get("/", async function (req, res, next) {
+router.get("/", ensureToken, async function (req, res, next) {
   const found = await Hunt.find(req.query);
 
   res.send(found);
 });
 
-router.post("/", async function (req, res, next) {
-  const hunt = new Hunt(req.body);
-
+router.post("/", ensureToken, async function (req, res, next) {
+  const hunt = new Hunt(req.body.hunt);
 
   await hunt.save();
 
   res.send(`<h1>${hunt.title} was added to database!</h1>`);
 });
 
-router.delete("/", ensureToken, async function (req, res, next) {
-  const result = await Hunt.findOneAndDelete(req.body);
+router.delete("/", ensureToken, ensureToken, async function (req, res, next) {
+  const result = await Hunt.findOneAndDelete(req.body.hunt);
 
   res.send(`<h1>${result.title} has been deleted from the database!</h1>`);
 });
@@ -50,6 +31,5 @@ router.put("/", ensureToken, async function (req, res, next) {
   res.send(`<h1>${result.title} has been updated!</h1>`);
 });
 
-initDb();
 
 module.exports = router;

@@ -27,4 +27,8 @@ router.get("/newHunt", ensureToken, function (req, res, next) {
   res.render("newHunt");
 });
 
+router.get("/addFriend", ensureToken, function(req, res, next) {
+  res.render("newFriendRequest");
+})
+
 module.exports = router;
