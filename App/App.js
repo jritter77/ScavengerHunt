@@ -21,12 +21,15 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
 
+  const [userId, setUserId] = React.useState('');
+
   const [loggedIn, setLoggedIn] = React.useState(false);
 
 
 
 
   if (loggedIn) {
+    console.log(userId);
     return (
       <NavigationContainer>
         <Drawer.Navigator initialRouteName='Dashboard' >
@@ -58,7 +61,7 @@ export default function App() {
   else {
     return (
       <NavigationContainer>
-        <LoginStack setLoggedIn={setLoggedIn}/>
+        <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId}/>
       </NavigationContainer>
     )
   }
