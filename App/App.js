@@ -60,9 +60,7 @@ export default function App() {
   }
   else {
     return (
-      <NavigationContainer>
         <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId}/>
-      </NavigationContainer>
     )
   }
   

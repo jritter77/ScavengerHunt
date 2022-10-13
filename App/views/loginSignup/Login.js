@@ -2,8 +2,11 @@ import { View, Text, Button, StyleSheet } from 'react-native'
 import React from 'react'
 import StandardButton from '../../components/StandardButton'
 import { TextInput } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
 
-const Login = ({navigation, setLoggedIn, setUserId}) => {
+const Login = ({setLoggedIn, setUserId}) => {
+
+  const navigation = useNavigation();
 
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -23,6 +26,8 @@ const Login = ({navigation, setLoggedIn, setUserId}) => {
 
     setUserId('George')
   }
+
+
 
   return (
     <View style={styles.buttonContainer}>

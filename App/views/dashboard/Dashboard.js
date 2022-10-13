@@ -3,6 +3,7 @@ import React from 'react'
 import StandardButton from '../../components/StandardButton';
 
 const Dashboard = ({navigation}) => {
+  console.log(navigation)
   return (
     <View style={styles.buttonContainer}>
       <StandardButton 
