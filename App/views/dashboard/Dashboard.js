@@ -1,11 +1,12 @@
 import { View, Text, Button, StyleSheet } from 'react-native'
 import React from 'react'
 import StandardButton from '../../components/StandardButton';
+import Styles from '../../Styles';
 
 const Dashboard = ({navigation}) => {
   console.log(navigation)
   return (
-    <View style={styles.buttonContainer}>
+    <View style={Styles.StandardStyles.page}>
       <StandardButton 
         title='Profile'
         onPress={() => {
@@ -26,14 +27,6 @@ const Dashboard = ({navigation}) => {
       />
     </View>
   )
-}
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+} 
 
 export default Dashboard

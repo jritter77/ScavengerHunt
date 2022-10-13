@@ -3,6 +3,7 @@ import React from 'react'
 import StandardButton from '../../components/StandardButton'
 import { TextInput } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
+import Styles from '../../Styles'
 
 const Login = ({setLoggedIn, setUserId}) => {
 
@@ -30,16 +31,16 @@ const Login = ({setLoggedIn, setUserId}) => {
 
 
   return (
-    <View style={styles.buttonContainer}>
+    <View style={Styles.StandardStyles.page}>
         <TextInput 
           onChangeText={setUsername}
           placeholder='Username'
-          style={styles.textInput}
+          style={Styles.StandardStyles.textInput}
         />
         <TextInput 
           onChangeText={setPassword}
           placeholder='Password'
-          style={styles.textInput}
+          style={Styles.StandardStyles.textInput}
         />
         <StandardButton 
           title='Login'
@@ -57,20 +58,7 @@ const Login = ({setLoggedIn, setUserId}) => {
   )
 }
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  textInput: {
-    width: '70%',
-    fontSize: 20,
-    padding: '5%',
-    borderColor: 'blue',
-    borderWidth: 2,
-    margin: '5%'
-  }
-})
+
+
 
 export default Login
