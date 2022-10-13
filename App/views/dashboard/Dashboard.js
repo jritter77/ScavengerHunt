@@ -5,18 +5,24 @@ import StandardButton from '../../components/StandardButton';
 const Dashboard = ({navigation}) => {
   return (
     <View style={styles.buttonContainer}>
-        <StandardButton 
-          title='My Hunts'
-          onPress={() => {
-            navigation.navigate('currentHunts')
-          }}
-        />
-        <StandardButton 
-          title='Sign Up'
-          onPress={() => {
-            navigation.navigate('SignUp');
-          }}
-        />
+      <StandardButton 
+        title='Profile'
+        onPress={() => {
+          navigation.navigate('ProfileStack');
+        }}
+      />
+      <StandardButton 
+        title='Hunts'
+        onPress={() => {
+          navigation.navigate('HuntStack')
+        }}
+      />
+      <StandardButton 
+        title='Friends'
+        onPress={() => {
+          navigation.navigate('FriendStack')
+        }}
+      />
     </View>
   )
 }

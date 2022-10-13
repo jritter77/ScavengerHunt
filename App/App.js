@@ -1,56 +1,30 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
 
-import ActiveHunt from './views/hunts/ActiveHunt';
-import AddFriend from './views/friends/AddFriend';
-import ChangeCredentials from './views/profile/ChangeCredentials';
+
 import Dashboard from './views/dashboard/Dashboard';
-import CreateHunt from './views/hunts/CreateHunt';
-import FindHunts from './views/hunts/FindHunts';
-import Friends from './views/friends/Friends';
-import FriendRequests from './views/friends/FriendRequests';
-import FriendProfile from './views/friends/FriendProfile';
-import HuntInfo from './views/hunts/HuntInfo';
-import Hunts from './views/hunts/Hunts';
-import Login from './views/loginSignup/Login';
-import Profile from './views/profile/Profile';
-import Settings from './views/profile/Settings';
-import SignUp from './views/loginSignup/SignUp';
+
+
+import ProfileStack from './views/profile/Index.js';
+import HuntStack from './views/hunts/Index.js';
+import FriendStack from './views/friends/Index.js';
+import LoginStack from './views/loginSignup/Index.js';
 
 
 
-const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 
 
 export default function App() {
 
-const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
 
-function ProfileStack() {
-  return (
-      <Stack.Navigator>
-        <Stack.Screen 
-          name='Profile'
-          component={Profile}
-        />
-        <Stack.Screen 
-          name='ChangeCredentials'
-          component={ChangeCredentials}
-        />
-        <Stack.Screen 
-          name='Settings'
-          component={Settings}
-        />
-      </Stack.Navigator>
-  );
-}
+
 
   if (loggedIn) {
     return (
@@ -67,13 +41,14 @@ function ProfileStack() {
               component={Dashboard}
             />
             <Drawer.Screen 
-              name='Hunts'
-              component={Hunts}
+              name='HuntStack'
+              component={HuntStack}
               options={{drawerLabel: 'Scavenger Hunts'}}
             />
             <Drawer.Screen 
-              name='Friends'
-              component={Friends}
+              name='FriendStack'
+              component={FriendStack}
+              options={{drawerLabel: 'Friends'}}
             />
           </Drawer.Group>
         </Drawer.Navigator>
@@ -82,7 +57,9 @@ function ProfileStack() {
   }
   else {
     return (
-      <Login setLoggedIn={setLoggedIn} />
+      <NavigationContainer>
+        <LoginStack setLoggedIn={setLoggedIn}/>
+      </NavigationContainer>
     )
   }
   

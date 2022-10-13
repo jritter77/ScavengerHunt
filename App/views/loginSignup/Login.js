@@ -12,7 +12,7 @@ const Login = ({navigation, setLoggedIn}) => {
           }}
         />
         <StandardButton 
-          title='Sign Up'
+          title='SignUp'
           onPress={() => {
             navigation.navigate('SignUp');
           }}
