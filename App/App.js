@@ -1,90 +1,91 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import React from 'react';
 
-import ActiveHunt from './views/ActiveHunt';
-import AddFriend from './views/AddFriend';
-import ChangeCredentials from './views/ChangeCredentials';
-import Dashboard from './views/Dashboard';
-import CreateHunt from './views/CreateHunt';
-import FindHunts from './views/FindHunts';
-import Friends from './views/Friends';
-import FriendRequests from './views/FriendRequests';
-import FriendProfile from './views/FriendProfile';
-import HuntInfo from './views/HuntInfo';
-import Login from './views/Login';
-import Profile from './views/Profile';
-import Settings from './views/Settings';
-import SignUp from './views/SignUp';
+import ActiveHunt from './views/hunts/ActiveHunt';
+import AddFriend from './views/friends/AddFriend';
+import ChangeCredentials from './views/profile/ChangeCredentials';
+import Dashboard from './views/dashboard/Dashboard';
+import CreateHunt from './views/hunts/CreateHunt';
+import FindHunts from './views/hunts/FindHunts';
+import Friends from './views/friends/Friends';
+import FriendRequests from './views/friends/FriendRequests';
+import FriendProfile from './views/friends/FriendProfile';
+import HuntInfo from './views/hunts/HuntInfo';
+import Hunts from './views/hunts/Hunts';
+import Login from './views/loginSignup/Login';
+import Profile from './views/profile/Profile';
+import Settings from './views/profile/Settings';
+import SignUp from './views/loginSignup/SignUp';
 
 
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+
 
 export default function App() {
+
+const [loggedIn, setLoggedIn] = React.useState(false);
+
+
+function ProfileStack() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-      <Stack.Screen 
-          name="ActiveHunt"
-          component={ActiveHunt}
-        />
+      <Stack.Navigator>
         <Stack.Screen 
-          name="AddFriend"
-          component={AddFriend}
-        />
-        <Stack.Screen 
-          name="ChangeCredentials"
-          component={ChangeCredentials}
-        />
-        <Stack.Screen 
-          name="CreateHunt"
-          component={CreateHunt}
-        />
-        <Stack.Screen 
-          name="Dashboard"
-          component={Dashboard}
-        />
-        <Stack.Screen 
-          name="FindHunts"
-          component={FindHunts}
-        />
-        <Stack.Screen 
-          name="FriendProfile"
-          component={FriendProfile}
-        />
-        <Stack.Screen 
-          name="FriendRequests"
-          component={FriendRequests}
-        />
-        <Stack.Screen 
-          name="Friends"
-          component={Friends}
-        />
-        <Stack.Screen 
-          name="HuntInfo"
-          component={HuntInfo}
-        />
-        <Stack.Screen 
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-          name="Profile"
+          name='Profile'
           component={Profile}
         />
         <Stack.Screen 
-          name="Settings"
-          component={Settings}
+          name='ChangeCredentials'
+          component={ChangeCredentials}
         />
         <Stack.Screen 
-          name="SignUp"
-          component={SignUp}
+          name='Settings'
+          component={Settings}
         />
       </Stack.Navigator>
-    </NavigationContainer>
   );
+}
+
+  if (loggedIn) {
+    return (
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName='Dashboard' >
+          <Drawer.Group screenOptions={{headerTitle: 'Lookout!'}}>
+            <Drawer.Screen 
+              name='ProfileStack'
+              component={ProfileStack}
+              options={{drawerLabel: 'Profile'}}
+            />
+            <Drawer.Screen 
+              name='Dashboard'
+              component={Dashboard}
+            />
+            <Drawer.Screen 
+              name='Hunts'
+              component={Hunts}
+              options={{drawerLabel: 'Scavenger Hunts'}}
+            />
+            <Drawer.Screen 
+              name='Friends'
+              component={Friends}
+            />
+          </Drawer.Group>
+        </Drawer.Navigator>
+      </NavigationContainer>
+    );
+  }
+  else {
+    return (
+      <Login setLoggedIn={setLoggedIn} />
+    )
+  }
+  
 }
 
 
