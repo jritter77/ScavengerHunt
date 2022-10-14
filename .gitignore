@@ -10,7 +10,7 @@
 *.userosscache
 *.sln.docstates
 
-App/.expo/*
+*/.expo/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
