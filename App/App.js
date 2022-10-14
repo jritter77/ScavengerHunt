@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerToggleButton } from '@react-navigation/drawer';
 import React from 'react';
 
 
@@ -12,6 +12,8 @@ import ProfileStack from './views/profile/Index.js';
 import HuntStack from './views/hunts/Index.js';
 import FriendStack from './views/friends/Index.js';
 import LoginStack from './views/loginSignup/Index.js';
+import { LinearGradient } from 'expo-linear-gradient';
+import Styles from './Styles';
 
 
 
@@ -32,8 +34,7 @@ export default function App() {
     console.log(userId);
     return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName='Dashboard' >
-          <Drawer.Group screenOptions={{headerTitle: 'Lookout!'}}>
+        <Drawer.Navigator initialRouteName='Dashboard' screenOptions={Styles.NavHeaderStyle} >
             <Drawer.Screen 
               name='ProfileStack'
               component={ProfileStack}
@@ -53,27 +54,16 @@ export default function App() {
               component={FriendStack}
               options={{drawerLabel: 'Friends'}}
             />
-          </Drawer.Group>
         </Drawer.Navigator>
       </NavigationContainer>
     );
   }
   else {
     return (
-      <NavigationContainer>
         <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId}/>
-      </NavigationContainer>
     )
   }
   
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
