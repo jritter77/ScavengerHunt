@@ -36,13 +36,13 @@ export default function App() {
       <NavigationContainer>
         <Drawer.Navigator initialRouteName='Dashboard' screenOptions={Styles.NavHeaderStyle} >
             <Drawer.Screen 
+              name='Dashboard'
+              component={Dashboard}
+            />
+            <Drawer.Screen 
               name='ProfileStack'
               component={ProfileStack}
               options={{drawerLabel: 'Profile'}}
-            />
-            <Drawer.Screen 
-              name='Dashboard'
-              component={Dashboard}
             />
             <Drawer.Screen 
               name='HuntStack'
