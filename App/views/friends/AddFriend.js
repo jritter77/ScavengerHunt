@@ -1,5 +1,6 @@
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import React from 'react'
+import Styles from '../../Styles'
 
 
 const AddFriend = ({navigation}) => {
@@ -16,8 +17,8 @@ function handleSubmit() {
     <View>
       <Text>Add Friend</Text>
       <TextInput
-      onChangeText = {setUser}
       placeholder = "Friend Username"
+      onChangeText = {setUser}
       />
     </View>
   )

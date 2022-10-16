@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import StandardButton from '../../components/StandardButton'
+import Styles from '../../Styles'
 
 const Friends = ({navigation}) => {
   return (
-    <View style={styles.buttonContainer}>
+    <View style={Styles.StandardStyles.page}>
       <StandardButton 
           title='Add Friend'
           onPress={() => {
@@ -27,13 +28,5 @@ const Friends = ({navigation}) => {
   )
 }
 
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
 
 export default Friends
