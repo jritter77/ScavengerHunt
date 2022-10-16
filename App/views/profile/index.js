@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Profile from './Profile';
 import ChangeCredentials from './ChangeCredentials';
 import Settings from './Settings';
+import ChangePassword from './ChangePassword';
+import ChangeUsername from './ChangeUsername';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +25,14 @@ const ProfileStack = (props) => {
           <Stack.Screen 
             name='Settings'
             children={() => <Settings {...props}/>}
+          />
+          <Stack.Screen 
+            name='ChangePassword'
+            children={() => <ChangePassword {...props}/>}
+          />
+          <Stack.Screen 
+            name='ChangeUsername'
+            children={() => <ChangeUsername {...props}/>}
           />
         </Stack.Navigator>
     );

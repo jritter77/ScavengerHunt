@@ -8,10 +8,10 @@ import React from 'react';
 import Dashboard from './views/dashboard/Dashboard';
 
 
-import ProfileStack from './views/profile/Index.js';
-import HuntStack from './views/hunts/Index.js';
-import FriendStack from './views/friends/Index.js';
-import LoginStack from './views/loginSignup/Index.js';
+import ProfileStack from './views/profile';
+import HuntStack from './views/hunts';
+import FriendStack from './views/friends';
+import LoginStack from './views/loginSignup';
 import { LinearGradient } from 'expo-linear-gradient';
 import Styles from './Styles';
 
