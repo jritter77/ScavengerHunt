@@ -5,12 +5,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Profile from './Profile';
 import ChangeCredentials from './ChangeCredentials';
 import Settings from './Settings';
+import Styles from '../../Styles';
 
 const Stack = createNativeStackNavigator();
 
 const ProfileStack = (props) => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={Styles.StackHeaderStyle}>
           <Stack.Screen 
             name='Profile'
             children={() => <Profile {...props}/>}
