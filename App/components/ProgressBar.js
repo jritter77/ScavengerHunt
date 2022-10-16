@@ -15,16 +15,18 @@ const styles = StyleSheet.create({
     container: {
         borderWidth: 2,
         borderRadius: 5,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flex: 1
     },
     bar: {
-        backgroundColor: '#53ECFC'
+        backgroundColor: '#53ECFC',
+        height: '100%'
     },
     text: {
         textAlign: 'center',
         color: 'white',
         fontWeight: 'bold',
-    }
+    },
 })
 
 export default ProgressBar
