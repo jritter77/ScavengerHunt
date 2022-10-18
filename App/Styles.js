@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import {StyleSheet} from 'react-native';
 
 const Styles = {
-    NavHeaderStyle : {
+    DrawerHeaderStyle : {
         headerTitleAlign: 'center',
         headerTitle: 'Lookout!',
         headerTintColor: 'white',
@@ -15,7 +15,11 @@ const Styles = {
               end={{x: 0, y: 1}}
         />)
       },
-
+      StackHeaderStyle : {
+        headerStyle: {
+          backgroundColor: '#FFFDD1',
+        }
+      },
       StandardStyles : StyleSheet.create({
         page: {
           flex: 1,

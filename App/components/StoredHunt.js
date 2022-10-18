@@ -1,10 +1,13 @@
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const StoredHunt = ({title, rating, description}) => {
 
+    const navigation = useNavigation();
+
     function handlePress() {
-        console.log('pressed');
+        navigation.navigate('HuntStack', {screen: 'StoredHuntInfo'})
     }
 
     return (

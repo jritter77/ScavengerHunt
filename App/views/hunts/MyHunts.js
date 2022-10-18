@@ -9,6 +9,7 @@ import LocalHunt from '../../components/LocalHunt'
 const MyHunts = ({navigation}) => {
 
   const [searchTerm, setSearchTerm] = React.useState('');
+  const [hunts, setHunts] = React.useState(JSON.parse(localStorage.getItem('hunts')));
 
   function handleSubmit() {
     console.log(searchTerm)
@@ -21,13 +22,13 @@ const MyHunts = ({navigation}) => {
 
   function populateHunts() {
 
-    let objs = [];
-
-    for (let i=0; i<10; i++) {
-      objs.push(<LocalHunt key={i} title={'Test Hunt'} description={'This is a test hunt!'} />);
+    const huntObjs = [];
+    
+    for (let hunt of hunts) {
+      huntObjs.push(<LocalHunt key={hunt._id} hunt={hunt}/>)
     }
 
-    return objs;
+    return huntObjs;
   }
 
   return (
