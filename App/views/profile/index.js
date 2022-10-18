@@ -9,6 +9,7 @@ import ChangePassword from './ChangePassword';
 import ChangeUsername from './ChangeUsername';
 
 
+
 const Stack = createNativeStackNavigator();
 
 const ProfileStack = (props) => {
@@ -33,7 +34,7 @@ const ProfileStack = (props) => {
           <Stack.Screen 
             name='ChangeUsername'
             children={() => <ChangeUsername {...props}/>}
-          />
+          />    
         </Stack.Navigator>
     );
 }
