@@ -8,6 +8,7 @@ import StoredHunt from '../../components/StoredHunt'
 const FindHunts = ({navigation}) => {
 
   const [searchTerm, setSearchTerm] = React.useState('');
+  const [hunts, setHunts] = React.useState(JSON.parse(localStorage.getItem('storedHunts')));
 
   function handleSubmit() {
     console.log(searchTerm)
@@ -22,8 +23,8 @@ const FindHunts = ({navigation}) => {
 
     let objs = [];
 
-    for (let i=0; i<10; i++) {
-      objs.push(<StoredHunt key={i} title={'Test Hunt'} rating={3.5} description={'This is a test hunt!'} />);
+    for (let hunt of hunts) {
+      objs.push(<StoredHunt key={hunt._id} hunt={hunt} />);
     }
 
     return objs;

@@ -21,6 +21,13 @@ localStorage.setItem('hunts', JSON.stringify([
   {_id: 4, title: 'Hunt 4', description: 'This is a test hunt!'},
 ]))
 
+localStorage.setItem('storedHunts', JSON.stringify([
+  {_id: 1, rating: 3.5, title: 'Hunt 1', description: 'This is a test hunt!'},
+  {_id: 2, rating: 2.5, title: 'Hunt 2', description: 'This is a test hunt!'},
+  {_id: 3, rating: 4.5, title: 'Hunt 3', description: 'This is a test hunt!'},
+  {_id: 4, rating: 1.5, title: 'Hunt 4', description: 'This is a test hunt!'},
+]))
+
 
 const HuntStack = (props) => {
 

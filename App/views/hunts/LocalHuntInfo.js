@@ -13,7 +13,7 @@ const LocalHuntInfo = ({navigation, route}) => {
       <Text style={styles.title}>{title}</Text>
       <View style={styles.progressContainer}>
         <Text style={styles.progress}>Progress:</Text>
-        <ProgressBar value={30} />
+        <ProgressBar value={30} style={{flex: 1}} />
       </View>
       <Text style={styles.description}>{description}</Text>
       <Text style={styles.group}>Group</Text>
@@ -23,7 +23,7 @@ const LocalHuntInfo = ({navigation, route}) => {
       />
       <StandardButton 
         title='Start/Continue'
-        onPress={() => console.log('Start/Continue!')}
+        onPress={() => navigation.navigate('ActiveHunt')}
       />
       <StandardButton 
         title='Delete Hunt'
@@ -39,22 +39,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '70%',
-    marginBottom: '5%'
+    marginBottom: '5%',
   },
   title: {
     backgroundColor: 'white',
     borderWidth: 2,
     borderRadius: 5,
-    width: '70%',
+    width: '80%',
     fontSize: 20,
     marginBottom: '5%',
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: '5%',
+    fontWeight: 'bold'
   },
   description: {
     backgroundColor: 'white',
     borderWidth: 2,
     borderRadius: 5, 
-    width: '70%',
+    width: '80%',
     height: '20%',
     fontSize: 20,
     marginBottom: '5%',
