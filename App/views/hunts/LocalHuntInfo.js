@@ -4,7 +4,7 @@ import Styles from '../../Styles'
 import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
 
-const HuntInfo = ({navigation, route}) => {
+const LocalHuntInfo = ({navigation, route}) => {
 
   const {_id, title, description} = route.params.hunt;
 
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default HuntInfo
+export default LocalHuntInfo

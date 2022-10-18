@@ -9,7 +9,7 @@ const LocalHunt = ({hunt}) => {
 
     function handlePress() {
         navigation.navigate('HuntStack', {
-            screen: 'HuntInfo', 
+            screen: 'LocalHuntInfo', 
             hunt: hunt
         });
     }

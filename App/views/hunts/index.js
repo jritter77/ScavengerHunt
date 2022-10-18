@@ -4,10 +4,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ActiveHunt from './ActiveHunt';
 import CreateHunt from './CreateHunt';
 import FindHunts from './FindHunts';
-import HuntInfo from './HuntInfo';
+import LocalHuntInfo from './LocalHuntInfo';
 import Hunts from './Hunts';
 import MyHunts from './MyHunts';
 import Styles from '../../Styles';
+import StoredHuntInfo from './StoredHuntInfo';
 
 
 
@@ -38,8 +39,12 @@ const HuntStack = (props) => {
             children={() => <FindHunts {...props}/>}
           />
           <Stack.Screen 
-            name='HuntInfo'
-            children={() => <HuntInfo {...props}/>}
+            name='LocalHuntInfo'
+            children={() => <LocalHuntInfo {...props}/>}
+          />
+          <Stack.Screen 
+            name='StoredHuntInfo'
+            children={() => <StoredHuntInfo {...props}/>}
           />
           <Stack.Screen 
             name='Hunts'
