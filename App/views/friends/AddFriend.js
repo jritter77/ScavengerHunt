@@ -7,8 +7,10 @@ const AddFriend = ({navigation}) => {
   const [user, setUser] = React.useState('')
 
   function handleSubmit() {
+    // Send username
+
     // Verify the username exists
-    console.log('Pressed');
+    
     // If not notify user
 
     // Else send friend request
@@ -17,6 +19,7 @@ const AddFriend = ({navigation}) => {
     <View style ={Styles.StandardStyles.page}>
       <Text style={styles.Text}>Add Friend</Text>
       <TextInput
+      style={Styles.StandardStyles.textInput}
       placeholder = 'Friend Username'
       onChangeText = {setUser}
       />
@@ -31,8 +34,10 @@ const AddFriend = ({navigation}) => {
 
 const styles = StyleSheet.create({
     Text: {
-      fontSize: '20pt'
-    }
+      fontSize: '20pt',
+      
+
+    },
   })
 
 

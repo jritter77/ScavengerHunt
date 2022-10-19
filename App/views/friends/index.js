@@ -5,6 +5,7 @@ import AddFriend from './AddFriend';
 import FriendProfile from './FriendProfile';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
+import { Button } from 'react-native-web';
 
 
 
@@ -12,7 +13,11 @@ const Stack = createNativeStackNavigator();
 
 const FriendStack = (props) => {
     return (
-        <Stack.Navigator initialRouteName='Friends'>
+        <Stack.Navigator initialRouteName='Friends' screenOptions={{
+            headerRight: () => (<Button 
+              title='clickNe'
+            />)
+          }}>
           <Stack.Screen 
             name='AddFriend'
             children={() => <AddFriend {...props}/>}
@@ -33,4 +38,9 @@ const FriendStack = (props) => {
     );
 }
 
+/* This is the local storage data for testing (Incomplete)
+localStorage.setItem('storedFriends', JSON.stringify({[
+  {}
+]})
+*/
 export default FriendStack
