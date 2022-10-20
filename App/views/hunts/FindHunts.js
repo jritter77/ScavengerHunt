@@ -4,11 +4,12 @@ import StandardButton from '../../components/StandardButton'
 import Styles from '../../Styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import StoredHunt from '../../components/StoredHunt'
+import { getData } from '../../Methods'
 
 const FindHunts = ({navigation}) => {
 
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [hunts, setHunts] = React.useState(JSON.parse(localStorage.getItem('storedHunts')));
+  const [hunts, setHunts] = React.useState([]);
 
   function handleSubmit() {
     console.log(searchTerm)
@@ -29,6 +30,14 @@ const FindHunts = ({navigation}) => {
 
     return objs;
   }
+
+  React.useEffect(() => {
+    async function fetchData() {
+      setHunts(await getData('storedHunts'))
+    }
+
+    fetchData();
+  }, [])
 
   return (
     <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>

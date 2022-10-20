@@ -9,27 +9,31 @@ import Hunts from './Hunts';
 import MyHunts from './MyHunts';
 import Styles from '../../Styles';
 import StoredHuntInfo from './StoredHuntInfo';
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import { setData } from '../../Methods';
 
 
 
 const Stack = createNativeStackNavigator();
 
-localStorage.setItem('hunts', JSON.stringify([
-  {_id: 1, title: 'Hunt 1', description: 'This is a test hunt!'},
-  {_id: 2, title: 'Hunt 2', description: 'This is a test hunt!'},
-  {_id: 3, title: 'Hunt 3', description: 'This is a test hunt!'},
-  {_id: 4, title: 'Hunt 4', description: 'This is a test hunt!'},
-]))
 
-localStorage.setItem('storedHunts', JSON.stringify([
-  {_id: 1, rating: 3.5, title: 'Hunt 1', description: 'This is a test hunt!'},
-  {_id: 2, rating: 2.5, title: 'Hunt 2', description: 'This is a test hunt!'},
-  {_id: 3, rating: 4.5, title: 'Hunt 3', description: 'This is a test hunt!'},
-  {_id: 4, rating: 1.5, title: 'Hunt 4', description: 'This is a test hunt!'},
-]))
 
 
 const HuntStack = (props) => {
+
+  setData('hunts', [
+    {_id: 1, title: 'Hunt 1', description: 'This is a test hunt!'},
+    {_id: 2, title: 'Hunt 2', description: 'This is a test hunt!'},
+    {_id: 3, title: 'Hunt 3', description: 'This is a test hunt!'},
+    {_id: 4, title: 'Hunt 4', description: 'This is a test hunt!'},
+  ]);
+  
+  setData('storedHunts', [
+    {_id: 1, rating: 3.5, title: 'Hunt 1', description: 'This is a test hunt!'},
+    {_id: 2, rating: 2.5, title: 'Hunt 2', description: 'This is a test hunt!'},
+    {_id: 3, rating: 4.5, title: 'Hunt 3', description: 'This is a test hunt!'},
+    {_id: 4, rating: 1.5, title: 'Hunt 4', description: 'This is a test hunt!'},
+  ])
 
     return (
         <Stack.Navigator initialRouteName='Hunts' screenOptions={Styles.StackHeaderStyle}>
