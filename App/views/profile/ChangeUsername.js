@@ -4,6 +4,9 @@ import Styles from '../../Styles'
 import StandardButton from '../../components/StandardButton'
 import { useNavigation } from '@react-navigation/native'
 
+import { CustomAlert } from '../../Methods'
+
+
 const changeUserName = ({navigation}) => {
   const [changeUserName, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -23,9 +26,13 @@ const changeUserName = ({navigation}) => {
         />
         <StandardButton 
           title='Submit'
-          onPress={() => {
-            navigation.navigate('ChangeCredentials');
-          }}
+          onPress={() => CustomAlert(
+            'Change Username', 
+            'Are you sure you would like to change your username?', 
+            () => {
+              navigation.navigate('ChangeCredentials')
+            })}
+
         />
     </View>
   )

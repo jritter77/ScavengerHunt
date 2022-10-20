@@ -34,7 +34,7 @@ export default function App() {
     console.log(userId);
     return (
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName='Dashboard' screenOptions={Styles.NavHeaderStyle} >
+        <Drawer.Navigator initialRouteName='Dashboard' screenOptions={Styles.DrawerHeaderStyle} >
             <Drawer.Screen 
               name='Dashboard'
               component={Dashboard}

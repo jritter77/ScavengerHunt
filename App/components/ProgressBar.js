@@ -1,12 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
-const ProgressBar = ({value}) => {
+const ProgressBar = ({value, style}) => {
   return (
-    <View style={styles.container}>
-        <View style={{width: `${value}%`, ...styles.bar}}>
-            <Text style={styles.text}>30%</Text>
-        </View>
+    <View style={{...styles.container, ...style}}>
+        <View style={{width: `${value}%`, ...styles.bar}}></View>
+        <Text style={styles.text}>{value}%</Text>
     </View>
   )
 }
@@ -15,16 +14,18 @@ const styles = StyleSheet.create({
     container: {
         borderWidth: 2,
         borderRadius: 5,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     bar: {
-        backgroundColor: '#53ECFC'
+        backgroundColor: '#53ECFC',
+        height: '100%',
+        position: 'absolute'
     },
     text: {
         textAlign: 'center',
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
-    }
+    },
 })
 
 export default ProgressBar

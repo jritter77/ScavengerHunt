@@ -14,7 +14,7 @@ const LoginStack = (props) => {
 
     return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={Styles.NavHeaderStyle} >
+        <Stack.Navigator screenOptions={Styles.DrawerHeaderStyle} >
           <Stack.Screen 
             name='Login'
             children={() => <Login {...props} />}

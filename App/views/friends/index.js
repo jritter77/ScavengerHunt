@@ -5,6 +5,7 @@ import AddFriend from './AddFriend';
 import FriendProfile from './FriendProfile';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
+import Styles from '../../Styles';
 
 
 
@@ -12,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 const FriendStack = (props) => {
     return (
-        <Stack.Navigator initialRouteName='Friends'>
+        <Stack.Navigator initialRouteName='Friends' screenOptions={Styles.StackHeaderStyle}>
           <Stack.Screen 
             name='AddFriend'
             children={() => <AddFriend {...props}/>}
