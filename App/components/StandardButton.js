@@ -3,8 +3,6 @@ import React from 'react'
 
 const StandardButton = ({title, onPress}) => {
 
-    const [user, setUser] = React.useState('fred');
-
   return (
     <TouchableOpacity 
         onPress={onPress}

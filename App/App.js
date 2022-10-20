@@ -17,13 +17,18 @@ import Styles from './Styles';
 
 
 
-
 const Drawer = createDrawerNavigator();
 
+
+
 export default function App() {
-  const [userId, setUserId] = React.useState("");
+
+  const [userId, setUserId] = React.useState('');
 
   const [loggedIn, setLoggedIn] = React.useState(false);
+
+
+
 
   if (loggedIn) {
     console.log(userId);
@@ -49,11 +54,16 @@ export default function App() {
               component={FriendStack}
               options={{drawerLabel: 'Friends'}}
             />
-
         </Drawer.Navigator>
       </NavigationContainer>
     );
-  } else {
-    return <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId} />;
   }
+  else {
+    return (
+        <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId}/>
+    )
+  }
+  
 }
+
+

@@ -18,7 +18,7 @@ const LocalHunt = ({hunt}) => {
         <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={handlePress}>
             <View>
                 <Text style={styles.title}>{hunt.title}</Text>
-                <ProgressBar value={30} />
+                <ProgressBar value={30} style={styles.progress} />
                 <Text style={styles.description}>{hunt.description}</Text>
             </View>
         </TouchableHighlight>
@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 14
+    },
+    progress: {
+        position: 'absolute',
+        right: 0,
+        width: '50%'
     }
 })
 
