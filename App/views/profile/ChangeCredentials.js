@@ -1,11 +1,8 @@
 import { View, Text, TextInput, Button} from 'react-native'
 import React from 'react'
 import Styles from '../../Styles'
-<<<<<<< HEAD
-=======
 import StandardButton from '../../components/StandardButton'
 import { useNavigation } from '@react-navigation/native'
->>>>>>> main
 
 const ChangeCredentials = ({navigation}) => {
 

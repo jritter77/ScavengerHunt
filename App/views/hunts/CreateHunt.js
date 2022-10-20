@@ -1,11 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import Styles from '../../Styles'
-<<<<<<< HEAD
-=======
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import StandardButton from '../../components/StandardButton'
->>>>>>> main
 
 const CreateHunt = ({navigation}) => {
 
@@ -70,10 +67,6 @@ const ClueField = ({clueVals, setClueVals, submitted}) => {
   
 
   return (
-<<<<<<< HEAD
-    <View style={Styles.StandardStyles.page}>
-      <Text>CreateHunt</Text>
-=======
     <View>
       <TextInput
         placeholder='Clue'
@@ -83,7 +76,6 @@ const ClueField = ({clueVals, setClueVals, submitted}) => {
         placeholder='Answer'
         onChangeText={setAnswer}
       />
->>>>>>> main
     </View>
   )
 }

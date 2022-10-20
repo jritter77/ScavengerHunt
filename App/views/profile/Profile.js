@@ -2,11 +2,6 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import StandardButton from '../../components/StandardButton'
 import Styles from '../../Styles'
-<<<<<<< HEAD
-
-const Profile = ({navigation}) => {
-  return (
-=======
 
 
 
@@ -15,7 +10,6 @@ import { useNavigation } from '@react-navigation/native'
 const Profile = ({navigation}) => {
   return (
 
->>>>>>> main
     <View style={Styles.StandardStyles.page}>
       <StandardButton 
         title='Change Credentials'

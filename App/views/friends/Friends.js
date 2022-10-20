@@ -2,15 +2,6 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import StandardButton from '../../components/StandardButton'
 import Styles from '../../Styles'
-<<<<<<< HEAD
-
-
-const Friends = ({navigation}) => {
-  return (
-    
-    <View style={Styles.StandardStyles.page}>
-        <StandardButton
-=======
 
 const Friends = ({navigation}) => {
   return (
@@ -22,7 +13,6 @@ const Friends = ({navigation}) => {
           }}
         />
         <StandardButton 
->>>>>>> main
           title='Friend Requests'
           onPress={() => {
             navigation.navigate('FriendRequests')
@@ -39,7 +29,6 @@ const Friends = ({navigation}) => {
 const styles = StyleSheet.create( {
   topBar: {
 
-<<<<<<< HEAD
   },
   button: {
     width: "70%",
@@ -55,6 +44,4 @@ const styles = StyleSheet.create( {
 })
 
 
-=======
->>>>>>> main
 export default Friends

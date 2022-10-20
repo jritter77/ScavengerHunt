@@ -1,10 +1,7 @@
 import { View, Text, TextInput, StyleSheet} from 'react-native'
 import React from 'react'
 import Styles from '../../Styles'
-<<<<<<< HEAD
 import StandardButton from '../../components/StandardButton'
-=======
->>>>>>> main
 
 const AddFriend = ({navigation}) => {
   const [user, setUser] = React.useState('')
@@ -19,7 +16,6 @@ const AddFriend = ({navigation}) => {
     // Else send friend request
   }
   return (
-<<<<<<< HEAD
     <View style ={Styles.StandardStyles.page}>
       <Text style={styles.Text}>Add Friend</Text>
       <TextInput
@@ -32,10 +28,6 @@ const AddFriend = ({navigation}) => {
       onPress = {handleSubmit}
       />
 
-=======
-    <View style={Styles.StandardStyles.page}>
-      <Text>AddFriend</Text>
->>>>>>> main
     </View>
   )
 }
