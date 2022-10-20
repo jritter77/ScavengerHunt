@@ -7,6 +7,7 @@ import StoredHunt from '../../components/StoredHunt'
 import LocalHunt from '../../components/LocalHunt'
 import { getData } from '../../Methods'
 
+// My Hunts Page
 const MyHunts = ({navigation}) => {
 
   const [searchTerm, setSearchTerm] = React.useState('');
