@@ -1,6 +1,13 @@
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import React from 'react'
 import ProgressBar from './ProgressBar';
+<<<<<<< HEAD
+
+const LocalHunt = ({title, rating, description}) => {
+
+    function handlePress() {
+        console.log('pressed');
+=======
 import { useNavigation } from '@react-navigation/native';
 
 const LocalHunt = ({hunt}) => {
@@ -12,14 +19,21 @@ const LocalHunt = ({hunt}) => {
             screen: 'LocalHuntInfo', 
             hunt: hunt
         });
+>>>>>>> main
     }
 
     return (
         <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={handlePress}>
             <View>
+<<<<<<< HEAD
+                <Text style={styles.title}>{title}</Text>
+                <ProgressBar value={30} />
+                <Text style={styles.description}>{description}</Text>
+=======
                 <Text style={styles.title}>{hunt.title}</Text>
                 <ProgressBar value={30} style={styles.progress} />
                 <Text style={styles.description}>{hunt.description}</Text>
+>>>>>>> main
             </View>
         </TouchableHighlight>
         
@@ -43,11 +57,14 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 14
+<<<<<<< HEAD
+=======
     },
     progress: {
         position: 'absolute',
         right: 0,
         width: '50%'
+>>>>>>> main
     }
 })
 
