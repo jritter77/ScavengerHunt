@@ -28,16 +28,16 @@ export async function getData(key) {
 
   export async function createLocalHunt(huntObj) {
     const currentHunts = await getData('hunts');
+    const hunts = currentHunts ? currentHunts : {};
+    const keys = Object.keys(hunts).map(e => parseInt(e));
 
-    const hunts = currentHunts ? currentHunts : [];
-
-    const _id = (currentHunts?.length) ? currentHunts[currentHunts.length-1]._id + 1 : 1;
+    const _id = keys.length ? keys[keys.length - 1] + 1 : 1;
     const author = 'localAuthor';
     const group = [];
 
     const hunt = {_id, author, group, ...huntObj}
 
-    hunts.push(hunt);
+    hunts[_id] = hunt;
 
     await setData('hunts', hunts);
   }
@@ -45,12 +45,7 @@ export async function getData(key) {
   export async function deleteLocalHunt(id) {
     const currentHunts = await getData('hunts');
 
-    for (let i = 0; i < currentHunts.length; i++) {
-      if (currentHunts[i]._id === id) {
-        currentHunts.splice(i, 1);
-        break;
-      }
-    }
+    delete currentHunts[id];
 
     setData('hunts', currentHunts);
   }

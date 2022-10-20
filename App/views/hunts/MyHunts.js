@@ -25,8 +25,8 @@ const MyHunts = ({navigation}) => {
 
     const huntObjs = [];
     
-    for (let hunt of hunts) {
-      huntObjs.push(<LocalHunt key={hunt._id} hunt={hunt}/>)
+    for (let hunt in hunts) {
+      huntObjs.push(<LocalHunt key={hunts[hunt]._id} hunt={hunts[hunt]}/>)
     }
 
     return huntObjs;
