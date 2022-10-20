@@ -5,7 +5,11 @@ import AddFriend from './AddFriend';
 import FriendProfile from './FriendProfile';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
+<<<<<<< HEAD
 import { Button } from 'react-native-web';
+=======
+import Styles from '../../Styles';
+>>>>>>> main
 
 
 
@@ -13,11 +17,15 @@ const Stack = createNativeStackNavigator();
 
 const FriendStack = (props) => {
     return (
+<<<<<<< HEAD
         <Stack.Navigator initialRouteName='Friends' screenOptions={{
             headerRight: () => (<Button 
               title='clickNe'
             />)
           }}>
+=======
+        <Stack.Navigator initialRouteName='Friends' screenOptions={Styles.StackHeaderStyle}>
+>>>>>>> main
           <Stack.Screen 
             name='AddFriend'
             children={() => <AddFriend {...props}/>}

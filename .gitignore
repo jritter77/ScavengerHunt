@@ -10,6 +10,8 @@
 *.userosscache
 *.sln.docstates
 
+*/.expo/*
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -349,4 +351,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /App/.expo
+<<<<<<< HEAD
 */.expo/*
+=======
+>>>>>>> main
