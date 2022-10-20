@@ -7,6 +7,7 @@ import ChangeCredentials from './ChangeCredentials';
 import Settings from './Settings';
 import ChangePassword from './ChangePassword';
 import ChangeUsername from './ChangeUsername';
+import Styles from '../../Styles';
 
 
 
@@ -14,7 +15,7 @@ const Stack = createNativeStackNavigator();
 
 const ProfileStack = (props) => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={Styles.StackHeaderStyle}>
           <Stack.Screen 
             name='Profile'
             children={() => <Profile {...props}/>}

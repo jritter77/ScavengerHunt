@@ -49,3 +49,20 @@ export async function getData(key) {
 
     setData('hunts', currentHunts);
   }
+
+  export function getHuntProgress(hunt) {
+
+    const clues = hunt.clues;
+
+    let total = 0;
+    let complete = 0;
+
+    for (let clue in clues) {
+      total += 1;
+      if (clues[clue].entry) {
+        complete += 1;
+      }
+    }
+
+    return complete / total;
+  }
