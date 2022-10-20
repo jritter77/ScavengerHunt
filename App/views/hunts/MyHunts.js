@@ -43,24 +43,14 @@ const MyHunts = ({navigation}) => {
   
 
   return (
-    <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
-      <TextInput 
-        style={styles.search}
-        onChangeText={setSearchTerm}
-        placeholder={'Search'}
-      />
+    <View style={Styles.StandardStyles.page}>
       <StandardButton 
-          title='Search'
-          onPress={() => handleSubmit()}
-      />
-      <View style={styles.huntsContainer}>
-        {populateHunts()}
-      </View>
-      <StandardButton 
-        title={'Show More'}
-        onPress={() => console.log('Show More!')}
-      />
-    </ScrollView>
+          title='Active Hunt'
+          onPress={() => {
+            navigation.navigate('ActiveHunt')
+          }}
+        />
+    </View>
   )
 }
 
