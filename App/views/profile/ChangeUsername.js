@@ -3,7 +3,9 @@ import React from 'react'
 import Styles from '../../Styles'
 import StandardButton from '../../components/StandardButton'
 import { useNavigation } from '@react-navigation/native'
+
 import { CustomAlert } from '../../Methods'
+
 
 const changeUserName = ({navigation}) => {
   const [changeUserName, setUserName] = React.useState('');
@@ -30,6 +32,7 @@ const changeUserName = ({navigation}) => {
             () => {
               navigation.navigate('ChangeCredentials')
             })}
+
         />
     </View>
   )
