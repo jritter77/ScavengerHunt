@@ -34,7 +34,10 @@ const MyHunts = ({navigation}) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      setHunts(await getData('hunts'));
+      const localHunts = await getData('hunts');
+      if (localHunts) {
+        setHunts(localHunts);
+      }
     }
 
     fetchData();

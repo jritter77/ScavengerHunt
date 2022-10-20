@@ -3,6 +3,7 @@ import React from 'react'
 import Styles from '../../Styles'
 import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
+import { deleteLocalHunt } from '../../Methods';
 
 const LocalHuntInfo = ({navigation, route}) => {
 
@@ -27,7 +28,7 @@ const LocalHuntInfo = ({navigation, route}) => {
       />
       <StandardButton 
         title='Delete Hunt'
-        onPress={() => console.log('Delete Hunt!')}
+        onPress={() => deleteLocalHunt(_id)}
       />
     </View>
   )
