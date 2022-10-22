@@ -1,72 +1,73 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import Styles from '../../Styles'
-import ProgressBar from '../../components/ProgressBar'
-import { getHuntProgress } from '../../Methods'
-import { ScrollView, TextInput } from 'react-native-gesture-handler'
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import Styles from "../../Styles";
+import ProgressBar from "../../components/ProgressBar";
+import { getHuntProgress } from "../../Methods";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
 
-const ActiveHunt = ({navigation, route}) => {
-
+const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
 
   const [clues, setClues] = React.useState(hunt.clues);
 
   const [clueFields, setClueFields] = React.useState([]);
 
-  const ClueField = ({clue}) => {
-
-    const [entry, setEntry] = React.useState(clue.entry)
+  const ClueField = ({ clue }) => {
+    const [entry, setEntry] = React.useState(clue.entry);
 
     return (
-      <View>
-        <Text style={styles.clue}>{clue.clue}</Text>
-        <TextInput 
-          value={entry}
-          onChangeText={setEntry}
-          style={styles.entry}
-        />
+      <View style={styles.clue}>
+        <Text style={styles.clueText}>{clue.clue}</Text>
+        <TextInput value={entry} onChangeText={setEntry} style={styles.entry} />
       </View>
     );
-  }
+  };
 
   React.useEffect(() => {
     for (let clue in clues) {
-      setClueFields(oldState => [...oldState, <ClueField key={clue} clue={clues[clue]} />]);
+      setClueFields((oldState) => [
+        ...oldState,
+        <ClueField key={clue} clue={clues[clue]} />,
+      ]);
     }
   }, []);
 
   return (
-    <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
+    <ScrollView
+      style={styles.scrollContainer}
+      contentContainerStyle={styles.scrollContainerContent}
+    >
       <ProgressBar value={getHuntProgress(hunt)} style={styles.progress} />
-      <View>
-        {clueFields}
-      </View>
+      {clueFields}
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   progress: {
-    width: '80%'
+    width: "80%",
+  },
+  clueText: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
   clue: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    width: "70%",
   },
   entry: {
     fontSize: 20,
-    backgroundColor: 'white',
-    padding: '2%',
+    backgroundColor: "white",
+    padding: "2%",
     borderWidth: 1,
-    borderRadius: 5
+    borderRadius: 5,
   },
   scrollContainer: {
-    backgroundColor: '#FFFDD1'
+    backgroundColor: "#FFFDD1",
   },
   scrollContainerContent: {
-    alignItems: 'center',
-    justifyContent: 'flex-start'
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
-})
+});
 
-export default ActiveHunt
+export default ActiveHunt;
