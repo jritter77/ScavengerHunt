@@ -35,8 +35,6 @@ const AddFriend = ({navigation}) => {
 const styles = StyleSheet.create({
     Text: {
       fontSize: '20pt',
-      
-
     },
   })
 
