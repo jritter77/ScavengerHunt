@@ -7,6 +7,7 @@ import FriendRequests from './FriendRequests';
 import Friends from './Friends';
 import Styles from '../../Styles';
 import FriendHeaderButtons from '../../components/FriendHeaderButtons';
+;
 
 
 
@@ -14,10 +15,10 @@ const Stack = createNativeStackNavigator();
 
 const FriendStack = (props) => {
     return (
-        <Stack.Navigator initialRouteName='Friends' screenOptions={FriendHeaderButtons}>
+        <Stack.Navigator initialRouteName='Friends' screenOptions={Styles.StackHeaderStyle}>
           <Stack.Screen 
             name='AddFriend'
-            children={() => <Friend {...props}/>}
+            children={() => <AddFriend {...props}/>}
           />
           <Stack.Screen 
             name='FriendProfile'
@@ -30,6 +31,8 @@ const FriendStack = (props) => {
           <Stack.Screen 
             name='Friends'
             children={() => <Friends {...props}/>}
+            options= {{
+              headerRight: () => <FriendHeaderButtons {...props} /> }}
           />
             
         </Stack.Navigator>

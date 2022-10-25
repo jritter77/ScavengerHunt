@@ -8,23 +8,13 @@ import FriendHeaderButtons  from '../../components/FriendHeaderButtons'
 const Friends = ({navigation}) => {
   return (
     <View style={Styles.StandardStyles.page}>
-      <FriendHeaderButtons
-          title='Add Friend'
-          onPress={() => {
-            navigation.navigate('AddFriend')
-          }}
-        />
-        <StandardButton 
-          title='Friend Requests'
-          onPress={() => {
-            navigation.navigate('FriendRequests')
-          } } />
         <StandardButton
           title='Friend Profile'
           onPress={() => {
             navigation.navigate('FriendProfile')
-          } } />
-      </View>
+          } } 
+      />
+    </View>   
   )
 }
 
@@ -32,16 +22,28 @@ const styles = StyleSheet.create( {
   topBar: {
 
   },
+
   button: {
-    width: "70%",
+
     backgroundColor: "blue",
     margin: '5%',
     padding: '5%',
     borderRadius: 5,
+    width: '50%',
+    flex: 1,
+    flexDirection: 'row'
   },
   text: {
-    color: 'white',
-    fontSize: '14pt'
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: '20pt',
+    textAlign: 'left'
+  },
+
+  container: {
+    backgroundColor: '#FFFDD1',
+    flex: 1
+    
   }
 })
 
