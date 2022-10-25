@@ -4,6 +4,7 @@ import Styles from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StandardButton from "../../components/StandardButton";
 import { createLocalHunt } from "../../Methods";
+import Picker from "../../components/Picker";
 
 const CreateHunt = ({ navigation }) => {
   const [title, setTitle] = React.useState("");
@@ -73,9 +74,11 @@ const ClueField = ({ id, setClueVals }) => {
   const [clue, setClue] = React.useState("");
   const [answer, setAnswer] = React.useState("");
 
+  const [pickerVal, setPickerVal] = React.useState("stuff");
+
   React.useEffect(() => {
     setClueVals((oldState) => {
-      oldState[id] = { clue, answer, entry: "" };
+      oldState[id] = { clue, answer, entry: "", type: pickerVal };
       return { ...oldState };
     });
   }, [clue, answer]);
@@ -91,6 +94,15 @@ const ClueField = ({ id, setClueVals }) => {
         placeholder="Answer"
         onChangeText={setAnswer}
         style={styles.field}
+      />
+      <Picker
+        options={[
+          { text: "val", value: "val" },
+          { text: "stuff", value: "stuff" },
+          { text: "things", value: "things" },
+        ]}
+        val={pickerVal}
+        setVal={setPickerVal}
       />
     </View>
   );
