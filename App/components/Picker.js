@@ -63,37 +63,32 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   modalView: {
     margin: "5%",
     backgroundColor: "white",
-    borderRadius: 5,
-    padding: "5%",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    width: '70%'
   },
   button: {
     borderRadius: 5,
-    padding: "5%",
+    padding: "2%",
+    width: '100%'
   },
   buttonOpen: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "white",
+    borderWidth: 1
   },
   option: {
-    borderWidth: 2,
+    borderWidth: 1,
     padding: "10%",
+    width: '100%'
   },
   textStyle: {
     color: "black",
-    fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "left",
+    fontSize: 20
   },
   modalText: {
     marginBottom: 15,

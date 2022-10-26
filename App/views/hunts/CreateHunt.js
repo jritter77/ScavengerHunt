@@ -74,7 +74,7 @@ const ClueField = ({ id, setClueVals }) => {
   const [clue, setClue] = React.useState("");
   const [answer, setAnswer] = React.useState("");
 
-  const [pickerVal, setPickerVal] = React.useState("stuff");
+  const [pickerVal, setPickerVal] = React.useState("checkbox");
 
   React.useEffect(() => {
     setClueVals((oldState) => {
@@ -85,25 +85,27 @@ const ClueField = ({ id, setClueVals }) => {
 
   return (
     <View style={styles.clue}>
-      <TextInput
-        placeholder="Clue"
-        onChangeText={setClue}
-        style={styles.field}
-      />
-      <TextInput
-        placeholder="Answer"
-        onChangeText={setAnswer}
-        style={styles.field}
-      />
+      <Text style={styles.text}>Type:</Text>
       <Picker
         options={[
-          { text: "val", value: "val" },
-          { text: "stuff", value: "stuff" },
-          { text: "things", value: "things" },
+          { text: "checkbox", value: "checkbox" },
+          { text: "text", value: "text" },
+          { text: "image", value: "image" },
         ]}
         val={pickerVal}
         setVal={setPickerVal}
       />
+      <Text style={styles.text}>Clue:</Text>
+      <TextInput
+        placeholder="clue"
+        onChangeText={setClue}
+        style={styles.field}
+      />
+      {(pickerVal === 'text') && <TextInput
+        placeholder="answer"
+        onChangeText={setAnswer}
+        style={styles.field}
+      />}
     </View>
   );
 };
@@ -144,6 +146,10 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     width: "70%",
   },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  }
 });
 
 export default CreateHunt;
