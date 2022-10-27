@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
+import axios from "axios";
 
 export function CustomAlert(title, msg, confirmHandler) {
     return Alert.alert(title, msg, [
@@ -25,6 +26,26 @@ export async function getData(key) {
       console.log(e);
     }
   }
+
+
+export async function loginUser(username, password) {
+  try {
+    const result = await axios.post('http://localhost:3000/users/login', {username, password});
+
+    console.log(result.data)
+    
+    if (result.data) {
+      await setData('token', result.data);
+      return true;
+    }
+
+    return false;
+    
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
 
   export async function createLocalHunt(huntObj) {
     const currentHunts = await getData('hunts');

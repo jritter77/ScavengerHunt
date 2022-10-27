@@ -6,6 +6,7 @@ let logger = require("morgan");
 let jwt = require("jsonwebtoken");
 let dotenv = require("dotenv");
 let mongoose = require('mongoose');
+let cors = require('cors');
 
 let indexRouter = require("./routes/index");
 let usersRouter = require("./routes/users");
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

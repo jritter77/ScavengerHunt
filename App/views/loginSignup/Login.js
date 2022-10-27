@@ -4,6 +4,7 @@ import StandardButton from '../../components/StandardButton'
 import { TextInput } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import Styles from '../../Styles'
+import { loginUser } from '../../Methods'
 
 const Login = ({setLoggedIn, setUserId}) => {
 
@@ -12,20 +13,20 @@ const Login = ({setLoggedIn, setUserId}) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  function handleSubmit() {
+  async function handleSubmit() {
     // Verify credentials are not blank or violate syntax
+    if (!username || !password) {
+      console.log('username and password cannot be blank!');
+      return;
+    }
 
     // Send credentials to server for verification
+    const result = await loginUser(username, password);
 
-    // Get response from server, if valid a cookie with JWT token will be returned and stored
-
-    // Else give feedback and stay at login screen
-
-    console.log(username, password);
-
-    setLoggedIn(true);
-
-    setUserId('George')
+    if (result) {
+      setLoggedIn(true);
+    }
+    
   }
 
 
