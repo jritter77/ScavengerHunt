@@ -20,13 +20,6 @@ const Stack = createNativeStackNavigator();
 
 
 const HuntStack = (props) => {
-
-  setData('hunts', [
-    {_id: 1, title: 'Hunt 1', description: 'This is a test hunt!'},
-    {_id: 2, title: 'Hunt 2', description: 'This is a test hunt!'},
-    {_id: 3, title: 'Hunt 3', description: 'This is a test hunt!'},
-    {_id: 4, title: 'Hunt 4', description: 'This is a test hunt!'},
-  ]);
   
   setData('storedHunts', [
     {_id: 1, rating: 3.5, title: 'Hunt 1', description: 'This is a test hunt!'},

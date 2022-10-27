@@ -6,6 +6,8 @@ import FriendProfile from './FriendProfile';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
 import Styles from '../../Styles';
+import StandardButton from '../../components/StandardButton';
+import { View } from 'react-native-web';
 
 
 

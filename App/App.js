@@ -14,6 +14,8 @@ import FriendStack from './views/friends';
 import LoginStack from './views/loginSignup';
 import { LinearGradient } from 'expo-linear-gradient';
 import Styles from './Styles';
+import { getData, setData } from './Methods';
+import axios from 'axios';
 
 
 
@@ -23,15 +25,35 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
 
-  const [userId, setUserId] = React.useState('');
-
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  
+
+  const testLogin = async () => {
+    const result = await axios.post('http://localhost:3000/users/login', {username: 'admin', password: 'root'});
+    console.log(result)
 
 
+
+    const users = await axios.get('http://localhost:3000/users', {params: {JWT: result.data}});
+    console.log(users);
+  }
+
+  React.useEffect(() => {
+    const checkToken = async () => {
+      const token = await getData('token');
+      if (token) {
+        setLoggedIn(true);
+      }
+      else {
+        setLoggedIn(false);
+      }
+    }
+
+    checkToken();
+  })
 
   if (loggedIn) {
-    console.log(userId);
     return (
       <NavigationContainer>
         <Drawer.Navigator initialRouteName='Dashboard' screenOptions={Styles.DrawerHeaderStyle} >
@@ -60,7 +82,7 @@ export default function App() {
   }
   else {
     return (
-        <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId}/>
+        <LoginStack setLoggedIn={setLoggedIn}/>
     )
   }
   

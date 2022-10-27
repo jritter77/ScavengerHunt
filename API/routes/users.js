@@ -1,4 +1,5 @@
 let express = require("express");
+let cors = require("cors");
 let router = express.Router();
 let jwt = require("jsonwebtoken");
 const { ensureToken } = require("../methods");
@@ -51,9 +52,9 @@ router.post("/login", async function (req, res, next) {
   if (user.validPassword(req.body.password)) {
     const token = jwt.sign({id: user._id}, process.env.SECRET);
     res.cookie('JWT', token, {httpOnly: true});
-    res.send('<h1>Cookie has been sent!</h1>');
+    res.send(token);
   } else {
-    res.send("<h1>Invalid credentials</h1>");
+    res.send(false);
   }
 });
 
