@@ -23,7 +23,6 @@ const FriendHeaderButtons = ({navigation}) => {
     </TouchableOpacity>
     ) }
     
-
   return (
     <View style={styles.container}>
       <FriendRequestsButton/>
@@ -39,11 +38,21 @@ const styles = StyleSheet.create( {
       justifyContent: 'center',
       flexDirection: 'row'
     },
+
+    button: {
+      backgroundColor: 'green',
+      flex: 1,
+      position: 'relative',
+      marginLeft: 3,
+      marginRight: 3,
+      width: '2em'
+
+
+    },
  
     buttonText: {
-      color: 'black',
-      fontWeight: 'bold',
-      fontSize: '12pt',
+      color: 'white',
+      fontSize: '14pt',
       textAlign: 'center'
     }
 

@@ -2,17 +2,22 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import StandardButton from '../../components/StandardButton'
 import Styles from '../../Styles'
-import FriendHeaderButtons  from '../../components/FriendHeaderButtons'
 
 
 const Friends = ({navigation}) => {
+  const [friendList, setFriendList] = React.useState([]);
+  const friendsObj =  [];
+
   return (
     <View style={Styles.StandardStyles.page}>
-        <StandardButton
-          title='Friend Profile'
-          onPress={() => {
-            navigation.navigate('FriendProfile')
-          } } 
+      <View>
+        
+      </View>
+      <StandardButton
+        title='Friend Profile'
+        onPress={() => {
+          navigation.navigate('FriendProfile')
+        } } 
       />
     </View>   
   )
