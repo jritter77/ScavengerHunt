@@ -2,8 +2,10 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import Styles from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
-import { getHuntProgress } from "../../Methods";
+import { getHuntProgress, setData, updateLocalHunt } from "../../Methods";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
+import Checkbox from "../../components/Checkbox";
+import StandardButton from "../../components/StandardButton";
 
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
@@ -12,13 +14,32 @@ const ActiveHunt = ({ navigation, route }) => {
 
   const [clueFields, setClueFields] = React.useState([]);
 
+
+  const handleSave = async () => {
+    hunt.clues = clues;
+    await updateLocalHunt(hunt);
+    navigation.navigate('MyHunts')
+  }
+
+
   const ClueField = ({ clue }) => {
     const [entry, setEntry] = React.useState(clue.entry);
 
+    React.useEffect(() => {
+      console.log(entry)
+      setClues(oldState => {
+        oldState[clue.id] = ({...clue, entry: entry});
+        return {...oldState}
+      })
+    }, [entry])
+
     return (
       <View style={styles.clue}>
-        <Text style={styles.clueText}>{clue.clue}</Text>
-        <TextInput value={entry} onChangeText={setEntry} style={styles.entry} />
+        <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
+          <Text style={styles.clueText}>{clue.clue}</Text>
+          {(clue.type !== 'text') && <Checkbox entry={entry} setEntry={setEntry}/>}
+        </View>
+        {(clue.type === 'text') && <TextInput value={entry} placeholder={'answer'} onChangeText={setEntry} style={styles.entry} />}
       </View>
     );
   };
@@ -39,6 +60,10 @@ const ActiveHunt = ({ navigation, route }) => {
     >
       <ProgressBar value={getHuntProgress(hunt)} style={styles.progress} />
       {clueFields}
+      <StandardButton 
+        title='Save & Quit'
+        onPress={handleSave}
+      />
     </ScrollView>
   );
 };
@@ -53,6 +78,7 @@ const styles = StyleSheet.create({
   },
   clue: {
     width: "70%",
+    margin: '5%'
   },
   entry: {
     fontSize: 20,

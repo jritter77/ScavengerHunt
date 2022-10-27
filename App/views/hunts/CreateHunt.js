@@ -78,7 +78,7 @@ const ClueField = ({ id, setClueVals }) => {
 
   React.useEffect(() => {
     setClueVals((oldState) => {
-      oldState[id] = { clue, answer, entry: "", type: pickerVal };
+      oldState[id] = { id, clue, answer, entry: '', type: pickerVal };
       return { ...oldState };
     });
   }, [clue, answer]);

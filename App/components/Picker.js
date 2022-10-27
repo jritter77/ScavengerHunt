@@ -53,6 +53,7 @@ const Picker = ({ options, val, setVal }) => {
         onPress={() => setModalVisible(true)}
       >
         <Text style={styles.textStyle}>{val}</Text>
+        <Text style={styles.symbol}>&#9660;</Text>
       </Pressable>
     </View>
   );
@@ -74,7 +75,10 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     padding: "2%",
-    width: '100%'
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   buttonOpen: {
     backgroundColor: "white",
@@ -94,6 +98,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
   },
+  symbol: {
+    marginRight: '5%'
+  }
 });
 
 export default Picker;

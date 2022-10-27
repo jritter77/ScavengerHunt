@@ -47,7 +47,17 @@ export async function getData(key) {
 
     delete currentHunts[id];
 
-    setData('hunts', currentHunts);
+    await setData('hunts', currentHunts);
+  }
+
+  export async function updateLocalHunt(hunt) {
+    const currentHunts = await getData('hunts');
+
+    console.log(hunt)
+
+    currentHunts[hunt._id] = hunt;
+
+    await setData('hunts', currentHunts)
   }
 
   export function getHuntProgress(hunt) {
@@ -64,5 +74,5 @@ export async function getData(key) {
       }
     }
 
-    return complete / total;
+    return Math.round(100 * complete / total);
   }
