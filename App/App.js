@@ -14,6 +14,7 @@ import FriendStack from './views/friends';
 import LoginStack from './views/loginSignup';
 import { LinearGradient } from 'expo-linear-gradient';
 import Styles from './Styles';
+import { setData } from './Methods';
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  
 
 
 
