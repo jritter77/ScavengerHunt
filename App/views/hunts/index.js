@@ -20,13 +20,6 @@ const Stack = createNativeStackNavigator();
 
 
 const HuntStack = (props) => {
-  
-  setData('storedHunts', [
-    {_id: 1, rating: 3.5, title: 'Hunt 1', description: 'This is a test hunt!'},
-    {_id: 2, rating: 2.5, title: 'Hunt 2', description: 'This is a test hunt!'},
-    {_id: 3, rating: 4.5, title: 'Hunt 3', description: 'This is a test hunt!'},
-    {_id: 4, rating: 1.5, title: 'Hunt 4', description: 'This is a test hunt!'},
-  ])
 
     return (
         <Stack.Navigator initialRouteName='Hunts' screenOptions={Styles.StackHeaderStyle}>

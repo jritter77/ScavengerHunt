@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import React from 'react'
 import ProgressBar from './ProgressBar';
 import { useNavigation } from '@react-navigation/native';
-import { getHuntProgress } from '../Methods';
+import { getHuntProgress } from '../models/hunts';
 
 const LocalHunt = ({hunt, setHunts}) => {
 

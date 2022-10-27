@@ -9,6 +9,7 @@ const StoredHuntInfo = ({navigation, route}) => {
 
   const {_id, rating, title, description} = route.params.hunt;
 
+
   return (
     <View style={Styles.StandardStyles.page}>
       <Text style={styles.title}>{title}</Text>

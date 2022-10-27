@@ -4,7 +4,7 @@ import StandardButton from '../../components/StandardButton'
 import { TextInput } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import Styles from '../../Styles'
-import { loginUser } from '../../Methods'
+import { loginUser } from '../../models/users'
 
 const Login = ({setLoggedIn, setUserId}) => {
 

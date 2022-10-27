@@ -52,7 +52,7 @@ router.post("/login", async function (req, res, next) {
   if (user.validPassword(req.body.password)) {
     const token = jwt.sign({id: user._id}, process.env.SECRET);
     res.cookie('JWT', token, {httpOnly: true});
-    res.send(token);
+    res.send({id: user._id, username: user.username, token: token});
   } else {
     res.send(false);
   }

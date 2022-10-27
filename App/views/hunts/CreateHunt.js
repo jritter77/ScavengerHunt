@@ -3,8 +3,8 @@ import React from "react";
 import Styles from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StandardButton from "../../components/StandardButton";
-import { createLocalHunt } from "../../Methods";
 import Picker from "../../components/Picker";
+import { createLocalHunt } from "../../models/hunts";
 
 const CreateHunt = ({ navigation }) => {
   const [title, setTitle] = React.useState("");

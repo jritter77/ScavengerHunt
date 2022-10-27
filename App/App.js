@@ -15,7 +15,6 @@ import LoginStack from './views/loginSignup';
 import { LinearGradient } from 'expo-linear-gradient';
 import Styles from './Styles';
 import { getData, setData } from './Methods';
-import axios from 'axios';
 
 
 
@@ -27,22 +26,11 @@ export default function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  
-
-  const testLogin = async () => {
-    const result = await axios.post('http://localhost:3000/users/login', {username: 'admin', password: 'root'});
-    console.log(result)
-
-
-
-    const users = await axios.get('http://localhost:3000/users', {params: {JWT: result.data}});
-    console.log(users);
-  }
 
   React.useEffect(() => {
     const checkToken = async () => {
-      const token = await getData('token');
-      if (token) {
+      const user = await getData('user');
+      if (user && user.token) {
         setLoggedIn(true);
       }
       else {

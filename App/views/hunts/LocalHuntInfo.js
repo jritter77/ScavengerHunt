@@ -3,7 +3,7 @@ import React from 'react'
 import Styles from '../../Styles'
 import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
-import { deleteLocalHunt, getData, getHuntProgress } from '../../Methods';
+import { deleteLocalHunt, getHuntProgress } from '../../models/hunts';
 
 const LocalHuntInfo = ({navigation, route}) => {
 
