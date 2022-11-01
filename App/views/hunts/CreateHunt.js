@@ -19,7 +19,7 @@ const CreateHunt = ({ navigation }) => {
       return;
     }
 
-    createLocalHunt({ title: title, description: desc, clues: clueVals });
+    createLocalHunt({ title: title, description: desc, clueList: clueVals });
     navigation.navigate("Hunts");
   };
 

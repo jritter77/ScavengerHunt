@@ -2,9 +2,12 @@ import axios from "axios";
 import { setData, getData } from "../Methods";
 
 
+const apiRoot = 'http://localhost:3000/';
+
+
 export async function loginUser(username, password) {
     try {
-      const result = await axios.post('http://localhost:3000/users/login', {username, password});
+      const result = await axios.post(apiRoot + 'login', {username, password});
   
       console.log(result.data)
       

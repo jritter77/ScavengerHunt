@@ -3,28 +3,76 @@ import { setData, getData } from "../Methods";
 
 // PUBLIC HUNT METHODS
 
+const apiRoot = 'http://localhost:3000/';
+
 export async function getPublicHunts() {
     const user = await getData('user');
-    const result = await axios.get('http://localhost:3000/hunts', {params: {JWT: user.token}});
+    const result = await axios.get(apiRoot + 'hunts', {params: {JWT: user.token}});
     return result.data;
 }
+
+export async function publishHunt(localHunt) {
+
+    console.log(localHunt);
+    const user = await getData('user');
+    const publishedHunt = {
+        author: localHunt.author,
+        authorId: localHunt.autorId,
+        title: localHunt.title,
+        description: localHunt.description,
+        clueList: localHunt.clueList,
+        ratings: [],
+        downloads: 0
+    }
+
+    const result = await axios.post(apiRoot + 'hunts', {hunt: publishedHunt}, {params: {JWT: user.token}})
+
+    return result.data;
+}
+
+export async function downloadHunt(publishedHuntId) {
+    const user = await getData('user');
+    const currentHunts = await getData('hunts') || {};
+
+    const result = await axios.get(apiRoot + 'hunts/download', {params: {JWT: user.token, huntId: publishedHuntId}})
+    const publishedHunt = result.data;
+
+
+    const localHunt = {
+        _id: publishedHunt._id,
+        author: publishedHunt.author,
+        authorId: publishedHunt.authorId,
+        title: publishedHunt.title,
+        description: publishedHunt.description,
+        clueList: publishedHunt.clueList,
+        group: []
+    }
+
+    currentHunts[localHunt._id] = localHunt;
+
+    await setData('hunts', currentHunts);
+}
+
+
 
 
 // LOCAL HUNT METHODS
 
 export async function createLocalHunt(huntObj) {
+    const user = await getData('user');
     const currentHunts = await getData('hunts');
     const hunts = currentHunts ? currentHunts : {};
     const keys = Object.keys(hunts).map(e => parseInt(e));
-
+    
     const _id = keys.length ? keys[keys.length - 1] + 1 : 1;
-    const author = 'localAuthor';
+    const author = user.username;
+    const authorId = user.id;
     const group = [];
-
-    const hunt = {_id, author, group, ...huntObj}
-
+    
+    const hunt = {_id, authorId, author, group, ...huntObj}
+    
     hunts[_id] = hunt;
-
+    
     await setData('hunts', hunts);
 }
 
@@ -48,7 +96,7 @@ export async function updateLocalHunt(hunt) {
 
 export function getHuntProgress(hunt) {
 
-    const clues = hunt.clues;
+    const clues = hunt.clueList;
 
     let total = 0;
     let complete = 0;

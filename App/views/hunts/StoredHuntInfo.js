@@ -4,10 +4,15 @@ import Styles from '../../Styles'
 import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
 import Rating from '../../components/Rating';
+import { downloadHunt } from '../../models/hunts';
 
 const StoredHuntInfo = ({navigation, route}) => {
 
   const {_id, rating, title, description} = route.params.hunt;
+
+  const handleDownload = async () => {
+    await downloadHunt(_id);
+  }
 
 
   return (
@@ -17,7 +22,7 @@ const StoredHuntInfo = ({navigation, route}) => {
       <Text style={styles.description}>{description}</Text>
       <StandardButton 
         title='Download Hunt'
-        onPress={() => console.log('Download Hunt!')}
+        onPress={handleDownload}
       />
       <StandardButton 
         title='Rate Hunt'
