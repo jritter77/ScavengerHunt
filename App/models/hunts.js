@@ -51,6 +51,8 @@ export async function downloadHunt(publishedHuntId) {
     currentHunts[localHunt._id] = localHunt;
 
     await setData('hunts', currentHunts);
+
+    return localHunt;
 }
 
 

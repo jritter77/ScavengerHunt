@@ -11,7 +11,12 @@ const StoredHuntInfo = ({navigation, route}) => {
   const {_id, rating, title, description} = route.params.hunt;
 
   const handleDownload = async () => {
-    await downloadHunt(_id);
+    const newHunt = await downloadHunt(_id);
+    navigation.navigate('HuntStack', {
+      screen: 'LocalHuntInfo', 
+      hunt: newHunt,
+      setHunts: setHunts
+  });
   }
 
 

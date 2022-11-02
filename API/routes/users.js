@@ -37,11 +37,8 @@ router.delete("/", ensureToken, async function (req, res, next) {
 
 // Edit Current User
 router.put("/", ensureToken, async function (req, res, next) {
-  const user = await User.findOne(req.body.user);
-  user.changeCredentials(req.body.attr);
-  await user.save();
-  
-  res.send(`<h1>${user.username} has been updated!</h1>`);
+  const result = await User.updateOne(req.body.user, req.body.attr);  
+  res.send(result);
 });
 
 
