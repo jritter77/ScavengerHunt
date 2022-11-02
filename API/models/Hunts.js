@@ -3,10 +3,11 @@ let mongoose = require("mongoose");
   
 const HuntSchema = mongoose.Schema({
     author: String,
+    authorId: String,
     title: String,
     description: String,
 
-    clueList: Array,
+    clueList: Object,
 
     ratings: Array,
     downloads: Number,

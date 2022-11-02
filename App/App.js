@@ -14,6 +14,7 @@ import FriendStack from './views/friends';
 import LoginStack from './views/loginSignup';
 import { LinearGradient } from 'expo-linear-gradient';
 import Styles from './Styles';
+import { getData, setData } from './Methods';
 
 
 
@@ -23,15 +24,24 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
 
-  const [userId, setUserId] = React.useState('');
-
   const [loggedIn, setLoggedIn] = React.useState(false);
 
 
+  React.useEffect(() => {
+    const checkToken = async () => {
+      const user = await getData('user');
+      if (user && user.token) {
+        setLoggedIn(true);
+      }
+      else {
+        setLoggedIn(false);
+      }
+    }
 
+    checkToken();
+  })
 
   if (loggedIn) {
-    console.log(userId);
     return (
       <NavigationContainer>
         <Drawer.Navigator initialRouteName='Dashboard' screenOptions={Styles.DrawerHeaderStyle} >
@@ -60,7 +70,7 @@ export default function App() {
   }
   else {
     return (
-        <LoginStack setLoggedIn={setLoggedIn} setUserId={setUserId}/>
+        <LoginStack setLoggedIn={setLoggedIn}/>
     )
   }
   

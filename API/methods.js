@@ -1,11 +1,10 @@
 let jwt = require("jsonwebtoken");
 
 module.exports.ensureToken = function (req, res, next) {
-  const cookies = req.cookies;
-
-  if (cookies.JWT) {
+  const JWT = req.cookies.JWT || req.query.JWT;
+  if (JWT) {
   
-    jwt.verify(cookies.JWT, process.env.SECRET, (err, result) => {
+    jwt.verify(JWT, process.env.SECRET, (err, result) => {
 
       if (err) {
         res.redirect(403, '/login');

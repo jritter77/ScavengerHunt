@@ -25,8 +25,8 @@ const MyHunts = ({navigation}) => {
 
     const huntObjs = [];
     
-    for (let hunt of hunts) {
-      huntObjs.push(<LocalHunt key={hunt._id} hunt={hunt}/>)
+    for (let hunt in hunts) {
+      huntObjs.push(<LocalHunt key={hunts[hunt]._id} hunt={hunts[hunt]} setHunts={setHunts} />)
     }
 
     return huntObjs;
@@ -34,7 +34,10 @@ const MyHunts = ({navigation}) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      setHunts(await getData('hunts'));
+      const localHunts = await getData('hunts');
+      if (localHunts) {
+        setHunts(localHunts);
+      }
     }
 
     fetchData();
@@ -42,14 +45,24 @@ const MyHunts = ({navigation}) => {
   
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
+      <TextInput 
+        style={styles.search}
+        onChangeText={setSearchTerm}
+        placeholder={'Search'}
+      />
       <StandardButton 
-          title='Active Hunt'
-          onPress={() => {
-            navigation.navigate('ActiveHunt')
-          }}
-        />
-    </View>
+          title='Search'
+          onPress={() => handleSubmit()}
+      />
+      <View style={styles.huntsContainer}>
+        {populateHunts()}
+      </View>
+      <StandardButton 
+        title={'Show More'}
+        onPress={() => console.log('Show More!')}
+      />
+    </ScrollView>
   )
 }
 

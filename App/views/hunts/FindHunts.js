@@ -4,7 +4,7 @@ import StandardButton from '../../components/StandardButton'
 import Styles from '../../Styles'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import StoredHunt from '../../components/StoredHunt'
-import { getData } from '../../Methods'
+import { getPublicHunts } from '../../models/hunts'
 
 const FindHunts = ({navigation}) => {
 
@@ -33,7 +33,7 @@ const FindHunts = ({navigation}) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      setHunts(await getData('storedHunts'))
+      setHunts(await getPublicHunts());
     }
 
     fetchData();

@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-app = require('../app');
+let app = require('../app');
 let debug = require('debug')('express-test-app:server');
 let http = require('http');
 
