@@ -12,7 +12,7 @@ const LocalHuntInfo = ({navigation, route}) => {
 
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
-    route.params.setHunts(await getData('hunts'));
+    route?.params?.setHunts?.(await getData('hunts'));
     navigation.navigate('MyHunts');
   }
 

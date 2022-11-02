@@ -13,8 +13,12 @@ export async function getPublicHunts() {
 
 export async function publishHunt(localHunt) {
 
-    console.log(localHunt);
     const user = await getData('user');
+
+    for (let clue in localHunt.clueList) {
+        localHunt.clueList[clue].entry = "";
+    }
+
     const publishedHunt = {
         author: localHunt.author,
         authorId: localHunt.autorId,

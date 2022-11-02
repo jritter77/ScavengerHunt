@@ -15,7 +15,6 @@ const StoredHuntInfo = ({navigation, route}) => {
     navigation.navigate('HuntStack', {
       screen: 'LocalHuntInfo', 
       hunt: newHunt,
-      setHunts: setHunts
   });
   }
 
