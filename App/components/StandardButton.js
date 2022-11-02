@@ -1,12 +1,16 @@
 import { View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
 
-const StandardButton = ({title, onPress}) => {
+const StandardButton = ({title, onPress, color}) => {
+   
+    if(!color){
+        color = 'blue';
+    }
 
   return (
     <TouchableOpacity 
         onPress={onPress}
-        style={styles.button}
+        style={{...styles.button, backgroundColor: color}}
     >
         <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
