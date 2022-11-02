@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import Styles from '../Styles'
 
+
+const mail = require('../assets/mailSymbol.png')
 
 
 const FriendHeaderButtons = ({navigation}) => {
@@ -11,7 +13,7 @@ const FriendHeaderButtons = ({navigation}) => {
       <TouchableOpacity 
       style={styles.button}
       onPress={ () => {navigation.navigate('FriendRequests')}} >
-      <Text style={styles.buttonText}>☺</Text>
+      <Image style= {{width: 40, height: 40}}source={mail}/>
       </TouchableOpacity>
     )}
   const AddFriendButton = () => {
@@ -19,7 +21,7 @@ const FriendHeaderButtons = ({navigation}) => {
       <TouchableOpacity 
     style={styles.button}
     onPress={ () => {navigation.navigate('AddFriend')}} >
-    <Text style={styles.buttonText}>☩</Text>
+    <Text>☩</Text>
     </TouchableOpacity>
     ) }
     
@@ -33,28 +35,24 @@ const FriendHeaderButtons = ({navigation}) => {
 
 const styles = StyleSheet.create( {
     container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
+
 
     button: {
-      backgroundColor: 'green',
-      flex: 1,
+      backgroundColor: '#1BA1E2',
       position: 'relative',
-      marginLeft: 3,
-      marginRight: 3,
-      width: '2em'
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5,
+      margin: 12,
+      width: 35,
+      height: 30,
+      
+      
 
 
     },
- 
-    buttonText: {
-      color: 'white',
-      fontSize: '14pt',
-      textAlign: 'center'
-    }
 
 })
 
