@@ -10,13 +10,9 @@ const FindHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
 
-  function handleSubmit() {
-    console.log(searchTerm);
-    // Get search term and order by
-
-    // Query database for search results
-
-    // populate huntContainer with hunt objects
+  async function handleSubmit() {
+    const result = await getPublicHunts(searchTerm);
+    setHunts(result);
   }
 
   function populateHunts() {
@@ -31,7 +27,7 @@ const FindHunts = ({ navigation }) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      setHunts(await getPublicHunts());
+      setHunts(await getPublicHunts(searchTerm));
     }
 
     fetchData();

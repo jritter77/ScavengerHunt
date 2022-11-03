@@ -12,13 +12,20 @@ const MyHunts = ({navigation}) => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [hunts, setHunts] = React.useState([]);
 
-  function handleSubmit() {
-    console.log(searchTerm)
-    // Get search term and order by
+  async function handleSubmit() {
 
-    // Query local storage for hunts matching search term 
+    const localHunts = await getData('hunts');
+    const filteredHunts = {};
 
-    // populate huntContainer with hunt objects
+    for (let hunt in localHunts) {
+      if (
+        localHunts[hunt].title.toLowerCase().includes(searchTerm.toLowerCase()) 
+        || localHunts[hunt].description.toLowerCase().includes(searchTerm.toLowerCase())) {
+          filteredHunts[hunt] = localHunts[hunt];
+      }
+    }
+    
+    setHunts(filteredHunts);
   }
 
   function populateHunts() {
@@ -48,7 +55,7 @@ const MyHunts = ({navigation}) => {
     <ScrollView 
       style={Styles.StandardStyles.scrollContainer} 
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
-    >
+      >
       <TextInput 
         style={styles.search}
         onChangeText={setSearchTerm}

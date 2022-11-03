@@ -12,6 +12,8 @@ const HuntSchema = mongoose.Schema({
     ratings: Array,
     downloads: Number,
 });
+
+HuntSchema.index({title: 'text', description: 'text'});
   
 const Hunt = module.exports = mongoose.model('Hunt', HuntSchema);
     

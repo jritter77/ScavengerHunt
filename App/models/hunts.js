@@ -5,9 +5,9 @@ import { setData, getData } from "../Methods";
 
 const apiRoot = 'http://localhost:3000/';
 
-export async function getPublicHunts() {
+export async function getPublicHunts(searchTerm) {
     const user = await getData('user');
-    const result = await axios.get(apiRoot + 'hunts', {params: {JWT: user.token}});
+    const result = await axios.get(apiRoot + 'hunts', {params: {JWT: user.token, search: searchTerm}});
     return result.data;
 }
 
