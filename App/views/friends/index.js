@@ -6,8 +6,8 @@ import FriendProfile from './FriendProfile';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
 import Styles from '../../Styles';
-import StandardButton from '../../components/StandardButton';
-import { View } from 'react-native-web';
+import FriendHeaderButtons from '../../components/FriendHeaderButtons';
+;
 
 
 
@@ -31,9 +31,17 @@ const FriendStack = (props) => {
           <Stack.Screen 
             name='Friends'
             children={() => <Friends {...props}/>}
+            options= {{
+              headerRight: () => <FriendHeaderButtons {...props} /> }}
           />
+            
         </Stack.Navigator>
     );
 }
 
+/* This is the local storage data for testing (Incomplete)
+localStorage.setItem('storedFriends', JSON.stringify({[
+  {}
+]})
+*/
 export default FriendStack
