@@ -5,6 +5,7 @@ import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
 import { deleteLocalHunt, getHuntProgress, publishHunt } from '../../models/hunts';
 import { getData } from '../../Methods';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const LocalHuntInfo = ({navigation, route}) => {
 
@@ -22,7 +23,10 @@ const LocalHuntInfo = ({navigation, route}) => {
   }
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <ScrollView 
+      style={Styles.StandardStyles.scrollContainer} 
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+    >
       <Text style={styles.title}>{title}</Text>
       <View style={styles.progressContainer}>
         <Text style={styles.progress}>Progress:</Text>
@@ -46,7 +50,7 @@ const LocalHuntInfo = ({navigation, route}) => {
         title='Publish Hunt'
         onPress={handlePublish}
       />
-    </View>
+    </ScrollView>
   )
 }
 
@@ -74,9 +78,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5, 
     width: '80%',
-    height: '20%',
+    minHeight: 64,
     fontSize: 20,
     marginBottom: '5%',
+    padding: '5%',
+    textAlign: 'center'
   },
   group: {
     backgroundColor: 'white',

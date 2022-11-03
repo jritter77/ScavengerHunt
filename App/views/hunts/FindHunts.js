@@ -39,8 +39,8 @@ const FindHunts = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={styles.scrollContainer}
-      contentContainerStyle={styles.scrollContainerContent}
+      style={Styles.StandardStyles.scrollContainer} 
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <TextInput
         style={styles.search}
@@ -60,12 +60,6 @@ const FindHunts = ({ navigation }) => {
 const styles = StyleSheet.create({
   huntsContainer: {
     width: "100%",
-    alignItems: "center",
-  },
-  scrollContainer: {
-    backgroundColor: "#FFFDD1",
-  },
-  scrollContainerContent: {
     alignItems: "center",
   },
   search: {

@@ -5,6 +5,7 @@ import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
 import Rating from '../../components/Rating';
 import { downloadHunt } from '../../models/hunts';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const StoredHuntInfo = ({navigation, route}) => {
 
@@ -20,7 +21,10 @@ const StoredHuntInfo = ({navigation, route}) => {
 
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <ScrollView 
+      style={Styles.StandardStyles.scrollContainer} 
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+    >
       <Text style={styles.title}>{title}</Text>
       <Rating rating={rating} size={40} backgroundColor='#FFFDD1' />
       <Text style={styles.description}>{description}</Text>
@@ -32,11 +36,12 @@ const StoredHuntInfo = ({navigation, route}) => {
         title='Rate Hunt'
         onPress={() => console.log('Rate Hunt!')}
       />
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  
   title: {
     backgroundColor: 'white',
     borderWidth: 2,
@@ -53,9 +58,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5, 
     width: '80%',
-    height: '20%',
+    minHeight: 64,
     fontSize: 20,
     marginBottom: '5%',
+    textAlign: 'center'
   },
   ratingText: {
     fontSize: 20,

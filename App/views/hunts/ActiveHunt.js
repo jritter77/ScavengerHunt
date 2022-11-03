@@ -55,8 +55,8 @@ const ActiveHunt = ({ navigation, route }) => {
 
   return (
     <ScrollView
-      style={styles.scrollContainer}
-      contentContainerStyle={styles.scrollContainerContent}
+      style={Styles.StandardStyles.scrollContainer} 
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <ProgressBar value={getHuntProgress(hunt)} style={styles.progress} />
       {clueFields}
@@ -86,14 +86,7 @@ const styles = StyleSheet.create({
     padding: "2%",
     borderWidth: 1,
     borderRadius: 5,
-  },
-  scrollContainer: {
-    backgroundColor: "#FFFDD1",
-  },
-  scrollContainerContent: {
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
+  }
 });
 
 export default ActiveHunt;

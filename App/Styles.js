@@ -21,6 +21,12 @@ const Styles = {
         }
       },
       StandardStyles : StyleSheet.create({
+        scrollContainer: {
+          backgroundColor: '#FFFDD1',
+        },
+        scrollContainerContent: {
+          alignItems: 'center',
+        },
         page: {
           flex: 1,
           alignItems: 'center',

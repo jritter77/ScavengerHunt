@@ -35,8 +35,8 @@ const CreateHunt = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={styles.scrollContainer}
-      contentContainerStyle={styles.scrollContainerContent}
+      style={Styles.StandardStyles.scrollContainer} 
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <TextInput
         placeholder="Title"
@@ -128,12 +128,6 @@ const styles = StyleSheet.create({
     width: "80%",
     fontSize: 20,
     marginBottom: "5%",
-  },
-  scrollContainer: {
-    backgroundColor: "#FFFDD1",
-  },
-  scrollContainerContent: {
-    alignItems: "center",
   },
   field: {
     backgroundColor: "white",
