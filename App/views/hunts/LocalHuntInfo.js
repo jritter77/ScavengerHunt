@@ -3,17 +3,30 @@ import React from 'react'
 import Styles from '../../Styles'
 import ProgressBar from '../../components/ProgressBar';
 import StandardButton from '../../components/StandardButton';
+import { deleteLocalHunt, getHuntProgress, publishHunt } from '../../models/hunts';
+import { getData } from '../../Methods';
 
 const LocalHuntInfo = ({navigation, route}) => {
 
   const {_id, title, description} = route.params.hunt;
+
+  const handleDelete = async () => {
+    await deleteLocalHunt(_id);
+    route?.params?.setHunts?.(await getData('hunts'));
+    navigation.navigate('MyHunts');
+  }
+
+  const handlePublish = async () => {
+    const result = await publishHunt(route.params.hunt);
+    return result.data;
+  }
 
   return (
     <View style={Styles.StandardStyles.page}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.progressContainer}>
         <Text style={styles.progress}>Progress:</Text>
-        <ProgressBar value={30} style={{flex: 1}} />
+        <ProgressBar value={getHuntProgress(route.params.hunt)} style={{flex: 1}} />
       </View>
       <Text style={styles.description}>{description}</Text>
       <Text style={styles.group}>Group</Text>
@@ -23,11 +36,15 @@ const LocalHuntInfo = ({navigation, route}) => {
       />
       <StandardButton 
         title='Start/Continue'
-        onPress={() => navigation.navigate('ActiveHunt')}
+        onPress={() => navigation.navigate('HuntStack', {screen: 'ActiveHunt', hunt: route.params.hunt})}
       />
       <StandardButton 
         title='Delete Hunt'
-        onPress={() => console.log('Delete Hunt!')}
+        onPress={handleDelete}
+      />
+      <StandardButton
+        title='Publish Hunt'
+        onPress={handlePublish}
       />
     </View>
   )
