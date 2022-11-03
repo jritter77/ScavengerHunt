@@ -5,11 +5,13 @@ import StandardButton from '../../components/StandardButton'
 import { useNavigation } from '@react-navigation/native'
 
 import { CustomAlert } from '../../Methods'
+import { updateUsername } from '../../models/users'
 
 
 const changeUserName = ({navigation}) => {
-  const [changeUserName, setUserName] = React.useState('');
+  const [username, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [feedback, setFeedback] = React.useState('');
 
   return (
     <View style={Styles.StandardStyles.page}>
@@ -24,14 +26,18 @@ const changeUserName = ({navigation}) => {
           placeholder='Password'
           style={Styles.StandardStyles.textInput}
         />
+        <Text>{feedback}</Text>
         <StandardButton 
           title='Submit'
-          onPress={() => CustomAlert(
-            'Change Username', 
-            'Are you sure you would like to change your username?', 
-            () => {
-              navigation.navigate('ChangeCredentials')
-            })}
+          onPress={
+            async () => {
+              if (await updateUsername(username, password)) {
+                navigation.navigate('ChangeCredentials');
+              }
+              else {
+                setFeedback('Incorrect Password')
+              }
+            }}
 
         />
     </View>

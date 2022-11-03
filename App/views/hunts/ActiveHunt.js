@@ -2,23 +2,23 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import Styles from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
-import { getHuntProgress, setData, updateLocalHunt } from "../../Methods";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Checkbox from "../../components/Checkbox";
 import StandardButton from "../../components/StandardButton";
+import { updateLocalHunt, getHuntProgress } from "../../models/hunts";
 
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
 
-  const [clues, setClues] = React.useState(hunt.clues);
+  const [clues, setClues] = React.useState(hunt.clueList);
 
   const [clueFields, setClueFields] = React.useState([]);
 
 
   const handleSave = async () => {
-    hunt.clues = clues;
+    hunt.clueList = clues;
     await updateLocalHunt(hunt);
-    navigation.navigate('MyHunts')
+    navigation.navigate('MyHunts');
   }
 
 
