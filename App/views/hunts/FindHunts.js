@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
-import Styles from "../../Styles";
+import { Styles } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StoredHunt from "../../components/StoredHunt";
 import { getPublicHunts } from "../../models/hunts";
@@ -35,7 +35,7 @@ const FindHunts = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer} 
+      style={Styles.StandardStyles.scrollContainer}
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <TextInput

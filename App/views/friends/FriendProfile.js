@@ -1,13 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Styles from '../../Styles'
+import { View, Text } from "react-native";
+import React from "react";
+import { Styles } from "../../Styles";
 
-const FriendProfile = ({navigation}) => {
+const FriendProfile = ({ navigation }) => {
   return (
     <View style={Styles.StandardStyles.page}>
       <Text>FriendProfile</Text>
     </View>
-  )
-}
+  );
+};
 
-export default FriendProfile
+export default FriendProfile;

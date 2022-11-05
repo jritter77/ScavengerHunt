@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import Styles from "../../Styles";
+import { Styles } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StandardButton from "../../components/StandardButton";
 import Picker from "../../components/Picker";
@@ -35,7 +35,7 @@ const CreateHunt = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer} 
+      style={Styles.StandardStyles.scrollContainer}
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <TextInput
@@ -78,7 +78,7 @@ const ClueField = ({ id, setClueVals }) => {
 
   React.useEffect(() => {
     setClueVals((oldState) => {
-      oldState[id] = { id, clue, answer, entry: '', type: pickerVal };
+      oldState[id] = { id, clue, answer, entry: "", type: pickerVal };
       return { ...oldState };
     });
   }, [clue, answer]);
@@ -101,11 +101,13 @@ const ClueField = ({ id, setClueVals }) => {
         onChangeText={setClue}
         style={styles.field}
       />
-      {(pickerVal === 'text') && <TextInput
-        placeholder="answer"
-        onChangeText={setAnswer}
-        style={styles.field}
-      />}
+      {pickerVal === "text" && (
+        <TextInput
+          placeholder="answer"
+          onChangeText={setAnswer}
+          style={styles.field}
+        />
+      )}
     </View>
   );
 };
@@ -142,8 +144,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontWeight: 'bold'
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default CreateHunt;

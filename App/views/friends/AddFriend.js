@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import React from "react";
-import Styles from "../../Styles";
+import { Styles } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
 import { sendFriendRequest } from "../../models/friends";
 import { getData } from "../../Methods";
