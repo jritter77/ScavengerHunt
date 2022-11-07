@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getData } from "../Methods";
 
-const apiRoot = "http://localhost:3000/";
+const apiRoot = "https://lookout-sh.com/";
 
 export async function sendFriendRequest(friendName) {
   try {

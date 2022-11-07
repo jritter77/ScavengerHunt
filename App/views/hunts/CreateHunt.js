@@ -13,10 +13,19 @@ const CreateHunt = ({ navigation }) => {
   const [clueFields, setClueFields] = React.useState([]);
   const [clueVals, setClueVals] = React.useState({});
 
+  const [feedback, setFeedback] = React.useState("");
+
   const handleSave = () => {
     if (!title && !desc) {
-      console.log("Must enter title and description!");
+      setFeedback("Please enter a Title and Description");
       return;
+    }
+
+    for (let clue in clueVals) {
+      if (clueVals[clue].clue === "") {
+        setFeedback("Please enter all clue prompts");
+        return;
+      }
     }
 
     createLocalHunt({ title: title, description: desc, clueList: clueVals });
@@ -51,6 +60,7 @@ const CreateHunt = ({ navigation }) => {
         onChangeText={setDesc}
       />
       {clueFields}
+      <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton
         title={"Add Clue"}
         onPress={() => {
@@ -145,6 +155,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  feedback: {
+    color: "red",
+    fontSize: 20,
   },
 });
 
