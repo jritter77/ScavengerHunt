@@ -1,5 +1,6 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator,  } from "@react-navigation/native-stack";
+
 
 import ActiveHunt from "./ActiveHunt";
 import CreateHunt from "./CreateHunt";

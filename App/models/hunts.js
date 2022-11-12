@@ -73,7 +73,7 @@ export async function createLocalHunt(huntObj) {
   const hunts = currentHunts ? currentHunts : {};
   const keys = Object.keys(hunts).map((e) => parseInt(e));
 
-  const _id = keys.length ? keys[keys.length - 1] + 1 : 1;
+  const _id = huntObj.title;
   const author = user.username;
   const authorId = user.id;
   const group = [];

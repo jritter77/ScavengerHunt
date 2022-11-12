@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Styles } from "../../Styles";
 import { loginUser } from "../../models/users";
 
-const Login = ({ setLoggedIn, setUserId }) => {
+const Login = ({ setLoggedIn }) => {
   const navigation = useNavigation();
 
   const [username, setUsername] = React.useState("");
@@ -37,6 +37,7 @@ const Login = ({ setLoggedIn, setUserId }) => {
       <TextInput
         onChangeText={setPassword}
         placeholder="Password"
+        secureTextEntry
         style={Styles.StandardStyles.textInput}
       />
       <StandardButton

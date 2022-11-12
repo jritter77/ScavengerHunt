@@ -3,6 +3,18 @@ import { setData, getData } from "../Methods";
 
 const apiRoot = "https://lookout-sh.com/";
 
+export async function createNewUser(username, password) {
+  try {
+    const result = await axios.post(apiRoot + "users", {username: username, password: password});
+    if (result.data) {
+      return true;
+    }
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
 export async function loginUser(username, password) {
   try {
     const result = await axios.post(apiRoot + "users/login", {

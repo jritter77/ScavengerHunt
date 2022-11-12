@@ -1,5 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
+import HomeButton from "./components/HomeButton";
 
 export const primaryColor = "#53ECFC";
 export const secondaryColor = "#F283B3";
@@ -11,6 +12,7 @@ export const Styles = {
     headerTitle: "Lookout!",
     headerTintColor: "white",
     headerTitleStyle: { fontSize: 40, fontWeight: "bold" },
+    headerRight: HomeButton,
     headerBackground: () => (
       <LinearGradient
         colors={[primaryColor, secondaryColor]}
