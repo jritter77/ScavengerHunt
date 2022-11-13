@@ -83,6 +83,8 @@ export async function createLocalHunt(huntObj) {
   hunts[_id] = hunt;
 
   await setData("hunts", hunts);
+
+  return hunt;
 }
 
 export async function deleteLocalHunt(id) {

@@ -6,15 +6,21 @@ import StandardButton from "../../components/StandardButton";
 import Rating from "../../components/Rating";
 import { downloadHunt } from "../../models/hunts";
 import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 const StoredHuntInfo = ({ navigation, route }) => {
   const { _id, rating, title, description } = route.params.hunt;
 
+
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
-    navigation.navigate("HuntStack", {
-      screen: "LocalHuntInfo",
-      hunt: newHunt,
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+        {name: 'LocalHuntInfo', params: {hunt: newHunt}}
+      ]
     });
   };
 

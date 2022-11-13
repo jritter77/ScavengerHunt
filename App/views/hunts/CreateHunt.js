@@ -15,7 +15,7 @@ const CreateHunt = ({ navigation }) => {
 
   const [feedback, setFeedback] = React.useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!title && !desc) {
       setFeedback("Please enter a Title and Description");
       return;
@@ -28,8 +28,15 @@ const CreateHunt = ({ navigation }) => {
       }
     }
 
-    createLocalHunt({ title: title, description: desc, clueList: clueVals });
-    navigation.navigate("Hunts");
+    const newHunt = await createLocalHunt({ title: title, description: desc, clueList: clueVals });
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+        {name: 'LocalHuntInfo', params: {hunt: newHunt}}
+      ]
+    });
   };
 
   React.useEffect(() => {
