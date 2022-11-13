@@ -1,44 +1,57 @@
-import { View, Text, TextInput, StyleSheet} from 'react-native'
-import React from 'react'
-import Styles from '../../Styles'
-import StandardButton from '../../components/StandardButton'
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import React from "react";
+import { Styles } from "../../Styles";
+import StandardButton from "../../components/StandardButton";
+import { sendFriendRequest } from "../../models/friends";
+import { getData } from "../../Methods";
+import axios from "axios";
 
-const AddFriend = ({navigation}) => {
-  const [user, setUser] = React.useState('')
+const apiRoot = "http://localhost:3000/";
 
-  function handleSubmit() {
+const AddFriend = ({ navigation }) => {
+  const [friend, setFriend] = React.useState("");
+
+  async function handleSubmit() {
     // Send username
 
     // Verify the username exists
-    
+    const user = await getData("user");
+
+    //  check if user exists
+    const exists = await axios.get(apiRoot + "users", {
+      params: { JWT: user.token, username: friend },
+    });
+
+    console.log(exists.data);
+
     // If not notify user
 
+    if (exists.data.length === 0) {
+      console.log("Not found!");
+    }
+
     // Else send friend request
+    else {
+      sendFriendRequest(friend);
+    }
   }
   return (
-    <View style ={Styles.StandardStyles.page}>
+    <View style={Styles.StandardStyles.page}>
       <Text style={styles.Text}>Add Friend</Text>
       <TextInput
-      style={Styles.StandardStyles.textInput}
-      placeholder = 'Friend Username'
-      onChangeText = {setUser}
+        style={Styles.StandardStyles.textInput}
+        placeholder="Friend Username"
+        onChangeText={setFriend}
       />
-      <StandardButton
-      title = 'Submit'
-      onPress = {handleSubmit}
-      />
-
+      <StandardButton title="Submit" onPress={handleSubmit} />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-    Text: {
-      fontSize: '20pt',
-    },
-  })
+  Text: {
+    fontSize: "20pt",
+  },
+});
 
-
-
-
-export default AddFriend
+export default AddFriend;
