@@ -26,7 +26,6 @@ export async function loginUser(username, password) {
       password,
     });
 
-    console.log(result.data);
 
     if (result.data) {
       await setData("user", result.data);

@@ -11,12 +11,16 @@ const Login = ({ setLoggedIn }) => {
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [feedback, setFeedback] = React.useState("");
 
   async function handleSubmit() {
     // Verify credentials are not blank or violate syntax
     if (!username || !password) {
-      console.log("username and password cannot be blank!");
+      setFeedback("Please enter a username and password");
       return;
+    }
+    else {
+      setFeedback('');
     }
 
     // Send credentials to server for verification
@@ -24,6 +28,9 @@ const Login = ({ setLoggedIn }) => {
 
     if (result) {
       setLoggedIn(true);
+    }
+    else {
+      setFeedback('Invalid Credentials')
     }
   }
 
@@ -40,6 +47,7 @@ const Login = ({ setLoggedIn }) => {
         secureTextEntry
         style={Styles.StandardStyles.textInput}
       />
+      <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton
         title="Login"
         onPress={() => {
@@ -55,5 +63,13 @@ const Login = ({ setLoggedIn }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  feedback: {
+    fontSize: 20,
+    color: 'red',
+    width: '70%'
+  }
+})
 
 export default Login;
