@@ -34,9 +34,12 @@ const CreateHunt = ({ navigation }) => {
       routes: [
         {name: 'Hunts'}, 
         {name: 'MyHunts'}, 
-        {name: 'LocalHuntInfo', params: {hunt: newHunt}}
       ]
     });
+    navigation.navigate('HuntStack', {
+      screen: 'LocalHuntInfo', 
+      hunt: newHunt,
+  });
   };
 
   React.useEffect(() => {

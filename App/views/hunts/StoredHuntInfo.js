@@ -21,9 +21,12 @@ const StoredHuntInfo = ({ navigation, route }) => {
       routes: [
         {name: 'Hunts'}, 
         {name: 'MyHunts'}, 
-        {name: 'LocalHuntInfo', params: {hunt: {}}}
       ]
     });
+    navigation.navigate('HuntStack', {
+      screen: 'LocalHuntInfo', 
+      hunt: newHunt,
+  });
   };
 
   const handleUnpublish = async () => {

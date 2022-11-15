@@ -3,7 +3,11 @@ import { setData, getData } from "../Methods";
 
 // PUBLIC HUNT METHODS
 
-const apiRoot = "https://lookout-sh.com/";
+// Server API
+//const apiRoot = "https://lookout-sh.com/";
+
+// Local API
+const apiRoot = "http://localhost:3000/";
 
 export async function getPublicHunts(searchTerm) {
   const user = await getData("user");

@@ -12,10 +12,14 @@ import { getData } from "../../Methods";
 import { ScrollView } from "react-native-gesture-handler";
 
 const LocalHuntInfo = ({ navigation, route }) => {
+  console.log(route)
+  console.log('routehunt:', route.params.hunt)
+
   const { _id, title, description, authorId } = route.params.hunt;
   const [user, setUser] = React.useState({});
 
-  console.log('routehunt:', route.params.hunt)
+  
+
 
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
@@ -25,6 +29,10 @@ const LocalHuntInfo = ({ navigation, route }) => {
 
   const handlePublish = async () => {
     const result = await publishHunt(route.params.hunt);
+
+    
+
+
     return result.data;
   };
 
