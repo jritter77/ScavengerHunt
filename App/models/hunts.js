@@ -22,7 +22,7 @@ export async function publishHunt(localHunt) {
 
   const publishedHunt = {
     author: localHunt.author,
-    authorId: localHunt.autorId,
+    authorId: localHunt.authorId,
     title: localHunt.title,
     description: localHunt.description,
     clueList: localHunt.clueList,
@@ -37,6 +37,22 @@ export async function publishHunt(localHunt) {
   );
 
   return result.data;
+}
+
+
+export async function unpublishHunt(publishedHuntId) {
+  const user = await getData('user');
+
+  console.log(user.token)
+  
+  const result = await axios.delete(
+    apiRoot + 'hunts', 
+    { params: {JWT: user.token, huntId: publishedHuntId}}
+  );
+
+  console.log(result)
+
+  return true;
 }
 
 export async function downloadHunt(publishedHuntId) {

@@ -4,9 +4,10 @@ import { backgroundColor, Styles } from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
 import StandardButton from "../../components/StandardButton";
 import Rating from "../../components/Rating";
-import { downloadHunt } from "../../models/hunts";
+import { downloadHunt, unpublishHunt } from "../../models/hunts";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const StoredHuntInfo = ({ navigation, route }) => {
   const { _id, rating, title, description } = route.params.hunt;
@@ -14,15 +15,27 @@ const StoredHuntInfo = ({ navigation, route }) => {
 
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
+    console.log('newhunt:', newHunt)
     navigation.reset({
       index: 0, 
       routes: [
         {name: 'Hunts'}, 
         {name: 'MyHunts'}, 
-        {name: 'LocalHuntInfo', params: {hunt: newHunt}}
+        {name: 'LocalHuntInfo', params: {hunt: {}}}
       ]
     });
   };
+
+  const handleUnpublish = async () => {
+    const result = await unpublishHunt(_id);
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'FindHunts'}, 
+      ]
+    });
+  }
 
   return (
     <ScrollView
@@ -36,6 +49,10 @@ const StoredHuntInfo = ({ navigation, route }) => {
       <StandardButton
         title="Rate Hunt"
         onPress={() => console.log("Rate Hunt!")}
+      />
+      <StandardButton
+        title="Unpublish Hunt"
+        onPress={handleUnpublish}
       />
     </ScrollView>
   );

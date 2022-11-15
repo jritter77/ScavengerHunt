@@ -12,8 +12,10 @@ import { getData } from "../../Methods";
 import { ScrollView } from "react-native-gesture-handler";
 
 const LocalHuntInfo = ({ navigation, route }) => {
-  const { _id, title, description } = route.params.hunt;
+  const { _id, title, description, authorId } = route.params.hunt;
   const [user, setUser] = React.useState({});
+
+  console.log('routehunt:', route.params.hunt)
 
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
@@ -63,7 +65,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
         }
       />
       <StandardButton title="Delete Hunt" onPress={handleDelete} />
-      {route.params.hunt.authorId === user.id && (
+      {authorId === user.id && (
         <StandardButton title="Publish Hunt" onPress={handlePublish} />
       )}
     </ScrollView>
