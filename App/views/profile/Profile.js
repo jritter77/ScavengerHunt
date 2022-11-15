@@ -4,8 +4,17 @@ import StandardButton from "../../components/StandardButton";
 import { Styles } from "../../Styles";
 
 import { useNavigation } from "@react-navigation/native";
+import { removeData } from "../../Methods";
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, setLoggedIn }) => {
+
+
+  const handleSignOut = async () => {
+    await removeData('user');
+    setLoggedIn(false);
+  }
+
+
   return (
     <View style={Styles.StandardStyles.page}>
       <StandardButton
@@ -15,6 +24,10 @@ const Profile = ({ navigation }) => {
       <StandardButton
         title="Settings"
         onPress={() => navigation.navigate("Settings")}
+      />
+      <StandardButton
+        title="Sign Out"
+        onPress={handleSignOut}
       />
     </View>
   );

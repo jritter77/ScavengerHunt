@@ -40,6 +40,7 @@ export async function publishHunt(localHunt) {
     { params: { JWT: user.token } }
   );
 
+
   return result.data;
 }
 

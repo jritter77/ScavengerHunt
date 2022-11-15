@@ -8,9 +8,11 @@ import { downloadHunt, unpublishHunt } from "../../models/hunts";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { getData } from "../../Methods";
 
 const StoredHuntInfo = ({ navigation, route }) => {
-  const { _id, rating, title, description } = route.params.hunt;
+  const [user, setUser] = React.useState({});
+  const { _id, authorId, rating, title, description } = route.params.hunt;
 
 
   const handleDownload = async () => {
@@ -40,6 +42,14 @@ const StoredHuntInfo = ({ navigation, route }) => {
     });
   }
 
+  React.useEffect(() => {
+    const getUser = async () => {
+      setUser(await getData('user'));
+    }
+
+    getUser();
+  }, [])
+
   return (
     <ScrollView
       style={Styles.StandardStyles.scrollContainer}
@@ -53,10 +63,10 @@ const StoredHuntInfo = ({ navigation, route }) => {
         title="Rate Hunt"
         onPress={() => console.log("Rate Hunt!")}
       />
-      <StandardButton
+      {user.id === authorId && <StandardButton
         title="Unpublish Hunt"
         onPress={handleUnpublish}
-      />
+      />}
     </ScrollView>
   );
 };
