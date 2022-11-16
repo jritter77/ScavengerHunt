@@ -30,7 +30,7 @@ export async function publishHunt(localHunt) {
     title: localHunt.title,
     description: localHunt.description,
     clueList: localHunt.clueList,
-    ratings: [],
+    ratings: {},
     downloads: 0,
   };
 
@@ -84,6 +84,20 @@ export async function downloadHunt(publishedHuntId) {
   await setData("hunts", currentHunts);
 
   return localHunt;
+}
+
+export async function rateHunt(huntId, rating) {
+  const user = await getData('user');
+
+  rating.username = user.username;
+
+  const result = await axios.post(
+    apiRoot + 'hunts/rating', 
+    {userId: user.id, huntId: huntId, rating: rating},
+    { params: { JWT: user.token } }
+  );
+
+  console.log(result);
 }
 
 // LOCAL HUNT METHODS
