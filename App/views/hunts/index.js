@@ -12,6 +12,7 @@ import { Styles } from "../../Styles";
 import StoredHuntInfo from "./StoredHuntInfo";
 import { AsyncStorage } from "@react-native-async-storage/async-storage";
 import { setData } from "../../Methods";
+import RateHunt from "./RateHunt";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,10 @@ const HuntStack = (props) => {
       <Stack.Screen
         name="FindHunts"
         children={() => <FindHunts {...props} />}
+      />
+      <Stack.Screen
+        name="RateHunt"
+        children={() => <RateHunt {...props} />}
       />
       <Stack.Screen
         name="LocalHuntInfo"

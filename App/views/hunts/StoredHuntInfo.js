@@ -61,7 +61,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
       <StandardButton title="Download Hunt" onPress={handleDownload} />
       <StandardButton
         title="Rate Hunt"
-        onPress={() => console.log("Rate Hunt!")}
+        onPress={() => navigation.navigate('RateHunt')}
       />
       {user.id === authorId && <StandardButton
         title="Unpublish Hunt"
