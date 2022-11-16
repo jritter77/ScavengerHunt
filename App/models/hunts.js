@@ -97,7 +97,20 @@ export async function rateHunt(huntId, rating) {
     { params: { JWT: user.token } }
   );
 
-  console.log(result);
+  return result.data;
+}
+
+
+export function getAvgRating(ratings) {
+  let total = 0;
+  let count = 0;
+
+  for (let r in ratings) {
+    total += ratings[r].rating;
+    count++;
+  }
+
+  return total/count;
 }
 
 // LOCAL HUNT METHODS

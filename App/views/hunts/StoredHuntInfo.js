@@ -4,7 +4,7 @@ import { backgroundColor, Styles } from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
 import StandardButton from "../../components/StandardButton";
 import Rating from "../../components/Rating";
-import { downloadHunt, unpublishHunt } from "../../models/hunts";
+import { downloadHunt, getAvgRating, unpublishHunt } from "../../models/hunts";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
@@ -12,7 +12,7 @@ import { getData } from "../../Methods";
 
 const StoredHuntInfo = ({ navigation, route }) => {
   const [user, setUser] = React.useState({});
-  const { _id, authorId, rating, title, description } = route.params.hunt;
+  const { _id, authorId, ratings, title, description } = route.params.hunt;
 
 
   const handleDownload = async () => {
@@ -56,7 +56,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <Text style={styles.title}>{title}</Text>
-      <Rating rating={rating} size={40} backgroundColor={backgroundColor} />
+      <Rating rating={getAvgRating(ratings)} size={40} backgroundColor={backgroundColor} />
       <Text style={styles.description}>{description}</Text>
       <StandardButton title="Download Hunt" onPress={handleDownload} />
       <StandardButton

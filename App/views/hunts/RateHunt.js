@@ -12,7 +12,18 @@ const RateHunt = ({navigation, route}) => {
 
     const handleSubmit = async () => {
         const result = await rateHunt(route.params.hunt._id, {rating, comment});
-        console.log(result);
+        
+        navigation.reset({
+            index: 0, 
+            routes: [
+              {name: 'Hunts'}, 
+              {name: 'FindHunts'}, 
+            ]
+        });
+        navigation.navigate('HuntStack', {
+            screen: 'StoredHuntInfo', 
+            hunt: result,
+        });
     }
 
 
