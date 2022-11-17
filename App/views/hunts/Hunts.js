@@ -2,24 +2,28 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
 import { Styles } from "../../Styles";
+import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
 const Hunts = ({ navigation }) => {
   return (
     <View style={Styles.StandardStyles.page}>
-      <StandardButton
+      <StandardButtonWithIcon
         title="My Hunts"
+        icon={require('../../assets/huntIcon.png')}
         onPress={() => {
           navigation.navigate("MyHunts");
         }}
       />
-      <StandardButton
+      <StandardButtonWithIcon
         title="Browse Hunts"
+        icon={require('../../assets/searchIcon.png')}
         onPress={() => {
           navigation.navigate("FindHunts");
         }}
       />
-      <StandardButton
+      <StandardButtonWithIcon
         title="Create New Hunt"
+        icon={require('../../assets/editIcon.png')}
         onPress={() => {
           navigation.navigate("CreateHunt");
         }}

@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   cover: {
     position: 'absolute',
     height: '100%',
-    right: '0%'
+    right: '0%',
+    overflow: 'hidden'
   },
   text: {
     marginRight: '5%'

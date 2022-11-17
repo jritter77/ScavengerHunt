@@ -65,7 +65,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
       <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton
         title="Submit"
-        onPress={handleSubmith}
+        onPress={handleSubmit}
       />
     </View>
   );

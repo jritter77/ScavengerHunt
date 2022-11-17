@@ -5,6 +5,7 @@ import { Styles } from "../../Styles";
 
 import { useNavigation } from "@react-navigation/native";
 import { removeData } from "../../Methods";
+import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
 const Profile = ({ navigation, setLoggedIn }) => {
 
@@ -17,16 +18,28 @@ const Profile = ({ navigation, setLoggedIn }) => {
 
   return (
     <View style={Styles.StandardStyles.page}>
-      <StandardButton
-        title="Change Credentials"
-        onPress={() => navigation.navigate("ChangeCredentials")}
+      <StandardButtonWithIcon
+        title="Change User Name"
+        icon={require('../../assets/editIcon.png')}
+        onPress={() => {
+          navigation.navigate("ChangeUsername");
+        }}
       />
-      <StandardButton
+      <StandardButtonWithIcon
+        title="Change Password"
+        icon={require('../../assets/editIcon.png')}
+        onPress={() => {
+          navigation.navigate("ChangePassword");
+        }}
+      />
+      <StandardButtonWithIcon
         title="Settings"
+        icon={require('../../assets/gearIcon.png')}
         onPress={() => navigation.navigate("Settings")}
       />
-      <StandardButton
+      <StandardButtonWithIcon
         title="Sign Out"
+        icon={require('../../assets/backIcon.png')}
         onPress={handleSignOut}
       />
     </View>

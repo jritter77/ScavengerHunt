@@ -8,10 +8,9 @@ import { rateHunt } from '../../models/hunts'
 
 const RateHunt = ({navigation, route}) => {
     const [rating, setRating] = React.useState(1);
-    const [comment, setComment] = React.useState('');
 
     const handleSubmit = async () => {
-        const result = await rateHunt(route.params.hunt._id, {rating, comment});
+        const result = await rateHunt(route.params.hunt._id, {rating});
         
         navigation.reset({
             index: 0, 
@@ -33,13 +32,6 @@ const RateHunt = ({navigation, route}) => {
         contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
         >
             <Rater rating={rating} setRating={setRating}/>
-            <TextInput
-                multiline
-                numberOfLines={8}
-                onChangeText={setComment}
-                placeholder='Comments'
-                style={styles.comment}
-            />
             <StandardButton title='Submit' onPress={handleSubmit} />
         </ScrollView>
     )

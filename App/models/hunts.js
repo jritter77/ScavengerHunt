@@ -110,7 +110,7 @@ export function getAvgRating(ratings) {
     count++;
   }
 
-  return total/count;
+  return count ? total/count : 0;
 }
 
 // LOCAL HUNT METHODS
