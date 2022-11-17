@@ -7,13 +7,14 @@ import StoredHunt from "../../components/StoredHunt";
 import LocalHunt from "../../components/LocalHunt";
 import { getData } from "../../Methods";
 import IconButton from "../../components/IconButton";
+import { getUserHunts } from "../../models/hunts";
 
 const MyHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
 
   async function handleSubmit() {
-    const localHunts = await getData("hunts");
+    const localHunts = await getUserHunts();
     const filteredHunts = {};
 
     for (let hunt in localHunts) {
@@ -50,7 +51,7 @@ const MyHunts = ({ navigation }) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      const localHunts = await getData("hunts");
+      const localHunts = await getUserHunts();
       if (localHunts) {
         setHunts(localHunts);
       }
