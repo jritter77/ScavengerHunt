@@ -10,6 +10,8 @@ import { updateLocalHunt, getHuntProgress } from "../../models/hunts";
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
 
+  console.log(hunt);
+
   const [clues, setClues] = React.useState(hunt.clueList);
 
   const [clueFields, setClueFields] = React.useState([]);
@@ -17,7 +19,17 @@ const ActiveHunt = ({ navigation, route }) => {
   const handleSave = async () => {
     hunt.clueList = clues;
     await updateLocalHunt(hunt);
-    navigation.navigate("MyHunts");
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+      ]
+    });
+    navigation.navigate('HuntStack', {
+      screen: 'LocalHuntInfo', 
+      hunt: hunt,
+  });
   };
 
   const ClueField = ({ clue }) => {
