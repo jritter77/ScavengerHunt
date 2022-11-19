@@ -17,8 +17,13 @@ const LocalHuntInfo = ({ navigation, route }) => {
 
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
-    route?.params?.setHunts?.(await getData("hunts"));
-    navigation.navigate("MyHunts");
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+      ]
+    });
   };
 
   const handlePublish = async () => {
