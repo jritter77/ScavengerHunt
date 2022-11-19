@@ -28,6 +28,9 @@ const LocalHuntInfo = ({ navigation, route }) => {
 
   const handlePublish = async () => {
     const publishedHunt = await publishHunt(route.params.hunt);
+    if (!publishedHunt) {
+      return;
+    }
     navigation.reset({
       index: 0, 
       routes: [

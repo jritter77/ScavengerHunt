@@ -20,6 +20,16 @@ export async function getPublicHunts(searchTerm) {
 export async function publishHunt(localHunt) {
   const user = await getData("user");
 
+  const exists = await axios.get(apiRoot + "hunts", {
+    params: { JWT: user.token, huntId: localHunt._id },
+  });
+
+
+  if (exists.data.length) {
+    alert('Hunt is already published!\n\nPlease unpublish hunt and republish to replace.')
+    return;
+  }
+
   for (let clue in localHunt.clueList) {
     localHunt.clueList[clue].entry = "";
   }
@@ -39,6 +49,15 @@ export async function publishHunt(localHunt) {
     { hunt: publishedHunt },
     { params: { JWT: user.token } }
   );
+
+  await deleteLocalHunt(localHunt._id);
+
+  const currentHunts = await getUserHunts();
+
+
+  currentHunts[result.data._id] = result.data;
+
+  await setUserHunts(currentHunts);
 
 
   return result.data;
