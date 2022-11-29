@@ -45,7 +45,7 @@ export default function App() {
           <Drawer.Screen name="Dashboard" component={Dashboard} />
           <Drawer.Screen
             name="ProfileStack"
-            component={ProfileStack}
+            children={() => <ProfileStack setLoggedIn={setLoggedIn} />}
             options={{ drawerLabel: "Profile" }}
           />
           <Drawer.Screen

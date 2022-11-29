@@ -5,6 +5,7 @@ import { Styles } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StoredHunt from "../../components/StoredHunt";
 import { getPublicHunts } from "../../models/hunts";
+import IconButton from "../../components/IconButton";
 
 const FindHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -38,12 +39,16 @@ const FindHunts = ({ navigation }) => {
       style={Styles.StandardStyles.scrollContainer}
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
-      <TextInput
-        style={styles.search}
-        onChangeText={setSearchTerm}
-        placeholder={"Search"}
-      />
-      <StandardButton title="Search" onPress={() => handleSubmit()} />
+      <View style={styles.searchBar}>
+        <TextInput
+          style={styles.search}
+          onChangeText={setSearchTerm}
+          placeholder={"Search"}
+        />
+        <IconButton icon={require('../../assets/searchIcon.png')} onPress={handleSubmit} />
+      </View>
+      
+      
       <View style={styles.huntsContainer}>{populateHunts()}</View>
       <StandardButton
         title={"Show More"}
@@ -59,15 +64,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   search: {
-    width: "90%",
+    width: "70%",
     backgroundColor: "white",
     padding: "5%",
     fontSize: 20,
     borderColor: "blue",
     borderWidth: 2,
     borderRadius: 5,
-    marginTop: "5%",
+    margin: "5%",
   },
+  searchBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    alignItems: 'center'
+  }
 });
 
 export default FindHunts;

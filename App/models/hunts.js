@@ -3,7 +3,11 @@ import { setData, getData } from "../Methods";
 
 // PUBLIC HUNT METHODS
 
+// Server API
 const apiRoot = "https://lookout-sh.com/";
+
+// Local API
+// const apiRoot = "http://localhost:3000/";
 
 export async function getPublicHunts(searchTerm) {
   const user = await getData("user");
@@ -16,17 +20,27 @@ export async function getPublicHunts(searchTerm) {
 export async function publishHunt(localHunt) {
   const user = await getData("user");
 
+  const exists = await axios.get(apiRoot + "hunts", {
+    params: { JWT: user.token, huntId: localHunt._id },
+  });
+
+
+  if (exists.data.length) {
+    alert('Hunt is already published!\n\nPlease unpublish hunt and republish to replace.')
+    return;
+  }
+
   for (let clue in localHunt.clueList) {
     localHunt.clueList[clue].entry = "";
   }
 
   const publishedHunt = {
     author: localHunt.author,
-    authorId: localHunt.autorId,
+    authorId: localHunt.authorId,
     title: localHunt.title,
     description: localHunt.description,
     clueList: localHunt.clueList,
-    ratings: [],
+    ratings: {},
     downloads: 0,
   };
 
@@ -36,12 +50,38 @@ export async function publishHunt(localHunt) {
     { params: { JWT: user.token } }
   );
 
+  await deleteLocalHunt(localHunt._id);
+
+  const currentHunts = await getUserHunts();
+
+
+  currentHunts[result.data._id] = result.data;
+
+  await setUserHunts(currentHunts);
+
+
   return result.data;
+}
+
+
+export async function unpublishHunt(publishedHuntId) {
+  const user = await getData('user');
+
+  console.log(user.token)
+  
+  const result = await axios.delete(
+    apiRoot + 'hunts', 
+    { params: {JWT: user.token, huntId: publishedHuntId}}
+  );
+
+  console.log(result)
+
+  return true;
 }
 
 export async function downloadHunt(publishedHuntId) {
   const user = await getData("user");
-  const currentHunts = (await getData("hunts")) || {};
+  const currentHunts = (await getUserHunts()) || {};
 
   const result = await axios.get(apiRoot + "hunts/download", {
     params: { JWT: user.token, huntId: publishedHuntId },
@@ -60,18 +100,44 @@ export async function downloadHunt(publishedHuntId) {
 
   currentHunts[localHunt._id] = localHunt;
 
-  await setData("hunts", currentHunts);
+  await setUserHunts(currentHunts);
 
   return localHunt;
+}
+
+export async function rateHunt(huntId, rating) {
+  const user = await getData('user');
+
+  rating.username = user.username;
+
+  const result = await axios.post(
+    apiRoot + 'hunts/rating', 
+    {userId: user.id, huntId: huntId, rating: rating},
+    { params: { JWT: user.token } }
+  );
+
+  return result.data;
+}
+
+
+export function getAvgRating(ratings) {
+  let total = 0;
+  let count = 0;
+
+  for (let r in ratings) {
+    total += ratings[r].rating;
+    count++;
+  }
+
+  return count ? total/count : 0;
 }
 
 // LOCAL HUNT METHODS
 
 export async function createLocalHunt(huntObj) {
   const user = await getData("user");
-  const currentHunts = await getData("hunts");
+  const currentHunts = await getUserHunts();
   const hunts = currentHunts ? currentHunts : {};
-  const keys = Object.keys(hunts).map((e) => parseInt(e));
 
   const _id = huntObj.title;
   const author = user.username;
@@ -82,25 +148,27 @@ export async function createLocalHunt(huntObj) {
 
   hunts[_id] = hunt;
 
-  await setData("hunts", hunts);
+  await setUserHunts(hunts);
+
+  return hunt;
 }
 
 export async function deleteLocalHunt(id) {
-  const currentHunts = await getData("hunts");
+  const currentHunts = await getUserHunts();
 
   delete currentHunts[id];
 
-  await setData("hunts", currentHunts);
+  await setUserHunts(currentHunts);
 }
 
 export async function updateLocalHunt(hunt) {
-  const currentHunts = await getData("hunts");
+  const currentHunts = await getUserHunts();
 
   console.log(hunt);
 
   currentHunts[hunt._id] = hunt;
 
-  await setData("hunts", currentHunts);
+  await setUserHunts(currentHunts);
 }
 
 export function getHuntProgress(hunt) {
@@ -117,4 +185,16 @@ export function getHuntProgress(hunt) {
   }
 
   return Math.round((100 * complete) / total);
+}
+
+
+export async function setUserHunts(hunts) {
+  const user = await getData('user');
+  const localHunts = await setData(user.id + '_hunts', hunts);
+}
+
+export async function getUserHunts() {
+  const user = await getData('user');
+  const localHunts = await getData(user.id + '_hunts');
+  return localHunts;
 }

@@ -12,6 +12,36 @@ const SignUp = ({ setLoggedIn, navigation }) => {
   const [confirmPass, setConfirmPass] = React.useState('');
   const [feedback, setFeedback] = React.useState('');
 
+  const handleSubmit = async () => {
+
+    if (!username) {
+      setFeedback('Please enter a Username');
+      return;
+    }
+
+    if (!password) {
+      setFeedback('Please enter a password');
+      return;
+    }
+
+    if (password !== confirmPass) {
+      setFeedback('Passwords do not match');
+      return;
+    }
+
+    if (await createNewUser(username, password)) {
+      const result = await loginUser(username, password);
+      if (result) {
+        setLoggedIn(true);
+      }
+      else {
+        setFeedback('Something went wrong...')
+      }
+    } else {
+      setFeedback("Something went wrong...");
+    }
+  }
+
   return (
     <View style={Styles.StandardStyles.page}>
       <Text style={styles.formTitle}>Create New User</Text>
@@ -35,35 +65,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
       <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton
         title="Submit"
-        onPress={async () => {
-
-          if (!username) {
-            setFeedback('Please enter a Username');
-            return;
-          }
-
-          if (!password) {
-            setFeedback('Please enter a password');
-            return;
-          }
-
-          if (password !== confirmPass) {
-            setFeedback('Passwords do not match');
-            return;
-          }
-
-          if (await createNewUser(username, password)) {
-            const result = await loginUser(username, password);
-            if (result) {
-              setLoggedIn(true);
-            }
-            else {
-              setFeedback('Something went wrong...')
-            }
-          } else {
-            setFeedback("Something went wrong...");
-          }
-        }}
+        onPress={handleSubmit}
       />
     </View>
   );

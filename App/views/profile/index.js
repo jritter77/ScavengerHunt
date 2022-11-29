@@ -3,31 +3,28 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Profile from "./Profile";
-import ChangeCredentials from "./ChangeCredentials";
 import Settings from "./Settings";
 import ChangePassword from "./ChangePassword";
 import ChangeUsername from "./ChangeUsername";
 import { Styles } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const ProfileStack = (props) => {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator screenOptions={Styles.StackHeaderStyle}>
-      <Stack.Screen name="Profile" children={() => <Profile {...props} />} />
-      <Stack.Screen
-        name="ChangeCredentials"
-        children={() => <ChangeCredentials {...props} />}
-      />
-      <Stack.Screen name="Settings" children={() => <Settings {...props} />} />
+      <Stack.Screen name="Profile" children={() => <Profile navigation={navigation} {...props} />} />
+      <Stack.Screen name="Settings" children={() => <Settings navigation={navigation} {...props} />} />
       <Stack.Screen
         name="ChangePassword"
-        children={() => <ChangePassword {...props} />}
+        children={() => <ChangePassword navigation={navigation} {...props} />}
       />
       <Stack.Screen
         name="ChangeUsername"
-        children={() => <ChangeUsername {...props} />}
+        children={() => <ChangeUsername navigation={navigation} {...props} />}
       />
     </Stack.Navigator>
   );

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { Styles } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
@@ -15,7 +15,7 @@ const CreateHunt = ({ navigation }) => {
 
   const [feedback, setFeedback] = React.useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!title && !desc) {
       setFeedback("Please enter a Title and Description");
       return;
@@ -27,16 +27,52 @@ const CreateHunt = ({ navigation }) => {
         return;
       }
     }
-
-    createLocalHunt({ title: title, description: desc, clueList: clueVals });
-    navigation.navigate("Hunts");
+    
+    const newHunt = await createLocalHunt({ title: title, description: desc, clueList: clueVals });
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+      ]
+    });
+    navigation.navigate('HuntStack', {
+      screen: 'LocalHuntInfo', 
+      hunt: newHunt,
+    });
   };
+
+  const handleAddClue = () => {
+    const arr = [...clueFields];
+    if (arr.length) {
+      arr.push(
+        <ClueField
+          key={parseInt(arr[arr.length-1].props.id) + 1}
+          id={parseInt(arr[arr.length-1].props.id) + 1}
+          setClueVals={setClueVals}
+          setClueFields={setClueFields}
+        />
+      );
+    }
+    else {
+      arr.push(
+        <ClueField
+          key={0}
+          id={0}
+          setClueVals={setClueVals}
+          setClueFields={setClueFields}
+        />
+      );
+    }
+    
+    setClueFields(arr);
+  }
 
   React.useEffect(() => {
     let fields = [];
 
     for (let i = 0; i < 3; i++) {
-      fields.push(<ClueField key={i} id={i} setClueVals={setClueVals} />);
+      fields.push(<ClueField key={i} id={i} setClueVals={setClueVals} setClueFields={setClueFields} />);
     }
 
     setClueFields(fields);
@@ -63,28 +99,26 @@ const CreateHunt = ({ navigation }) => {
       <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton
         title={"Add Clue"}
-        onPress={() => {
-          const arr = [...clueFields];
-          arr.push(
-            <ClueField
-              key={arr.length}
-              id={arr.length}
-              setClueVals={setClueVals}
-            />
-          );
-          setClueFields(arr);
-        }}
+        onPress={handleAddClue}
       />
       <StandardButton title={"Save Changes"} onPress={handleSave} />
     </ScrollView>
   );
 };
 
-const ClueField = ({ id, setClueVals }) => {
+const ClueField = ({ id, setClueVals, setClueFields }) => {
   const [clue, setClue] = React.useState("");
   const [answer, setAnswer] = React.useState("");
 
   const [pickerVal, setPickerVal] = React.useState("checkbox");
+
+  const handleRemoveClue = () => {
+    setClueFields(oldState => {
+      oldState.splice(oldState.findIndex(e => e.props.id === id ), 1);
+      console.log(oldState)
+      return [...oldState];
+    });
+  }
 
   React.useEffect(() => {
     setClueVals((oldState) => {
@@ -95,7 +129,12 @@ const ClueField = ({ id, setClueVals }) => {
 
   return (
     <View style={styles.clue}>
-      <Text style={styles.text}>Type:</Text>
+      <View style={styles.clueHeader}>
+        <Text style={styles.text}>Type:</Text>
+        <TouchableOpacity style={styles.removeClueBtn} onPress={handleRemoveClue}>
+          <Text style={styles.removeClueText}>X</Text>
+        </TouchableOpacity>
+      </View>
       <Picker
         options={[
           { text: "checkbox", value: "checkbox" },
@@ -132,6 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     textAlign: "center",
     padding: "5%",
+    flex: 1
   },
   description: {
     backgroundColor: "white",
@@ -140,6 +180,7 @@ const styles = StyleSheet.create({
     width: "80%",
     fontSize: 20,
     marginBottom: "5%",
+    padding: '5%'
   },
   field: {
     backgroundColor: "white",
@@ -160,6 +201,17 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 20,
   },
+  removeClueBtn: {},
+  removeClueText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 4
+  },
+  clueHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end'
+  }
 });
 
 export default CreateHunt;

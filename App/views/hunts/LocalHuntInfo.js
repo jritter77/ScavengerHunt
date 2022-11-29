@@ -12,18 +12,39 @@ import { getData } from "../../Methods";
 import { ScrollView } from "react-native-gesture-handler";
 
 const LocalHuntInfo = ({ navigation, route }) => {
-  const { _id, title, description } = route.params.hunt;
+  const { _id, title, description, authorId } = route.params.hunt;
   const [user, setUser] = React.useState({});
 
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
-    route?.params?.setHunts?.(await getData("hunts"));
-    navigation.navigate("MyHunts");
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+      ]
+    });
   };
 
   const handlePublish = async () => {
-    const result = await publishHunt(route.params.hunt);
-    return result.data;
+    const publishedHunt = await publishHunt(route.params.hunt);
+    if (!publishedHunt) {
+      return;
+    }
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'FindHunts'}, 
+      ]
+    });
+    navigation.navigate('HuntStack', {
+      screen: 'StoredHuntInfo', 
+      hunt: publishedHunt,
+  });
+
+
+
   };
 
   React.useEffect(() => {
@@ -63,7 +84,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
         }
       />
       <StandardButton title="Delete Hunt" onPress={handleDelete} />
-      {route.params.hunt.authorId === user.id && (
+      {authorId === user.id && (
         <StandardButton title="Publish Hunt" onPress={handlePublish} />
       )}
     </ScrollView>

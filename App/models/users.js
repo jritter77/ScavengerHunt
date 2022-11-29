@@ -1,7 +1,11 @@
 import axios from "axios";
 import { setData, getData } from "../Methods";
 
+// Server API
 const apiRoot = "https://lookout-sh.com/";
+
+// Local API
+// const apiRoot = "http://localhost:3000/";
 
 export async function createNewUser(username, password) {
   try {
@@ -22,7 +26,6 @@ export async function loginUser(username, password) {
       password,
     });
 
-    console.log(result.data);
 
     if (result.data) {
       await setData("user", result.data);

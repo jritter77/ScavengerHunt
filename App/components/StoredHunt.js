@@ -2,12 +2,13 @@ import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Rating from './Rating';
+import { getAvgRating } from '../models/hunts';
 
 const StoredHunt = ({hunt}) => {
 
     const navigation = useNavigation();
 
-    const {title, rating, description} = hunt;
+    const {title, ratings, description} = hunt;
 
     function handlePress() {
         navigation.navigate('HuntStack', {screen: 'StoredHuntInfo', hunt: hunt})
@@ -17,7 +18,7 @@ const StoredHunt = ({hunt}) => {
         <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={handlePress}>
             <View>
                 <Text style={styles.title}>{title} </Text>
-                <Rating style={styles.rating} rating={rating} size={20} backgroundColor='white' />
+                <Rating style={styles.rating} rating={getAvgRating(ratings)} size={20} backgroundColor='white' />
                 <Text style={styles.description}>{description}</Text>
             </View>
         </TouchableHighlight>
