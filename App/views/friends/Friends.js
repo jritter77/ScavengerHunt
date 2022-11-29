@@ -4,12 +4,15 @@ import StandardButton from "../../components/StandardButton";
 import { Styles } from "../../Styles";
 import LocalFriends from "../../components/LocalFriends";
 import { ScrollView } from "react-native-gesture-handler";
+import { Button } from "react-native-web";
+import { FlipInEasyX } from "react-native-reanimated";
 
 const testFriends = [
   { _id: "cyd66", username: "Bob" },
   { _id: "corngw", username: "Amy" },
   { _id: "mpm6", username: "Kyle" },
   { _id: "odsnogs9", username: "Tim" },
+  {_id: "orgiid2", username: "Justin"},
 ];
 
 const Friends = ({ navigation }) => {
@@ -34,15 +37,23 @@ const Friends = ({ navigation }) => {
       style={Styles.StandardStyles.scrollContainer}
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
-      {populateFriends()}
+      <View style={styles.friendsContainer} >{populateFriends()}</View>
       <StandardButton
         title="Friend Profile"
         onPress={() => {
-          navigation.navigate("FriendProfile");
+          navigation.navigate("FriendProfile")
         }}
       />
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  friendsContainer: {
+    width: '100%',
+    paddingLeft: '10%',
+    marginTop: '15%'
+  }
+})
 
 export default Friends;

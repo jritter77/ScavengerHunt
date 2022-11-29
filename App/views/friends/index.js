@@ -17,14 +17,17 @@ const FriendStack = (props) => {
     >
       <Stack.Screen
         name="AddFriend"
+        options={{headerTitle: '', headerTransparent: true}}
         children={() => <AddFriend {...props} />}
       />
       <Stack.Screen
         name="FriendProfile"
+        options = {{headerTitle: '', headerTransparent: true}}
         children={() => <FriendProfile {...props} />}
       />
       <Stack.Screen
         name="FriendRequests"
+        options={{headerTitle: '', headerTransparent: true}}
         children={() => <FriendRequests {...props} />}
       />
       <Stack.Screen

@@ -1,35 +1,41 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { TouchableHighlight } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
+
 
 const LocalFriends = ({id, username}) => {
+  const navigation = useNavigation();
+  // Finish Hunts Completed after implementation of Hunt History
   return (
-   <TouchableHighlight style={styles.container}>
-    <Text style={styles.user}>{username}</Text>
-    <View></View>
+   <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={() => navigation.navigate('FriendProfile')}>
+    <View>
+      <Text style={styles.user}>{username}</Text>
+      <Text>Hunts Completed: </Text>   
+
+    </View>
    </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      width: '70%',
-      marginBottom: '5%',
-      backgroundColor: 'white'
+      width: '90%',
+      backgroundColor: 'white',
+      borderWidth: 2,
+      borderRadius: 5,
+      marginBottom: '2%',
+      padding: '5%'
   },
 
   user: {
-    borderWidth: 2,
-    borderRadius: 5,
-    width: '80%',
     fontSize: 20,
-    marginBottom: '5%',
-    textAlign: 'center',
-    padding: '5%',
+    textAlign: 'left',
+    top: '2%',
+    left: '2%',
+    paddingBottom: 10,
     fontWeight: 'bold'
+
     
 
   }
