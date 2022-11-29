@@ -9,10 +9,10 @@ import { setData, getData } from "../Methods";
 // Local API
 const apiRoot = "http://localhost:3000/";
 
-export async function getPublicHunts(searchTerm) {
+export async function getPublicHunts(searchTerm, limit) {
   const user = await getData("user");
   const result = await axios.get(apiRoot + "hunts", {
-    params: { JWT: user.token, search: searchTerm },
+    params: { JWT: user.token, search: searchTerm, limit },
   });
   return result.data;
 }

@@ -10,9 +10,10 @@ import IconButton from "../../components/IconButton";
 const FindHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
+  const [limit, setLimit] = React.useState(5);
 
   async function handleSubmit() {
-    const result = await getPublicHunts(searchTerm);
+    const result = await getPublicHunts(searchTerm, limit);
     setHunts(result);
   }
 
@@ -28,11 +29,11 @@ const FindHunts = ({ navigation }) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      setHunts(await getPublicHunts(searchTerm));
+      setHunts(await getPublicHunts(searchTerm, limit));
     }
 
     fetchData();
-  }, []);
+  }, [limit]);
 
   return (
     <ScrollView
@@ -52,7 +53,7 @@ const FindHunts = ({ navigation }) => {
       <View style={styles.huntsContainer}>{populateHunts()}</View>
       <StandardButton
         title={"Show More"}
-        onPress={() => console.log("Show More!")}
+        onPress={() => setLimit(oldState => oldState + 5)}
       />
     </ScrollView>
   );
