@@ -20,12 +20,12 @@ export async function getPublicHunts(searchTerm) {
 export async function publishHunt(localHunt) {
   const user = await getData("user");
 
-  const exists = await axios.get(apiRoot + "hunts", {
+  const exists = await axios.get(apiRoot + "hunts/download", {
     params: { JWT: user.token, huntId: localHunt._id },
   });
 
 
-  if (exists.data.length) {
+  if (exists.data) {
     alert('Hunt is already published!\n\nPlease unpublish hunt and republish to replace.')
     return;
   }

@@ -21,7 +21,7 @@ const LocalHunt = ({hunt, setHunts}) => {
             <View>
                 <Text style={styles.title}>{hunt.title}</Text>
                 <ProgressBar value={getHuntProgress(hunt)} style={styles.progress} />
-                <Text style={styles.description}>{hunt.description}</Text>
+                <Text numberOfLines={1} style={styles.description}>{hunt.description}</Text>
             </View>
         </TouchableHighlight>
         
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: '90%',
         marginBottom: '2%',
-        padding: '5%'
+        padding: '5%',
     },
     title: {
         fontSize: 20
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     description: {
-        fontSize: 14
+        fontSize: 14,
     },
     progress: {
         position: 'absolute',

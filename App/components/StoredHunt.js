@@ -19,7 +19,7 @@ const StoredHunt = ({hunt}) => {
             <View>
                 <Text style={styles.title}>{title} </Text>
                 <Rating style={styles.rating} rating={getAvgRating(ratings)} size={20} backgroundColor='white' />
-                <Text style={styles.description}>{description}</Text>
+                <Text numberOfLines={1} style={styles.description}>{description}</Text>
             </View>
         </TouchableHighlight>
         
