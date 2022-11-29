@@ -12,6 +12,7 @@ import { getUserHunts } from "../../models/hunts";
 const MyHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
+  const [limit, setLimit] = React.useState(5);
 
   async function handleSubmit() {
     const localHunts = await getUserHunts();
@@ -36,6 +37,8 @@ const MyHunts = ({ navigation }) => {
   function populateHunts() {
     const huntObjs = [];
 
+    let count = 0;
+
     for (let hunt in hunts) {
       huntObjs.push(
         <LocalHunt
@@ -43,6 +46,12 @@ const MyHunts = ({ navigation }) => {
           hunt={hunts[hunt]}
         />
       );
+
+      count++;
+
+      if (count >= limit) {
+        break;
+      }
     }
 
     return huntObjs;
@@ -76,7 +85,7 @@ const MyHunts = ({ navigation }) => {
       <View style={styles.huntsContainer}>{populateHunts()}</View>
       <StandardButton
         title={"Show More"}
-        onPress={() => console.log("Show More!")}
+        onPress={() => setLimit(oldState => oldState + 5)}
       />
     </ScrollView>
   );
