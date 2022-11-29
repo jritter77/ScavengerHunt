@@ -41,7 +41,6 @@ const MyHunts = ({ navigation }) => {
         <LocalHunt
           key={hunts[hunt]._id}
           hunt={hunts[hunt]}
-          setHunts={setHunts}
         />
       );
     }

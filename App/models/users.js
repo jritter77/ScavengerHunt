@@ -2,10 +2,10 @@ import axios from "axios";
 import { setData, getData } from "../Methods";
 
 // Server API
-const apiRoot = "https://lookout-sh.com/";
+// const apiRoot = "https://lookout-sh.com/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 export async function createNewUser(username, password) {
   try {

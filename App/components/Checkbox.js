@@ -7,7 +7,6 @@ const Checkbox = ({entry, setEntry}) => {
 const [checked, setChecked] = React.useState(entry);
 
 const handlePress = () => {
-    console.log(entry)
     setEntry(!entry);
     setChecked(!checked);
 }

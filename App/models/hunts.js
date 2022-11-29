@@ -4,10 +4,10 @@ import { setData, getData } from "../Methods";
 // PUBLIC HUNT METHODS
 
 // Server API
-const apiRoot = "https://lookout-sh.com/";
+// const apiRoot = "https://lookout-sh.com/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 export async function getPublicHunts(searchTerm) {
   const user = await getData("user");
@@ -179,7 +179,7 @@ export function getHuntProgress(hunt) {
 
   for (let clue in clues) {
     total += 1;
-    if (clues[clue].entry) {
+    if (clues[clue].type === 'checkbox' && clues[clue].entry || clues[clue].type === 'text' && clues[clue].entry === clues[clue].answer) {
       complete += 1;
     }
   }

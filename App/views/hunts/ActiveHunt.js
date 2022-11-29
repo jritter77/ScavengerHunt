@@ -10,10 +10,7 @@ import { updateLocalHunt, getHuntProgress } from "../../models/hunts";
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
 
-  console.log(hunt);
-
   const [clues, setClues] = React.useState(hunt.clueList);
-
   const [clueFields, setClueFields] = React.useState([]);
 
   const handleSave = async () => {
@@ -34,13 +31,21 @@ const ActiveHunt = ({ navigation, route }) => {
 
   const ClueField = ({ clue }) => {
     const [entry, setEntry] = React.useState(clue.entry);
+    const [valid, setValid] = React.useState('red');
 
     React.useEffect(() => {
-      console.log(entry);
       setClues((oldState) => {
         oldState[clue.id] = { ...clue, entry: entry };
         return { ...oldState };
       });
+
+      if (entry) {
+        entry === clue.answer ? setValid('green') : setValid('red');
+      }
+      else {
+        setValid('black');
+      }
+
     }, [entry]);
 
     return (
@@ -56,7 +61,7 @@ const ActiveHunt = ({ navigation, route }) => {
             value={entry}
             placeholder={"answer"}
             onChangeText={setEntry}
-            style={styles.entry}
+            style={{...styles.entry, borderColor: valid}}
           />
         )}
       </View>

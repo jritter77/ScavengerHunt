@@ -69,7 +69,6 @@ const LocalHuntInfo = ({ navigation, route }) => {
         />
       </View>
       <Text style={styles.description}>{description}</Text>
-      <Text style={styles.group}>Group</Text>
       <StandardButton
         title="Invite Friend"
         onPress={() => console.log("Invite Friend!")}
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: "5%",
     padding: "5%",
-    textAlign: "center",
+    textAlign: "left",
   },
   group: {
     backgroundColor: "white",

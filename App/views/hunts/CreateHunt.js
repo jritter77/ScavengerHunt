@@ -115,7 +115,6 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
   const handleRemoveClue = () => {
     setClueFields(oldState => {
       oldState.splice(oldState.findIndex(e => e.props.id === id ), 1);
-      console.log(oldState)
       return [...oldState];
     });
   }
