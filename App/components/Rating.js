@@ -6,6 +6,13 @@ const Rating = ({rating, size, backgroundColor, style}) => {
   let percent = (1 - rating/5) * 100;
 
 
+  if (!rating) {
+    return (
+      <View style={{...styles.container, ...style}}>
+        <Text style={{fontSize: size, ...styles.text}}>No&nbsp;Rating</Text>
+      </View>)
+  }
+
   return (
     <View style={{...styles.container, ...style}}>
       <Text style={{fontSize: size, ...styles.text}}>{rating}</Text>

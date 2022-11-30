@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     minHeight: 64,
     fontSize: 20,
     marginBottom: "5%",
-    textAlign: "center",
+    padding: '5%',
+    textAlign: "left",
   },
   ratingText: {
     fontSize: 20,

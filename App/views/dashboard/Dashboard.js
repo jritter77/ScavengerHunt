@@ -5,7 +5,6 @@ import { Styles } from "../../Styles";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
 const Dashboard = ({ navigation }) => {
-  console.log(navigation);
   return (
     <View style={Styles.StandardStyles.page}>
       <StandardButtonWithIcon
