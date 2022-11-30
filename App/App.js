@@ -21,6 +21,7 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [theme, setTheme] = React.useState('default');
 
   React.useEffect(() => {
     const checkToken = async () => {
@@ -31,6 +32,10 @@ export default function App() {
         setLoggedIn(false);
       }
     };
+
+    const checkTheme = () => {
+      
+    }
 
     checkToken();
   });

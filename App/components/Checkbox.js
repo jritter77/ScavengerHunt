@@ -6,10 +6,10 @@ const Checkbox = ({entry, setEntry}) => {
 
 const [checked, setChecked] = React.useState(entry);
 
-const handlePress = () => {
-    setEntry(!entry);
-    setChecked(!checked);
-}
+    const handlePress = () => {
+        setEntry(!entry);
+        setChecked(!checked);
+    }
 
   return (
     <TouchableWithoutFeedback style={styles.container} onPress={handlePress}>
