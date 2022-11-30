@@ -27,7 +27,6 @@ const FriendStack = (props) => {
       />
       <Stack.Screen
         name="FriendRequests"
-        options={{headerTitle: '', headerTransparent: true}}
         children={() => <FriendRequests {...props} />}
       />
       <Stack.Screen
