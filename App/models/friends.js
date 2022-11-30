@@ -23,3 +23,20 @@ export async function sendFriendRequest(friendName) {
     return false;
   }
 }
+
+// get friend requests
+export async function getFriendReq() {
+  try {
+    const user = await getData("user");
+    const result = await axios.get(
+      apiRoot + "friends",
+      { params: { JWT: user.token } });
+    console.log(result.data);
+  } catch (e) {
+    console.log(e)
+    return false
+  }
+}
+
+
+// accept friend request

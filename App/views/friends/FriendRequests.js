@@ -1,24 +1,20 @@
 import { View, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import React from "react";
 import { Styles } from "../../Styles";
+import { getFriendReq } from "../../models/friends";
 
 const FriendRequests = ({ navigation }) => {
-  // Function to handleRequests
-  async function handleRequests() {
-    const user = await getData("user");
-    const [userRequests] = React.useState([])
+  const [req, userReqs] = React.useState([]);
+  
+  getFriendReq();
 
-    // Fetch all Friend Requests
-
-    // Display
-
-    // Handle acceptFriend and denyRequest
-
-}
+  
   return (
-    <View style={Styles.StandardStyles.page}>
-      <Text>FriendRequests</Text>
-    </View>
+    <ScrollView style= {Styles.StandardStyles.scrollContainer}>
+      <View style={Styles.StandardStyles.page}>
+      </View>
+    </ScrollView>
   );
 };
 

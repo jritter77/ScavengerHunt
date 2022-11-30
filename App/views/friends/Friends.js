@@ -38,12 +38,6 @@ const Friends = ({ navigation }) => {
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <View style={styles.friendsContainer} >{populateFriends()}</View>
-      <StandardButton
-        title="Friend Profile"
-        onPress={() => {
-          navigation.navigate("FriendProfile")
-        }}
-      />
     </ScrollView>
   );
 };
