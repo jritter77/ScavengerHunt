@@ -10,22 +10,33 @@ export function CustomAlert(title, msg, confirmHandler) {
 }
 
 export async function setData(key, data) {
-    try {
-      const strData = JSON.stringify(data);
-      await AsyncStorage.setItem(key, strData);
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    const strData = JSON.stringify(data);
+    await AsyncStorage.setItem(key, strData);
+  } catch (e) {
+    console.log(e);
   }
+}
 
 export async function getData(key) {
-    try {
-      const result = await AsyncStorage.getItem(key);
-      return JSON.parse(result);
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    const result = await AsyncStorage.getItem(key);
+    return JSON.parse(result);
+  } catch (e) {
+    console.log(e);
   }
+}
+
+
+export async function removeData(key) {
+  try {
+    await AsyncStorage.removeItem(key);
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
 
 
 

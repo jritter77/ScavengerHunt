@@ -1,67 +1,103 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import Styles from '../../Styles'
-import ProgressBar from '../../components/ProgressBar';
-import StandardButton from '../../components/StandardButton';
-import Rating from '../../components/Rating';
-import { downloadHunt } from '../../models/hunts';
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { backgroundColor, Styles } from "../../Styles";
+import ProgressBar from "../../components/ProgressBar";
+import StandardButton from "../../components/StandardButton";
+import Rating from "../../components/Rating";
+import { downloadHunt, getAvgRating, unpublishHunt } from "../../models/hunts";
+import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import { getData } from "../../Methods";
 
-const StoredHuntInfo = ({navigation, route}) => {
+const StoredHuntInfo = ({ navigation, route }) => {
+  const [user, setUser] = React.useState({});
+  const { _id, authorId, ratings, title, description } = route.params.hunt;
 
-  const {_id, rating, title, description} = route.params.hunt;
 
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
+    console.log('newhunt:', newHunt)
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+      ]
+    });
     navigation.navigate('HuntStack', {
       screen: 'LocalHuntInfo', 
       hunt: newHunt,
   });
+  };
+
+  const handleUnpublish = async () => {
+    const result = await unpublishHunt(_id);
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'FindHunts'}, 
+      ]
+    });
   }
 
+  React.useEffect(() => {
+    const getUser = async () => {
+      setUser(await getData('user'));
+    }
+
+    getUser();
+  }, [])
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <ScrollView
+      style={Styles.StandardStyles.scrollContainer}
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+    >
       <Text style={styles.title}>{title}</Text>
-      <Rating rating={rating} size={40} backgroundColor='#FFFDD1' />
+      <Rating rating={getAvgRating(ratings)} size={40} backgroundColor={backgroundColor} />
       <Text style={styles.description}>{description}</Text>
-      <StandardButton 
-        title='Download Hunt'
-        onPress={handleDownload}
+      <StandardButton title="Download Hunt" onPress={handleDownload} />
+      <StandardButton
+        title="Rate Hunt"
+        onPress={() => navigation.navigate('RateHunt')}
       />
-      <StandardButton 
-        title='Rate Hunt'
-        onPress={() => console.log('Rate Hunt!')}
-      />
-    </View>
-  )
-}
+      {user.id === authorId && <StandardButton
+        title="Unpublish Hunt"
+        onPress={handleUnpublish}
+      />}
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   title: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderWidth: 2,
     borderRadius: 5,
-    width: '80%',
+    width: "80%",
     fontSize: 20,
-    marginBottom: '5%',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    padding: '5%'
+    marginBottom: "5%",
+    textAlign: "center",
+    fontWeight: "bold",
+    padding: "5%",
   },
   description: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderWidth: 2,
-    borderRadius: 5, 
-    width: '80%',
-    height: '20%',
+    borderRadius: 5,
+    width: "80%",
+    minHeight: 64,
     fontSize: 20,
-    marginBottom: '5%',
+    marginBottom: "5%",
+    textAlign: "center",
   },
   ratingText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: '5%'
-  }
-})
+    fontWeight: "bold",
+    marginRight: "5%",
+  },
+});
 
-export default StoredHuntInfo
+export default StoredHuntInfo;

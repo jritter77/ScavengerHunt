@@ -1,13 +1,29 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Styles from '../../Styles'
+import { View, Text, StyleSheet} from "react-native";
+import React from "react";
+import { Styles } from "../../Styles";
 
-const FriendProfile = ({navigation}) => {
+const FriendProfile = ({ navigation }) => {
   return (
-    <View style={Styles.StandardStyles.page}>
-      <Text>FriendProfile</Text>
+    <View style={styles.container}>
+      <Text style = {styles.usernameText}>Bob</Text>
+      <Text style = {styles.usernameText}>Hunts Completed</Text>
     </View>
-  )
-}
+  );
+};
 
-export default FriendProfile
+const styles = StyleSheet.create({
+  usernameText: {
+    fontSize: 20,
+    paddingTop: ' 15%'
+  },
+  
+
+
+  container: {
+    height: '100%',
+    backgroundColor: '#FFFDD1',
+    alignItems: 'center'
+  }
+})
+
+export default FriendProfile;

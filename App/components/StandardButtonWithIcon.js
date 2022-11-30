@@ -1,7 +1,7 @@
 import { View, Text, Button, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import React from 'react'
 
-const StandardButton = ({title, onPress}) => {
+const StandardButtonWithIcon = ({title, onPress, icon}) => {
 
 
   return (
@@ -10,6 +10,7 @@ const StandardButton = ({title, onPress}) => {
         style={styles.button}
     >
         <Text style={styles.text}>{title}</Text>
+        {icon && <Image style={styles.icon} source={icon} />}
     </TouchableOpacity>
   )
 }
@@ -17,17 +18,20 @@ const StandardButton = ({title, onPress}) => {
 const styles = StyleSheet.create({
     button: {
         width: "70%",
-        backgroundColor: "blue",
+        backgroundColor: "white",
         margin: '5%',
         borderRadius: 5,
         borderColor: 'blue',
         borderWidth: 2,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         padding: '5%'
     },
     text: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: 15
     },
     icon: {
@@ -39,4 +43,4 @@ const styles = StyleSheet.create({
 
 
 
-export default StandardButton
+export default StandardButtonWithIcon

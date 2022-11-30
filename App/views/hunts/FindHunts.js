@@ -1,27 +1,22 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import StandardButton from '../../components/StandardButton'
-import Styles from '../../Styles'
-import { ScrollView, TextInput } from 'react-native-gesture-handler'
-import StoredHunt from '../../components/StoredHunt'
-import { getPublicHunts } from '../../models/hunts'
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import StandardButton from "../../components/StandardButton";
+import { Styles } from "../../Styles";
+import { ScrollView, TextInput } from "react-native-gesture-handler";
+import StoredHunt from "../../components/StoredHunt";
+import { getPublicHunts } from "../../models/hunts";
+import IconButton from "../../components/IconButton";
 
-const FindHunts = ({navigation}) => {
-
-  const [searchTerm, setSearchTerm] = React.useState('');
+const FindHunts = ({ navigation }) => {
+  const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
 
-  function handleSubmit() {
-    console.log(searchTerm)
-    // Get search term and order by
-
-    // Query database for search results
-
-    // populate huntContainer with hunt objects
+  async function handleSubmit() {
+    const result = await getPublicHunts(searchTerm);
+    setHunts(result);
   }
 
   function populateHunts() {
-
     let objs = [];
 
     for (let hunt of hunts) {
@@ -33,55 +28,57 @@ const FindHunts = ({navigation}) => {
 
   React.useEffect(() => {
     async function fetchData() {
-      setHunts(await getPublicHunts());
+      setHunts(await getPublicHunts(searchTerm));
     }
 
     fetchData();
-  }, [])
+  }, []);
 
   return (
-    <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContainerContent}>
-      <TextInput 
-        style={styles.search}
-        onChangeText={setSearchTerm}
-        placeholder={'Search'}
-      />
-      <StandardButton 
-          title='Search'
-          onPress={() => handleSubmit()}
-      />
-      <View style={styles.huntsContainer}>
-        {populateHunts()}
+    <ScrollView
+      style={Styles.StandardStyles.scrollContainer}
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+    >
+      <View style={styles.searchBar}>
+        <TextInput
+          style={styles.search}
+          onChangeText={setSearchTerm}
+          placeholder={"Search"}
+        />
+        <IconButton icon={require('../../assets/searchIcon.png')} onPress={handleSubmit} />
       </View>
-      <StandardButton 
-        title={'Show More'}
-        onPress={() => console.log('Show More!')}
+      
+      
+      <View style={styles.huntsContainer}>{populateHunts()}</View>
+      <StandardButton
+        title={"Show More"}
+        onPress={() => console.log("Show More!")}
       />
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   huntsContainer: {
-    width: '100%',
-    alignItems: 'center'
-  },
-  scrollContainer: {
-    backgroundColor: '#FFFDD1'
-  },
-  scrollContainerContent: {
-    alignItems: 'center'
+    width: "100%",
+    alignItems: "center",
   },
   search: {
-    width: '90%',
-    backgroundColor: 'white',
-    padding: '5%',
+    width: "70%",
+    backgroundColor: "white",
+    padding: "5%",
     fontSize: 20,
-    borderColor: 'blue',
+    borderColor: "blue",
     borderWidth: 2,
     borderRadius: 5,
-    marginTop: '5%'
+    margin: "5%",
+  },
+  searchBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    alignItems: 'center'
   }
-})
+});
 
-export default FindHunts
+export default FindHunts;

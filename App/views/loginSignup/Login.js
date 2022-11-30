@@ -1,23 +1,26 @@
-import { View, Text, Button, StyleSheet } from 'react-native'
-import React from 'react'
-import StandardButton from '../../components/StandardButton'
-import { TextInput } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
-import Styles from '../../Styles'
-import { loginUser } from '../../models/users'
+import { View, Text, Button, StyleSheet } from "react-native";
+import React from "react";
+import StandardButton from "../../components/StandardButton";
+import { TextInput } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { Styles } from "../../Styles";
+import { loginUser } from "../../models/users";
 
-const Login = ({setLoggedIn, setUserId}) => {
-
+const Login = ({ setLoggedIn }) => {
   const navigation = useNavigation();
 
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [feedback, setFeedback] = React.useState("");
 
   async function handleSubmit() {
     // Verify credentials are not blank or violate syntax
     if (!username || !password) {
-      console.log('username and password cannot be blank!');
+      setFeedback("Please enter a username and password");
       return;
+    }
+    else {
+      setFeedback('');
     }
 
     // Send credentials to server for verification
@@ -26,40 +29,47 @@ const Login = ({setLoggedIn, setUserId}) => {
     if (result) {
       setLoggedIn(true);
     }
-    
+    else {
+      setFeedback('Invalid Credentials')
+    }
   }
-
-
 
   return (
     <View style={Styles.StandardStyles.page}>
-        <TextInput 
-          onChangeText={setUsername}
-          placeholder='Username'
-          style={Styles.StandardStyles.textInput}
-        />
-        <TextInput 
-          onChangeText={setPassword}
-          placeholder='Password'
-          style={Styles.StandardStyles.textInput}
-        />
-        <StandardButton 
-          title='Login'
-          onPress={() => {
-            handleSubmit();
-          }}
-        />
-        <StandardButton 
-          title='SignUp'
-          onPress={() => {
-            navigation.navigate('SignUp');
-          }}
-        />
+      <TextInput
+        onChangeText={setUsername}
+        placeholder="Username"
+        style={Styles.StandardStyles.textInput}
+      />
+      <TextInput
+        onChangeText={setPassword}
+        placeholder="Password"
+        secureTextEntry
+        style={Styles.StandardStyles.textInput}
+      />
+      <Text style={styles.feedback}>{feedback}</Text>
+      <StandardButton
+        title="Login"
+        onPress={() => {
+          handleSubmit();
+        }}
+      />
+      <StandardButton
+        title="SignUp"
+        onPress={() => {
+          navigation.navigate("SignUp");
+        }}
+      />
     </View>
-  )
-}
+  );
+};
 
+const styles = StyleSheet.create({
+  feedback: {
+    fontSize: 20,
+    color: 'red',
+    width: '70%'
+  }
+})
 
-
-
-export default Login
+export default Login;

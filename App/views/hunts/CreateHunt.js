@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import Styles from "../../Styles";
+import { Styles } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StandardButton from "../../components/StandardButton";
 import Picker from "../../components/Picker";
@@ -13,21 +13,66 @@ const CreateHunt = ({ navigation }) => {
   const [clueFields, setClueFields] = React.useState([]);
   const [clueVals, setClueVals] = React.useState({});
 
-  const handleSave = () => {
+  const [feedback, setFeedback] = React.useState("");
+
+  const handleSave = async () => {
     if (!title && !desc) {
-      console.log("Must enter title and description!");
+      setFeedback("Please enter a Title and Description");
       return;
     }
 
-    createLocalHunt({ title: title, description: desc, clueList: clueVals });
-    navigation.navigate("Hunts");
+    for (let clue in clueVals) {
+      if (clueVals[clue].clue === "") {
+        setFeedback("Please enter all clue prompts");
+        return;
+      }
+    }
+    
+    const newHunt = await createLocalHunt({ title: title, description: desc, clueList: clueVals });
+    navigation.reset({
+      index: 0, 
+      routes: [
+        {name: 'Hunts'}, 
+        {name: 'MyHunts'}, 
+      ]
+    });
+    navigation.navigate('HuntStack', {
+      screen: 'LocalHuntInfo', 
+      hunt: newHunt,
+    });
   };
+
+  const handleAddClue = () => {
+    const arr = [...clueFields];
+    if (arr.length) {
+      arr.push(
+        <ClueField
+          key={parseInt(arr[arr.length-1].props.id) + 1}
+          id={parseInt(arr[arr.length-1].props.id) + 1}
+          setClueVals={setClueVals}
+          setClueFields={setClueFields}
+        />
+      );
+    }
+    else {
+      arr.push(
+        <ClueField
+          key={0}
+          id={0}
+          setClueVals={setClueVals}
+          setClueFields={setClueFields}
+        />
+      );
+    }
+    
+    setClueFields(arr);
+  }
 
   React.useEffect(() => {
     let fields = [];
 
     for (let i = 0; i < 3; i++) {
-      fields.push(<ClueField key={i} id={i} setClueVals={setClueVals} />);
+      fields.push(<ClueField key={i} id={i} setClueVals={setClueVals} setClueFields={setClueFields} />);
     }
 
     setClueFields(fields);
@@ -35,8 +80,8 @@ const CreateHunt = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={styles.scrollContainer}
-      contentContainerStyle={styles.scrollContainerContent}
+      style={Styles.StandardStyles.scrollContainer}
+      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <TextInput
         placeholder="Title"
@@ -51,41 +96,45 @@ const CreateHunt = ({ navigation }) => {
         onChangeText={setDesc}
       />
       {clueFields}
+      <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton
         title={"Add Clue"}
-        onPress={() => {
-          const arr = [...clueFields];
-          arr.push(
-            <ClueField
-              key={arr.length}
-              id={arr.length}
-              setClueVals={setClueVals}
-            />
-          );
-          setClueFields(arr);
-        }}
+        onPress={handleAddClue}
       />
       <StandardButton title={"Save Changes"} onPress={handleSave} />
     </ScrollView>
   );
 };
 
-const ClueField = ({ id, setClueVals }) => {
+const ClueField = ({ id, setClueVals, setClueFields }) => {
   const [clue, setClue] = React.useState("");
   const [answer, setAnswer] = React.useState("");
 
   const [pickerVal, setPickerVal] = React.useState("checkbox");
 
+  const handleRemoveClue = () => {
+    setClueFields(oldState => {
+      oldState.splice(oldState.findIndex(e => e.props.id === id ), 1);
+      console.log(oldState)
+      return [...oldState];
+    });
+  }
+
   React.useEffect(() => {
     setClueVals((oldState) => {
-      oldState[id] = { id, clue, answer, entry: '', type: pickerVal };
+      oldState[id] = { id, clue, answer, entry: "", type: pickerVal };
       return { ...oldState };
     });
   }, [clue, answer]);
 
   return (
     <View style={styles.clue}>
-      <Text style={styles.text}>Type:</Text>
+      <View style={styles.clueHeader}>
+        <Text style={styles.text}>Type:</Text>
+        <TouchableOpacity style={styles.removeClueBtn} onPress={handleRemoveClue}>
+          <Text style={styles.removeClueText}>X</Text>
+        </TouchableOpacity>
+      </View>
       <Picker
         options={[
           { text: "checkbox", value: "checkbox" },
@@ -101,11 +150,13 @@ const ClueField = ({ id, setClueVals }) => {
         onChangeText={setClue}
         style={styles.field}
       />
-      {(pickerVal === 'text') && <TextInput
-        placeholder="answer"
-        onChangeText={setAnswer}
-        style={styles.field}
-      />}
+      {pickerVal === "text" && (
+        <TextInput
+          placeholder="answer"
+          onChangeText={setAnswer}
+          style={styles.field}
+        />
+      )}
     </View>
   );
 };
@@ -120,6 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     textAlign: "center",
     padding: "5%",
+    flex: 1
   },
   description: {
     backgroundColor: "white",
@@ -128,12 +180,7 @@ const styles = StyleSheet.create({
     width: "80%",
     fontSize: 20,
     marginBottom: "5%",
-  },
-  scrollContainer: {
-    backgroundColor: "#FFFDD1",
-  },
-  scrollContainerContent: {
-    alignItems: "center",
+    padding: '5%'
   },
   field: {
     backgroundColor: "white",
@@ -148,7 +195,22 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: "bold",
+  },
+  feedback: {
+    color: "red",
+    fontSize: 20,
+  },
+  removeClueBtn: {},
+  removeClueText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    padding: 4
+  },
+  clueHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end'
   }
 });
 
