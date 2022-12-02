@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { ScrollView, TextInput} from 'react-native-gesture-handler'
-import { Styles } from '../../Styles'
+import { Styles, ThemeContext } from '../../Styles'
 import Rater from '../../components/Rater'
 import StandardButton from '../../components/StandardButton'
 import { rateHunt } from '../../models/hunts'
 
 const RateHunt = ({navigation, route}) => {
     const [rating, setRating] = React.useState(1);
+    const theme = React.useContext(ThemeContext);
 
     const handleSubmit = async () => {
         const result = await rateHunt(route.params.hunt._id, {rating});
@@ -28,8 +29,8 @@ const RateHunt = ({navigation, route}) => {
 
     return (
         <ScrollView
-        style={Styles.StandardStyles.scrollContainer}
-        contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+        style={theme.StandardStyles.scrollContainer}
+        contentContainerStyle={theme.StandardStyles.scrollContainerContent}
         >
             <Rater rating={rating} setRating={setRating}/>
             <StandardButton title='Submit' onPress={handleSubmit} />

@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 
 const FriendRequests = ({ navigation }) => {
+  const theme = React.useContext(ThemeContext);
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <Text>FriendRequests</Text>
     </View>
   );

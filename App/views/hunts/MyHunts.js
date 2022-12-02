@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StoredHunt from "../../components/StoredHunt";
 import LocalHunt from "../../components/LocalHunt";
@@ -13,6 +13,7 @@ const MyHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
   const [limit, setLimit] = React.useState(5);
+  const theme = React.useContext(ThemeContext);
 
   async function handleSubmit() {
     const localHunts = await getUserHunts();
@@ -70,7 +71,7 @@ const MyHunts = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
+      style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <View style={styles.searchBar}>

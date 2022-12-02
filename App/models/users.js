@@ -61,3 +61,17 @@ export async function updateUsername(newUsername, password) {
     return false;
   }
 }
+
+export async function getUserSettings() {
+  const user = await getData('user');
+
+  let userSettings = await getData(user.id + '_settings');
+
+  if (!userSettings) {
+    userSettings = {theme: 'default'};
+    await setData(user.id + '_settings', userSettings);
+  }
+
+  return userSettings;
+
+}

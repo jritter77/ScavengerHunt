@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
 import { sendFriendRequest } from "../../models/friends";
 import { getData } from "../../Methods";
@@ -10,6 +10,7 @@ const apiRoot = "http://localhost:3000/";
 
 const AddFriend = ({ navigation }) => {
   const [friend, setFriend] = React.useState("");
+  const theme = React.useContext(ThemeContext);
 
   async function handleSubmit() {
     // Send username
@@ -36,7 +37,7 @@ const AddFriend = ({ navigation }) => {
     }
   }
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <Text style={styles.Text}>Add Friend</Text>
       <TextInput
         style={Styles.StandardStyles.textInput}

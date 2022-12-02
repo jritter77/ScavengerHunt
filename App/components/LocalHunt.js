@@ -4,7 +4,7 @@ import ProgressBar from './ProgressBar';
 import { useNavigation } from '@react-navigation/native';
 import { getHuntProgress } from '../models/hunts';
 
-const LocalHunt = ({hunt, setHunts}) => {
+const LocalHunt = ({hunt}) => {
 
     const navigation = useNavigation();
 
@@ -12,7 +12,6 @@ const LocalHunt = ({hunt, setHunts}) => {
         navigation.navigate('HuntStack', {
             screen: 'LocalHuntInfo', 
             hunt: hunt,
-            setHunts: setHunts
         });
     }
 

@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
 
 const Settings = ({ navigation }) => {
+  const theme = React.useContext(ThemeContext);
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <Text style={styles.text}>Themes</Text>
       <Text style={styles.text}>Font Size</Text>
       <Text style={styles.text}>Data</Text>

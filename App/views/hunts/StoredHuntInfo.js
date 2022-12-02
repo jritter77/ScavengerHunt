@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { backgroundColor, Styles } from "../../Styles";
+import { backgroundColor, Styles, ThemeContext } from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
 import StandardButton from "../../components/StandardButton";
 import Rating from "../../components/Rating";
@@ -13,6 +13,7 @@ import { getData } from "../../Methods";
 const StoredHuntInfo = ({ navigation, route }) => {
   const [user, setUser] = React.useState({});
   const { _id, authorId, ratings, title, description } = route.params.hunt;
+  const theme = React.useContext(ThemeContext);
 
 
   const handleDownload = async () => {
@@ -52,8 +53,8 @@ const StoredHuntInfo = ({ navigation, route }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
-      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <Text style={styles.title}>{title}</Text>
       <Rating rating={getAvgRating(ratings)} size={40} backgroundColor={backgroundColor} />

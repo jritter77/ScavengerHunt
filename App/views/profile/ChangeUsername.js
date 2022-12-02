@@ -1,6 +1,6 @@
 import { View, Text, TextInput, Button } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,19 +11,20 @@ const changeUserName = ({ navigation }) => {
   const [username, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+  const theme = React.useContext(ThemeContext);
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <Text>ChangeUsername</Text>
       <TextInput
         onChangeText={setUserName}
         placeholder="UserName"
-        style={Styles.StandardStyles.textInput}
+        style={theme.StandardStyles.textInput}
       />
       <TextInput
         onChangeText={setPassword}
         placeholder="Password"
-        style={Styles.StandardStyles.textInput}
+        style={theme.StandardStyles.textInput}
       />
       <Text>{feedback}</Text>
       <StandardButton

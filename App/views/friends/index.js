@@ -5,15 +5,16 @@ import AddFriend from "./AddFriend";
 import FriendProfile from "./FriendProfile";
 import FriendRequests from "./FriendRequests";
 import Friends from "./Friends";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import FriendHeaderButtons from "../../components/FriendHeaderButtons";
 const Stack = createNativeStackNavigator();
 
 const FriendStack = (props) => {
+  const theme = React.useContext(ThemeContext);
   return (
     <Stack.Navigator
       initialRouteName="Friends"
-      screenOptions={Styles.StackHeaderStyle}
+      screenOptions={theme.StackHeaderStyle}
     >
       <Stack.Screen
         name="AddFriend"
@@ -38,9 +39,5 @@ const FriendStack = (props) => {
   );
 };
 
-/* This is the local storage data for testing (Incomplete)
-localStorage.setItem('storedFriends', JSON.stringify({[
-  {}
-]})
-*/
+
 export default FriendStack;

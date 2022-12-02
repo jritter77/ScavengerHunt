@@ -5,7 +5,7 @@ import {
   createDrawerNavigator,
   DrawerToggleButton,
 } from "@react-navigation/drawer";
-import React from "react";
+import React, { useContext } from "react";
 
 import Dashboard from "./views/dashboard/Dashboard";
 
@@ -15,13 +15,18 @@ import FriendStack from "./views/friends";
 import LoginStack from "./views/loginSignup";
 import { LinearGradient } from "expo-linear-gradient";
 import { getData, setData } from "./Methods";
-import { Styles } from "./Styles";
+import { Styles, ThemeStyles, themes, ThemeContext } from "./Styles";
+import { getUserSettings } from "./models/users";
+import MainStack from "./views/MainStack";
 
-const Drawer = createDrawerNavigator();
+
+
 
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [theme, setTheme] = React.useState('default');
+
+  const theme = useContext(ThemeContext);
+
 
   React.useEffect(() => {
     const checkToken = async () => {
@@ -33,38 +38,20 @@ export default function App() {
       }
     };
 
-    const checkTheme = () => {
-      
-    }
-
+    
     checkToken();
-  });
+
+  }, []);
+
+
+  console.log(theme);
+
 
   if (loggedIn) {
     return (
-      <NavigationContainer>
-        <Drawer.Navigator
-          initialRouteName="Dashboard"
-          screenOptions={Styles.DrawerHeaderStyle}
-        >
-          <Drawer.Screen name="Dashboard" component={Dashboard} />
-          <Drawer.Screen
-            name="ProfileStack"
-            children={() => <ProfileStack setLoggedIn={setLoggedIn} />}
-            options={{ drawerLabel: "Profile" }}
-          />
-          <Drawer.Screen
-            name="HuntStack"
-            component={HuntStack}
-            options={{ drawerLabel: "Scavenger Hunts" }}
-          />
-          <Drawer.Screen
-            name="FriendStack"
-            component={FriendStack}
-            options={{ drawerLabel: "Friends" }}
-          />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <ThemeContext.Provider value={ThemeStyles(themes.dark)}>
+        <MainStack setLoggedIn={setLoggedIn} />
+      </ThemeContext.Provider>
     );
   } else {
     return <LoginStack setLoggedIn={setLoggedIn} />;

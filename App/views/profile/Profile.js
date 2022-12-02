@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 
 import { useNavigation } from "@react-navigation/native";
 import { removeData } from "../../Methods";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
 const Profile = ({ navigation, setLoggedIn }) => {
+  const theme = React.useContext(ThemeContext);
 
 
   const handleSignOut = async () => {
@@ -17,7 +18,7 @@ const Profile = ({ navigation, setLoggedIn }) => {
 
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <StandardButtonWithIcon
         title="Change User Name"
         icon={require('../../assets/editIcon.png')}

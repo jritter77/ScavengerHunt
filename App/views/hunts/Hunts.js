@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
 const Hunts = ({ navigation }) => {
+  const theme = React.useContext(ThemeContext);
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <StandardButtonWithIcon
         title="My Hunts"
         icon={require('../../assets/huntIcon.png')}
