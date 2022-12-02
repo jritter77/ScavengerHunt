@@ -2,14 +2,17 @@ import axios from "axios";
 import { setData, getData } from "../Methods";
 
 // Server API
-// const apiRoot = "https://lookout-sh.com/";
+const apiRoot = "https://lookout-sh.com/";
 
 // Local API
-const apiRoot = "http://localhost:3000/";
+// const apiRoot = "http://localhost:3000/";
 
 export async function createNewUser(username, password) {
   try {
-    const result = await axios.post(apiRoot + "users", {username: username, password: password});
+    const result = await axios.post(apiRoot + "users", {
+      username: username,
+      password: password,
+    });
     if (result.data) {
       return true;
     }
@@ -25,7 +28,6 @@ export async function loginUser(username, password) {
       username,
       password,
     });
-
 
     if (result.data) {
       await setData("user", result.data);

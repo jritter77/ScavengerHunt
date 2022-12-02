@@ -4,10 +4,10 @@ import { setData, getData } from "../Methods";
 // PUBLIC HUNT METHODS
 
 // Server API
-// const apiRoot = "https://lookout-sh.com/";
+const apiRoot = "https://lookout-sh.com/";
 
 // Local API
-const apiRoot = "http://localhost:3000/";
+// const apiRoot = "http://localhost:3000/";
 
 export async function getPublicHunts(searchTerm, limit) {
   const user = await getData("user");
@@ -20,13 +20,14 @@ export async function getPublicHunts(searchTerm, limit) {
 export async function publishHunt(localHunt) {
   const user = await getData("user");
 
-  const exists = await axios.get(apiRoot + "hunts/download", {
-    params: { JWT: user.token, huntId: localHunt._id },
+  const exists = await axios.get(apiRoot + "hunts", {
+    params: { JWT: user.token, search: localHunt._id },
   });
 
-
-  if (exists.data) {
-    alert('Hunt is already published!\n\nPlease unpublish hunt and republish to replace.')
+  if (exists.data.length) {
+    alert(
+      "Hunt is already published!\n\nPlease unpublish hunt and republish to replace."
+    );
     return;
   }
 
@@ -54,27 +55,23 @@ export async function publishHunt(localHunt) {
 
   const currentHunts = await getUserHunts();
 
-
   currentHunts[result.data._id] = result.data;
 
   await setUserHunts(currentHunts);
 
-
   return result.data;
 }
 
-
 export async function unpublishHunt(publishedHuntId) {
-  const user = await getData('user');
+  const user = await getData("user");
 
-  console.log(user.token)
-  
-  const result = await axios.delete(
-    apiRoot + 'hunts', 
-    { params: {JWT: user.token, huntId: publishedHuntId}}
-  );
+  console.log(user.token);
 
-  console.log(result)
+  const result = await axios.delete(apiRoot + "hunts", {
+    params: { JWT: user.token, huntId: publishedHuntId },
+  });
+
+  console.log(result);
 
   return true;
 }
@@ -106,19 +103,18 @@ export async function downloadHunt(publishedHuntId) {
 }
 
 export async function rateHunt(huntId, rating) {
-  const user = await getData('user');
+  const user = await getData("user");
 
   rating.username = user.username;
 
   const result = await axios.post(
-    apiRoot + 'hunts/rating', 
-    {userId: user.id, huntId: huntId, rating: rating},
+    apiRoot + "hunts/rating",
+    { userId: user.id, huntId: huntId, rating: rating },
     { params: { JWT: user.token } }
   );
 
   return result.data;
 }
-
 
 export function getAvgRating(ratings) {
   let total = 0;
@@ -129,7 +125,7 @@ export function getAvgRating(ratings) {
     count++;
   }
 
-  return count ? total/count : 0;
+  return count ? total / count : 0;
 }
 
 // LOCAL HUNT METHODS
@@ -179,7 +175,10 @@ export function getHuntProgress(hunt) {
 
   for (let clue in clues) {
     total += 1;
-    if (clues[clue].type === 'checkbox' && clues[clue].entry || clues[clue].type === 'text' && clues[clue].entry === clues[clue].answer) {
+    if (
+      (clues[clue].type === "checkbox" && clues[clue].entry) ||
+      (clues[clue].type === "text" && clues[clue].entry === clues[clue].answer)
+    ) {
       complete += 1;
     }
   }
@@ -187,14 +186,13 @@ export function getHuntProgress(hunt) {
   return Math.round((100 * complete) / total);
 }
 
-
 export async function setUserHunts(hunts) {
-  const user = await getData('user');
-  const localHunts = await setData(user.id + '_hunts', hunts);
+  const user = await getData("user");
+  const localHunts = await setData(user.id + "_hunts", hunts);
 }
 
 export async function getUserHunts() {
-  const user = await getData('user');
-  const localHunts = await getData(user.id + '_hunts');
+  const user = await getData("user");
+  const localHunts = await getData(user.id + "_hunts");
   return localHunts;
 }
