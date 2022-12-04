@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
 import StandardButton from "../../components/StandardButton";
 import {
@@ -14,6 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 const LocalHuntInfo = ({ navigation, route }) => {
   const { _id, title, description, authorId } = route.params.hunt;
   const [user, setUser] = React.useState({});
+  const theme = React.useContext(ThemeContext);
 
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
@@ -57,8 +58,8 @@ const LocalHuntInfo = ({ navigation, route }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
-      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <Text style={styles.title}>{title}</Text>
       <View style={styles.progressContainer}>

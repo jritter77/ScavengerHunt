@@ -8,7 +8,7 @@ import FindHunts from "./FindHunts";
 import LocalHuntInfo from "./LocalHuntInfo";
 import Hunts from "./Hunts";
 import MyHunts from "./MyHunts";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import StoredHuntInfo from "./StoredHuntInfo";
 import { AsyncStorage } from "@react-native-async-storage/async-storage";
 import { setData } from "../../Methods";
@@ -17,10 +17,11 @@ import RateHunt from "./RateHunt";
 const Stack = createNativeStackNavigator();
 
 const HuntStack = (props) => {
+  const theme = React.useContext(ThemeContext);
   return (
     <Stack.Navigator
       initialRouteName="Hunts"
-      screenOptions={Styles.StackHeaderStyle}
+      screenOptions={theme.StackHeaderStyle}
     >
       <Stack.Screen
         name="ActiveHunt"

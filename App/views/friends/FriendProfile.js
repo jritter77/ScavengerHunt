@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet} from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 
 const FriendProfile = ({ navigation }) => {
+  const theme = React.useContext(ThemeContext);
   return (
-    <View style={styles.container}>
-      <Text style = {styles.usernameText}>Bob</Text>
-      <Text style = {styles.usernameText}>Hunts Completed</Text>
+    <View style={theme.StandardStyles.page}>
+      <Text>FriendProfile</Text>
     </View>
   );
 };

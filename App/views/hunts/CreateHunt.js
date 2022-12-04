@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StandardButton from "../../components/StandardButton";
 import Picker from "../../components/Picker";
@@ -14,6 +14,8 @@ const CreateHunt = ({ navigation }) => {
   const [clueVals, setClueVals] = React.useState({});
 
   const [feedback, setFeedback] = React.useState("");
+
+  const theme = React.useContext(ThemeContext);
 
   const handleSave = async () => {
     if (!title && !desc) {
@@ -80,8 +82,8 @@ const CreateHunt = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
-      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <TextInput
         placeholder="Title"

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StoredHunt from "../../components/StoredHunt";
 import { getPublicHunts } from "../../models/hunts";
@@ -11,6 +11,8 @@ const FindHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
   const [limit, setLimit] = React.useState(5);
+
+  const theme = React.useContext(ThemeContext);
 
   async function handleSubmit() {
     const result = await getPublicHunts(searchTerm, limit);
@@ -37,8 +39,8 @@ const FindHunts = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
-      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <View style={styles.searchBar}>
         <TextInput

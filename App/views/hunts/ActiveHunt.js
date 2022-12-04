@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Checkbox from "../../components/Checkbox";
@@ -9,6 +9,7 @@ import { updateLocalHunt, getHuntProgress } from "../../models/hunts";
 
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
+  const theme = React.useContext(ThemeContext);
 
   const [clues, setClues] = React.useState(hunt.clueList);
   const [clueFields, setClueFields] = React.useState([]);
@@ -79,7 +80,7 @@ const ActiveHunt = ({ navigation, route }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
+      style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
     >
       <ProgressBar value={getHuntProgress(hunt)} style={styles.progress} />

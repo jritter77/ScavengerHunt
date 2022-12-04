@@ -1,12 +1,16 @@
 import { View, Text, Button, StyleSheet } from "react-native";
 import React from "react";
-import StandardButton from "../../components/StandardButton";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
-const Dashboard = ({ navigation }) => {
+const Dashboard = ({ navigation, route }) => {
+
+  const theme = React.useContext(ThemeContext);
+
+  console.log(theme);
+
   return (
-    <View style={Styles.StandardStyles.page}>
+    <View style={theme.StandardStyles.page}>
       <StandardButtonWithIcon
         title="Profile"
         icon={require('../../assets/profileIcon.png')}

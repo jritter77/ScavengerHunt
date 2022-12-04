@@ -3,25 +3,26 @@ import React from 'react'
 import ProgressBar from './ProgressBar';
 import { useNavigation } from '@react-navigation/native';
 import { getHuntProgress } from '../models/hunts';
+import { ThemeContext } from '../Styles';
 
-const LocalHunt = ({hunt, setHunts}) => {
+const LocalHunt = ({hunt}) => {
 
     const navigation = useNavigation();
+    const theme = React.useContext(ThemeContext);
 
     function handlePress() {
         navigation.navigate('HuntStack', {
             screen: 'LocalHuntInfo', 
             hunt: hunt,
-            setHunts: setHunts
         });
     }
 
     return (
-        <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={handlePress}>
+        <TouchableHighlight style={{...styles.container, backgroundColor: theme.btnBgColor, borderColor: theme.btnBorderColor}} underlayColor={'cyan'} activeOpacity={.6} onPress={handlePress}>
             <View>
-                <Text style={styles.title}>{hunt.title}</Text>
+                <Text style={{...styles.title, color: theme.btnTextColor}} >{hunt.title}</Text>
                 <ProgressBar value={getHuntProgress(hunt)} style={styles.progress} />
-                <Text numberOfLines={1} style={styles.description}>{hunt.description}</Text>
+                <Text numberOfLines={1} style={{...styles.description, color: theme.btnTextColor}}>{hunt.description}</Text>
             </View>
         </TouchableHighlight>
         

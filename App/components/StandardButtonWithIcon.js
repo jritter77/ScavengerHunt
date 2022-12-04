@@ -1,15 +1,19 @@
 import { View, Text, Button, StyleSheet, TouchableOpacity, Image} from 'react-native'
 import React from 'react'
+import { ThemeContext } from '../Styles'
 
 const StandardButtonWithIcon = ({title, onPress, icon}) => {
 
+    const theme = React.useContext(ThemeContext);
 
+
+    console.log(theme)
   return (
     <TouchableOpacity 
         onPress={onPress}
-        style={styles.button}
+        style={{...styles.button, backgroundColor: theme.btnBgColor}}
     >
-        <Text style={styles.text}>{title}</Text>
+        <Text style={{...styles.text, color: theme.btnTextColor}}>{title}</Text>
         {icon && <Image style={styles.icon} source={icon} />}
     </TouchableOpacity>
   )

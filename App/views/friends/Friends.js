@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import StandardButton from "../../components/StandardButton";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import LocalFriends from "../../components/LocalFriends";
 import { ScrollView } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
@@ -17,6 +17,7 @@ const testFriends = [
 
 const Friends = ({ navigation }) => {
   const [friendList, setFriendList] = React.useState(testFriends);
+  const theme = React.useContext(ThemeContext);
 
   function populateFriends() {
     const friendsObj = [];
@@ -34,8 +35,8 @@ const Friends = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={Styles.StandardStyles.scrollContainer}
-      contentContainerStyle={Styles.StandardStyles.scrollContainerContent}
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <View style={styles.friendsContainer} >{populateFriends()}</View>
     </ScrollView>
