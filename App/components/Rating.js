@@ -12,11 +12,10 @@ const Rating = ({ rating, size, backgroundColor, style }) => {
     );
   }
 
+  console.log(rating);
   return (
     <View style={{ ...styles.container, ...style }}>
-      <Text style={{ fontSize: size, ...styles.text }}>
-        {rating.toFixed(1)}
-      </Text>
+      <Text style={{ fontSize: size, ...styles.text }}>{rating}</Text>
       <View>
         <Text style={{ fontSize: size, ...styles.stars }}>
           &#9733;&#9733;&#9733;&#9733;&#9733;

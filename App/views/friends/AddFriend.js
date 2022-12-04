@@ -42,16 +42,15 @@ const AddFriend = ({ navigation }) => {
       <TextInput
         style={theme.StandardStyles.textInput}
         placeholder="Friend Username"
-        onChangeText={setFriend}
       />
-      <StandardButton title="Submit" onPress={handleSubmit} />
+      <StandardButton title="Submit" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   Text: {
-    fontSize: "20pt",
+    fontSize: 20,
   },
 });
 

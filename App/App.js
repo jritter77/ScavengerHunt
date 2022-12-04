@@ -19,14 +19,10 @@ import { Styles, ThemeStyles, themes, ThemeContext } from "./Styles";
 import { getUserSettings } from "./models/users";
 import MainStack from "./views/MainStack";
 
-
-
-
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const theme = useContext(ThemeContext);
-
 
   React.useEffect(() => {
     const checkToken = async () => {
@@ -38,14 +34,8 @@ export default function App() {
       }
     };
 
-    
     checkToken();
-
   }, []);
-
-
-  console.log(theme);
-
 
   if (loggedIn) {
     return (

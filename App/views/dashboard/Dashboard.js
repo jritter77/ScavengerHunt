@@ -4,30 +4,27 @@ import { Styles, ThemeContext } from "../../Styles";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
 const Dashboard = ({ navigation, route }) => {
-
   const theme = React.useContext(ThemeContext);
-
-  console.log(theme);
 
   return (
     <View style={theme.StandardStyles.page}>
       <StandardButtonWithIcon
         title="Profile"
-        icon={require('../../assets/profileIcon.png')}
+        icon={require("../../assets/profileIcon.png")}
         onPress={() => {
           navigation.navigate("ProfileStack");
         }}
       />
       <StandardButtonWithIcon
         title="Hunts"
-        icon={require('../../assets/huntIcon.png')}
+        icon={require("../../assets/huntIcon.png")}
         onPress={() => {
           navigation.navigate("HuntStack");
         }}
       />
       <StandardButtonWithIcon
         title="Friends"
-        icon={require('../../assets/friendsIcon.png')}
+        icon={require("../../assets/friendsIcon.png")}
         onPress={() => {
           navigation.navigate("FriendStack");
         }}

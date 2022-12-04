@@ -48,14 +48,16 @@ const FindHunts = ({ navigation }) => {
           onChangeText={setSearchTerm}
           placeholder={"Search"}
         />
-        <IconButton icon={require('../../assets/searchIcon.png')} onPress={handleSubmit} />
+        <IconButton
+          icon={require("../../assets/searchIcon.png")}
+          onPress={handleSubmit}
+        />
       </View>
-      
-      
+
       <View style={styles.huntsContainer}>{populateHunts()}</View>
       <StandardButton
         title={"Show More"}
-        onPress={() => setLimit(oldState => oldState + 5)}
+        onPress={() => setLimit((oldState) => oldState + 5)}
       />
     </ScrollView>
   );
@@ -77,11 +79,11 @@ const styles = StyleSheet.create({
     margin: "5%",
   },
   searchBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    alignItems: 'center'
-  }
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+    alignItems: "center",
+  },
 });
 
 export default FindHunts;
