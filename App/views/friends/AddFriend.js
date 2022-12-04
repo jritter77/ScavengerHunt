@@ -38,10 +38,10 @@ const AddFriend = ({ navigation }) => {
   }
   return (
     <View style={theme.StandardStyles.page}>
-      <Text style={styles.Text}>Add Friend</Text>
       <TextInput
         style={theme.StandardStyles.textInput}
         placeholder="Friend Username"
+        placeholderTextColor={theme.inputTextColor}
       />
       <StandardButton title="Submit" />
     </View>

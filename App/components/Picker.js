@@ -54,7 +54,11 @@ const Picker = ({ options, val, setVal }) => {
       <Pressable
         style={[
           { ...styles.button, backgroundColor: theme.backgroundColor },
-          { ...styles.buttonOpen, backgroundColor: theme.backgroundColor },
+          {
+            ...styles.buttonOpen,
+            backgroundColor: theme.backgroundColor,
+            borderColor: theme.inputBorderColor,
+          },
         ]}
         onPress={() => setModalVisible(true)}
       >

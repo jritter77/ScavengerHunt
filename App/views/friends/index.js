@@ -18,16 +18,17 @@ const FriendStack = (props) => {
     >
       <Stack.Screen
         name="AddFriend"
-        options={{headerTitle: '', headerTransparent: true}}
+        options={{ headerTitle: "Add Friend" }}
         children={() => <AddFriend {...props} />}
       />
       <Stack.Screen
         name="FriendProfile"
-        options = {{headerTitle: '', headerTransparent: true}}
+        options={{ headerTitle: "Friend Profile" }}
         children={() => <FriendProfile {...props} />}
       />
       <Stack.Screen
         name="FriendRequests"
+        options={{ headerTitle: "Friend Requests" }}
         children={() => <FriendRequests {...props} />}
       />
       <Stack.Screen
@@ -40,6 +41,5 @@ const FriendStack = (props) => {
     </Stack.Navigator>
   );
 };
-
 
 export default FriendStack;

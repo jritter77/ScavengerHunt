@@ -99,6 +99,7 @@ const CreateHunt = ({ navigation }) => {
           ...styles.title,
           backgroundColor: theme.backgroundColor,
           color: theme.textColor,
+          borderColor: theme.inputBorderColor,
         }}
         onChangeText={setTitle}
       />
@@ -111,6 +112,7 @@ const CreateHunt = ({ navigation }) => {
           ...styles.description,
           backgroundColor: theme.backgroundColor,
           color: theme.textColor,
+          borderColor: theme.inputBorderColor,
         }}
         onChangeText={setDesc}
       />
@@ -178,6 +180,7 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
           ...styles.field,
           backgroundColor: theme.backgroundColor,
           color: theme.textColor,
+          borderColor: theme.inputBorderColor,
         }}
       />
       {pickerVal === "text" && (
@@ -189,6 +192,7 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
             ...styles.field,
             backgroundColor: theme.backgroundColor,
             color: theme.textColor,
+            borderColor: theme.inputBorderColor,
           }}
         />
       )}

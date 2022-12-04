@@ -12,7 +12,7 @@ const testFriends = [
   { _id: "corngw", username: "Amy" },
   { _id: "mpm6", username: "Kyle" },
   { _id: "odsnogs9", username: "Tim" },
-  {_id: "orgiid2", username: "Justin"},
+  { _id: "orgiid2", username: "Justin" },
 ];
 
 const Friends = ({ navigation }) => {
@@ -38,17 +38,17 @@ const Friends = ({ navigation }) => {
       style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
-      <View style={styles.friendsContainer} >{populateFriends()}</View>
+      <View style={styles.friendsContainer}>{populateFriends()}</View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   friendsContainer: {
-    width: '100%',
-    paddingLeft: '10%',
-    marginTop: '15%'
-  }
-})
+    width: "100%",
+    paddingLeft: "10%",
+    marginTop: "15%",
+  },
+});
 
 export default Friends;

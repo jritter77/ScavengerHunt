@@ -15,7 +15,6 @@ const Rating = ({ rating, size, backgroundColor, style }) => {
     );
   }
 
-  console.log(rating);
   return (
     <View style={{ ...styles.container, ...style }}>
       <Text style={{ ...styles.text, fontSize: size, color: theme.textColor }}>
