@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
+import { ThemeContext } from "../Styles";
 
 const Rating = ({ rating, size, backgroundColor, style }) => {
   let percent = (1 - rating / 5) * 100;
+
+  const theme = React.useContext(ThemeContext);
 
   if (!rating) {
     return (
@@ -15,16 +18,18 @@ const Rating = ({ rating, size, backgroundColor, style }) => {
   console.log(rating);
   return (
     <View style={{ ...styles.container, ...style }}>
-      <Text style={{ fontSize: size, ...styles.text }}>{rating}</Text>
+      <Text style={{ ...styles.text, fontSize: size, color: theme.textColor }}>
+        {rating}
+      </Text>
       <View>
-        <Text style={{ fontSize: size, ...styles.stars }}>
+        <Text style={{ ...styles.stars, fontSize: size }}>
           &#9733;&#9733;&#9733;&#9733;&#9733;
         </Text>
         <View
           style={{
-            width: `${percent}%`,
-            backgroundColor: backgroundColor,
             ...styles.cover,
+            width: `${percent}%`,
+            backgroundColor: theme.backgroundColor,
           }}
         ></View>
       </View>

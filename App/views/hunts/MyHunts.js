@@ -41,12 +41,7 @@ const MyHunts = ({ navigation }) => {
     let count = 0;
 
     for (let hunt in hunts) {
-      huntObjs.push(
-        <LocalHunt
-          key={hunts[hunt]._id}
-          hunt={hunts[hunt]}
-        />
-      );
+      huntObjs.push(<LocalHunt key={hunts[hunt]._id} hunt={hunts[hunt]} />);
 
       count++;
 
@@ -76,17 +71,25 @@ const MyHunts = ({ navigation }) => {
     >
       <View style={styles.searchBar}>
         <TextInput
-          style={{...styles.search, backgroundColor: theme.backgroundColor, color: theme.textColor}}
+          style={{
+            ...styles.search,
+            backgroundColor: theme.backgroundColor,
+            color: theme.textColor,
+          }}
           onChangeText={setSearchTerm}
           placeholder={"Search"}
+          placeholderTextColor={theme.inputTextColor}
         />
-        <IconButton icon={require('../../assets/searchIcon.png')} onPress={handleSubmit} />
+        <IconButton
+          icon={require("../../assets/searchIcon.png")}
+          onPress={handleSubmit}
+        />
       </View>
-      
+
       <View style={styles.huntsContainer}>{populateHunts()}</View>
       <StandardButton
         title={"Show More"}
-        onPress={() => setLimit(oldState => oldState + 5)}
+        onPress={() => setLimit((oldState) => oldState + 5)}
       />
     </ScrollView>
   );
@@ -108,11 +111,11 @@ const styles = StyleSheet.create({
     margin: "5%",
   },
   searchBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    alignItems: 'center'
-  }
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "80%",
+    alignItems: "center",
+  },
 });
 
 export default MyHunts;

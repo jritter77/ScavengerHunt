@@ -44,9 +44,14 @@ const FindHunts = ({ navigation }) => {
     >
       <View style={styles.searchBar}>
         <TextInput
-          style={styles.search}
+          style={{
+            ...styles.search,
+            backgroundColor: theme.backgroundColor,
+            color: theme.inputTextColor,
+          }}
           onChangeText={setSearchTerm}
           placeholder={"Search"}
+          placeholderTextColor={theme.inputTextColor}
         />
         <IconButton
           icon={require("../../assets/searchIcon.png")}

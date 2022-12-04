@@ -19,11 +19,13 @@ const changeUserName = ({ navigation }) => {
       <TextInput
         onChangeText={setUserName}
         placeholder="UserName"
+        placeholderTextColor={theme.inputTextColor}
         style={theme.StandardStyles.textInput}
       />
       <TextInput
         onChangeText={setPassword}
         placeholder="Password"
+        placeholderTextColor={theme.inputTextColor}
         style={theme.StandardStyles.textInput}
       />
       <Text>{feedback}</Text>

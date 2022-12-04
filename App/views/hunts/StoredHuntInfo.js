@@ -15,59 +15,71 @@ const StoredHuntInfo = ({ navigation, route }) => {
   const { _id, authorId, ratings, title, description } = route.params.hunt;
   const theme = React.useContext(ThemeContext);
 
-
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
-    console.log('newhunt:', newHunt)
+    console.log("newhunt:", newHunt);
     navigation.reset({
-      index: 0, 
-      routes: [
-        {name: 'Hunts'}, 
-        {name: 'MyHunts'}, 
-      ]
+      index: 0,
+      routes: [{ name: "Hunts" }, { name: "MyHunts" }],
     });
-    navigation.navigate('HuntStack', {
-      screen: 'LocalHuntInfo', 
+    navigation.navigate("HuntStack", {
+      screen: "LocalHuntInfo",
       hunt: newHunt,
-  });
+    });
   };
 
   const handleUnpublish = async () => {
     const result = await unpublishHunt(_id);
     navigation.reset({
-      index: 0, 
-      routes: [
-        {name: 'Hunts'}, 
-        {name: 'FindHunts'}, 
-      ]
+      index: 0,
+      routes: [{ name: "Hunts" }, { name: "FindHunts" }],
     });
-  }
+  };
 
   React.useEffect(() => {
     const getUser = async () => {
-      setUser(await getData('user'));
-    }
+      setUser(await getData("user"));
+    };
 
     getUser();
-  }, [])
+  }, []);
 
   return (
     <ScrollView
       style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
-      <Text style={styles.title}>{title}</Text>
-      <Rating rating={getAvgRating(ratings).toFixed(1)} size={40} backgroundColor={backgroundColor} />
-      <Text style={styles.description}>{description}</Text>
+      <Text
+        style={{
+          ...styles.title,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+        }}
+      >
+        {title}
+      </Text>
+      <Rating
+        rating={getAvgRating(ratings).toFixed(1)}
+        size={40}
+        backgroundColor={backgroundColor}
+      />
+      <Text
+        style={{
+          ...styles.description,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+        }}
+      >
+        {description}
+      </Text>
       <StandardButton title="Download Hunt" onPress={handleDownload} />
       <StandardButton
         title="Rate Hunt"
-        onPress={() => navigation.navigate('RateHunt')}
+        onPress={() => navigation.navigate("RateHunt")}
       />
-      {user.id === authorId && <StandardButton
-        title="Unpublish Hunt"
-        onPress={handleUnpublish}
-      />}
+      {user.id === authorId && (
+        <StandardButton title="Unpublish Hunt" onPress={handleUnpublish} />
+      )}
     </ScrollView>
   );
 };
@@ -92,7 +104,7 @@ const styles = StyleSheet.create({
     minHeight: 64,
     fontSize: 20,
     marginBottom: "5%",
-    padding: '5%',
+    padding: "5%",
     textAlign: "left",
   },
   ratingText: {

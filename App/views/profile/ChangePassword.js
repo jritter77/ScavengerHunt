@@ -16,16 +16,19 @@ const ChangePassword = ({ navigation }) => {
       <TextInput
         onChangeText={setOldPassword}
         placeholder="Old Password"
+        placeholderTextColor={theme.inputTextColor}
         style={theme.StandardStyles.textInput}
       />
       <TextInput
         onChangeText={setPassword}
         placeholder="Password"
+        placeholderTextColor={theme.inputTextColor}
         style={theme.StandardStyles.textInput}
       />
       <TextInput
         onChangeText={setPasswordConfirm}
         placeholder="Confirm Password"
+        placeholderTextColor={theme.inputTextColor}
         style={theme.StandardStyles.textInput}
       />
       <StandardButton

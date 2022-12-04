@@ -18,21 +18,18 @@ const ActiveHunt = ({ navigation, route }) => {
     hunt.clueList = clues;
     await updateLocalHunt(hunt);
     navigation.reset({
-      index: 0, 
-      routes: [
-        {name: 'Hunts'}, 
-        {name: 'MyHunts'}, 
-      ]
+      index: 0,
+      routes: [{ name: "Hunts" }, { name: "MyHunts" }],
     });
-    navigation.navigate('HuntStack', {
-      screen: 'LocalHuntInfo', 
+    navigation.navigate("HuntStack", {
+      screen: "LocalHuntInfo",
       hunt: hunt,
-  });
+    });
   };
 
   const ClueField = ({ clue }) => {
     const [entry, setEntry] = React.useState(clue.entry);
-    const [valid, setValid] = React.useState('red');
+    const [valid, setValid] = React.useState("red");
 
     React.useEffect(() => {
       setClues((oldState) => {
@@ -41,18 +38,18 @@ const ActiveHunt = ({ navigation, route }) => {
       });
 
       if (entry) {
-        entry === clue.answer ? setValid('green') : setValid('red');
+        entry === clue.answer ? setValid("green") : setValid("red");
+      } else {
+        setValid("black");
       }
-      else {
-        setValid('black');
-      }
-
     }, [entry]);
 
     return (
       <View style={styles.clue}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={styles.clueText}>{clue.clue}</Text>
+          <Text style={{ ...styles.clueText, color: theme.textColor }}>
+            {clue.clue}
+          </Text>
           {clue.type !== "text" && (
             <Checkbox entry={entry} setEntry={setEntry} />
           )}
@@ -62,7 +59,7 @@ const ActiveHunt = ({ navigation, route }) => {
             value={entry}
             placeholder={"answer"}
             onChangeText={setEntry}
-            style={{...styles.entry, borderColor: valid}}
+            style={{ ...styles.entry, borderColor: valid }}
           />
         )}
       </View>

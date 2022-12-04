@@ -29,17 +29,18 @@ const CreateHunt = ({ navigation }) => {
         return;
       }
     }
-    
-    const newHunt = await createLocalHunt({ title: title, description: desc, clueList: clueVals });
-    navigation.reset({
-      index: 0, 
-      routes: [
-        {name: 'Hunts'}, 
-        {name: 'MyHunts'}, 
-      ]
+
+    const newHunt = await createLocalHunt({
+      title: title,
+      description: desc,
+      clueList: clueVals,
     });
-    navigation.navigate('HuntStack', {
-      screen: 'LocalHuntInfo', 
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Hunts" }, { name: "MyHunts" }],
+    });
+    navigation.navigate("HuntStack", {
+      screen: "LocalHuntInfo",
       hunt: newHunt,
     });
   };
@@ -49,14 +50,13 @@ const CreateHunt = ({ navigation }) => {
     if (arr.length) {
       arr.push(
         <ClueField
-          key={parseInt(arr[arr.length-1].props.id) + 1}
-          id={parseInt(arr[arr.length-1].props.id) + 1}
+          key={parseInt(arr[arr.length - 1].props.id) + 1}
+          id={parseInt(arr[arr.length - 1].props.id) + 1}
           setClueVals={setClueVals}
           setClueFields={setClueFields}
         />
       );
-    }
-    else {
+    } else {
       arr.push(
         <ClueField
           key={0}
@@ -66,15 +66,22 @@ const CreateHunt = ({ navigation }) => {
         />
       );
     }
-    
+
     setClueFields(arr);
-  }
+  };
 
   React.useEffect(() => {
     let fields = [];
 
     for (let i = 0; i < 3; i++) {
-      fields.push(<ClueField key={i} id={i} setClueVals={setClueVals} setClueFields={setClueFields} />);
+      fields.push(
+        <ClueField
+          key={i}
+          id={i}
+          setClueVals={setClueVals}
+          setClueFields={setClueFields}
+        />
+      );
     }
 
     setClueFields(fields);
@@ -87,22 +94,29 @@ const CreateHunt = ({ navigation }) => {
     >
       <TextInput
         placeholder="Title"
-        style={styles.title}
+        placeholderTextColor={theme.inputTextColor}
+        style={{
+          ...styles.title,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+        }}
         onChangeText={setTitle}
       />
       <TextInput
         multiline
         numberOfLines={4}
         placeholder="Description"
-        style={styles.description}
+        placeholderTextColor={theme.inputTextColor}
+        style={{
+          ...styles.description,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+        }}
         onChangeText={setDesc}
       />
       {clueFields}
       <Text style={styles.feedback}>{feedback}</Text>
-      <StandardButton
-        title={"Add Clue"}
-        onPress={handleAddClue}
-      />
+      <StandardButton title={"Add Clue"} onPress={handleAddClue} />
       <StandardButton title={"Save Changes"} onPress={handleSave} />
     </ScrollView>
   );
@@ -114,12 +128,17 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
 
   const [pickerVal, setPickerVal] = React.useState("checkbox");
 
+  const theme = React.useContext(ThemeContext);
+
   const handleRemoveClue = () => {
-    setClueFields(oldState => {
-      oldState.splice(oldState.findIndex(e => e.props.id === id ), 1);
+    setClueFields((oldState) => {
+      oldState.splice(
+        oldState.findIndex((e) => e.props.id === id),
+        1
+      );
       return [...oldState];
     });
-  }
+  };
 
   React.useEffect(() => {
     setClueVals((oldState) => {
@@ -131,9 +150,14 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
   return (
     <View style={styles.clue}>
       <View style={styles.clueHeader}>
-        <Text style={styles.text}>Type:</Text>
-        <TouchableOpacity style={styles.removeClueBtn} onPress={handleRemoveClue}>
-          <Text style={styles.removeClueText}>X</Text>
+        <Text style={{ ...styles.text, color: theme.textColor }}>Type:</Text>
+        <TouchableOpacity
+          style={styles.removeClueBtn}
+          onPress={handleRemoveClue}
+        >
+          <Text style={{ ...styles.removeClueText, color: theme.textColor }}>
+            X
+          </Text>
         </TouchableOpacity>
       </View>
       <Picker
@@ -145,17 +169,27 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
         val={pickerVal}
         setVal={setPickerVal}
       />
-      <Text style={styles.text}>Clue:</Text>
+      <Text style={{ ...styles.text, color: theme.textColor }}>Clue:</Text>
       <TextInput
         placeholder="clue"
+        placeholderTextColor={theme.inputTextColor}
         onChangeText={setClue}
-        style={styles.field}
+        style={{
+          ...styles.field,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+        }}
       />
       {pickerVal === "text" && (
         <TextInput
           placeholder="answer"
+          placeholderTextColor={theme.inputTextColor}
           onChangeText={setAnswer}
-          style={styles.field}
+          style={{
+            ...styles.field,
+            backgroundColor: theme.backgroundColor,
+            color: theme.textColor,
+          }}
         />
       )}
     </View>
@@ -172,7 +206,7 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
     textAlign: "center",
     padding: "5%",
-    flex: 1
+    flex: 1,
   },
   description: {
     backgroundColor: "white",
@@ -181,7 +215,7 @@ const styles = StyleSheet.create({
     width: "80%",
     fontSize: 20,
     marginBottom: "5%",
-    padding: '5%'
+    padding: "5%",
   },
   field: {
     backgroundColor: "white",
@@ -205,14 +239,14 @@ const styles = StyleSheet.create({
   removeClueBtn: {},
   removeClueText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    padding: 4
+    fontWeight: "bold",
+    padding: 4,
   },
   clueHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end'
-  }
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+  },
 });
 
 export default CreateHunt;

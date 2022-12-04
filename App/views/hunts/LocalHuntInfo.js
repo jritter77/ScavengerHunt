@@ -19,11 +19,8 @@ const LocalHuntInfo = ({ navigation, route }) => {
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
     navigation.reset({
-      index: 0, 
-      routes: [
-        {name: 'Hunts'}, 
-        {name: 'MyHunts'}, 
-      ]
+      index: 0,
+      routes: [{ name: "Hunts" }, { name: "MyHunts" }],
     });
   };
 
@@ -33,19 +30,13 @@ const LocalHuntInfo = ({ navigation, route }) => {
       return;
     }
     navigation.reset({
-      index: 0, 
-      routes: [
-        {name: 'Hunts'}, 
-        {name: 'FindHunts'}, 
-      ]
+      index: 0,
+      routes: [{ name: "Hunts" }, { name: "FindHunts" }],
     });
-    navigation.navigate('HuntStack', {
-      screen: 'StoredHuntInfo', 
+    navigation.navigate("HuntStack", {
+      screen: "StoredHuntInfo",
       hunt: publishedHunt,
-  });
-
-
-
+    });
   };
 
   React.useEffect(() => {
@@ -61,15 +52,35 @@ const LocalHuntInfo = ({ navigation, route }) => {
       style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
-      <Text style={styles.title}>{title}</Text>
+      <Text
+        style={{
+          ...styles.title,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+          borderColor: theme.btnBorderColor,
+        }}
+      >
+        {title}
+      </Text>
       <View style={styles.progressContainer}>
-        <Text style={styles.progress}>Progress:</Text>
+        <Text style={{ ...styles.progress, color: theme.textColor }}>
+          Progress:
+        </Text>
         <ProgressBar
           value={getHuntProgress(route.params.hunt)}
           style={{ flex: 1 }}
         />
       </View>
-      <Text style={styles.description}>{description}</Text>
+      <Text
+        style={{
+          ...styles.description,
+          backgroundColor: theme.backgroundColor,
+          color: theme.textColor,
+          borderColor: theme.btnBorderColor,
+        }}
+      >
+        {description}
+      </Text>
       <StandardButton
         title="Invite Friend"
         onPress={() => console.log("Invite Friend!")}
