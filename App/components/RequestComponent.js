@@ -4,17 +4,14 @@ import { TouchableHighlight } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 
 
-const LocalFriends = ({id, username}) => {
+const RequestComponent = ({id, username}) => {
   const navigation = useNavigation();
   // Finish Hunts Completed after implementation of Hunt History
   return (
-   <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={() => navigation.navigate('FriendProfile')}>
-    <View>
+    <View style = {styles.container}>
       <Text style={styles.user}>{username}</Text>
-      <Text>Hunts Completed: </Text>   
-
+      <Text>Hunts Completed: 0 </Text>   
     </View>
-   </TouchableHighlight>
   )
 }
 
@@ -41,4 +38,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default LocalFriends
+export default RequestComponent;

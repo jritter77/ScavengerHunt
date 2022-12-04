@@ -20,16 +20,16 @@ export async function getPublicHunts(searchTerm, limit) {
 export async function publishHunt(localHunt) {
   const user = await getData("user");
 
-  const exists = await axios.get(apiRoot + "hunts", {
-    params: { JWT: user.token, search: localHunt._id },
-  });
+  // const exists = await axios.get(apiRoot + "hunts", {
+  //   params: { JWT: user.token, search: localHunt._id },
+  // });
 
-  if (exists.data.length) {
-    alert(
-      "Hunt is already published!\n\nPlease unpublish hunt and republish to replace."
-    );
-    return;
-  }
+  // if (exists.data.length) {
+  //   alert(
+  //     "Hunt is already published!\n\nPlease unpublish hunt and republish to replace."
+  //   );
+  //   return;
+  // }
 
   for (let clue in localHunt.clueList) {
     localHunt.clueList[clue].entry = "";
