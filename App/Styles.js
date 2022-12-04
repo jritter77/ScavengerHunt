@@ -19,15 +19,21 @@ export const themes = {
     btnBgColor: 'blue',
     btnTextColor: 'white',
     btnBorderColor: 'blue',
+    inputBorderColor: 'blue',
+    inputTextColor: 'black',
+    inputBgColor: 'white',
   },
   dark: {
-    topGradient: 'black',
-    bottomGradient: 'black',
-    backgroundColor: 'black',
+    topGradient: '#383838',
+    bottomGradient: '#383838',
+    backgroundColor: '#383838',
     textColor: 'white',
-    btnBgColor: 'black',
+    btnBgColor: '#383838',
     btnTextColor: 'white',
-    btnBorderColor: 'white',
+    btnBorderColor: 'blue',
+    inputBorderColor: 'blue',
+    inputTextColor: 'white',
+    inputBgColor: '#383838',
   }
 }
 
@@ -52,6 +58,9 @@ export const Styles = {
       ),
     },
     StackHeaderStyle: {
+      headerTitleStyle: {
+        color: 'white',
+      },
       headerStyle: {
         backgroundColor: backgroundColor,
       },
@@ -103,6 +112,10 @@ export const ThemeStyles = (theme) => {
     ),
   },
   StackHeaderStyle: {
+    headerTintColor: 'white',
+    headerTitleStyle: {
+      color: 'white',
+    },
     headerStyle: {
       backgroundColor: theme.backgroundColor,
     },
@@ -124,10 +137,11 @@ export const ThemeStyles = (theme) => {
       width: "70%",
       fontSize: 20,
       padding: "5%",
-      borderColor: "blue",
+      borderColor: theme.inputBorderColor,
       borderWidth: 2,
       margin: "5%",
-      backgroundColor: "white",
+      backgroundColor: theme.inputBgColor,
+      color: theme.inputTextColor,
     },
   }),
 });

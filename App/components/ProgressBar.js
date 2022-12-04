@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import { ThemeContext } from '../Styles'
 
 const ProgressBar = ({value, style}) => {
+    const theme = React.useContext(ThemeContext);
   return (
-    <View style={{...styles.container, ...style}}>
+    <View style={{...styles.container, ...style, backgroundColor: theme.btnBgColor}}>
         <View style={{width: `${value}%`, ...styles.bar}}></View>
-        <Text style={styles.text}>{value}%</Text>
+        <Text style={{...styles.text, color: theme.textColor}}>{value}%</Text>
     </View>
   )
 }

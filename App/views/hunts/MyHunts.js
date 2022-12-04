@@ -76,7 +76,7 @@ const MyHunts = ({ navigation }) => {
     >
       <View style={styles.searchBar}>
         <TextInput
-          style={styles.search}
+          style={{...styles.search, backgroundColor: theme.backgroundColor, color: theme.textColor}}
           onChangeText={setSearchTerm}
           placeholder={"Search"}
         />

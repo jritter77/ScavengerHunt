@@ -57,7 +57,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
       contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <Text style={styles.title}>{title}</Text>
-      <Rating rating={getAvgRating(ratings)} size={40} backgroundColor={backgroundColor} />
+      <Rating rating={getAvgRating(ratings).toFixed(1)} size={40} backgroundColor={backgroundColor} />
       <Text style={styles.description}>{description}</Text>
       <StandardButton title="Download Hunt" onPress={handleDownload} />
       <StandardButton

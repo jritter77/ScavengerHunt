@@ -40,7 +40,7 @@ const AddFriend = ({ navigation }) => {
     <View style={theme.StandardStyles.page}>
       <Text style={styles.Text}>Add Friend</Text>
       <TextInput
-        style={Styles.StandardStyles.textInput}
+        style={theme.StandardStyles.textInput}
         placeholder="Friend Username"
         onChangeText={setFriend}
       />

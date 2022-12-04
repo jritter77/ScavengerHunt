@@ -18,7 +18,7 @@ const StoredHunt = ({hunt}) => {
         <TouchableHighlight style={styles.container} underlayColor={'cyan'} activeOpacity={.6} onPress={handlePress}>
             <View>
                 <Text style={styles.title}>{title} </Text>
-                <Rating style={styles.rating} rating={getAvgRating(ratings)} size={20} backgroundColor='white' />
+                <Rating style={styles.rating} rating={getAvgRating(ratings).toFixed(1)} size={20} backgroundColor='white' />
                 <Text numberOfLines={1} style={styles.description}>{description}</Text>
             </View>
         </TouchableHighlight>
