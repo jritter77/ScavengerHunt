@@ -13,11 +13,12 @@ export async function sendFriendRequest(friendName) {
 
     const result = await axios.post(
       apiRoot + "friends",
-      { user: user.username, reciever: friendName },
+      { user: user.username, receiver: friendName },
       { params: { JWT: user.token } }
     );
 
     console.log(result.data);
+    return result.data;
   } catch (e) {
     console.log(e);
     return false;
@@ -25,18 +26,18 @@ export async function sendFriendRequest(friendName) {
 }
 
 // get friend requests
-export async function getFriendReq() {
+export async function getFriends() {
   try {
     const user = await getData("user");
-    const result = await axios.get(
-      apiRoot + "friends",
-      { params: { JWT: user.token } });
+    const result = await axios.get(apiRoot + "friends", {
+      params: { JWT: user.token },
+    });
     console.log(result.data);
+    return result.data;
   } catch (e) {
-    console.log(e)
-    return false
+    console.log(e);
+    return false;
   }
 }
-
 
 // accept friend request

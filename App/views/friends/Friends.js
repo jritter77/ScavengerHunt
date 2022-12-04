@@ -1,22 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import StandardButton from "../../components/StandardButton";
 import { Styles, ThemeContext } from "../../Styles";
 import LocalFriends from "../../components/LocalFriends";
 import { ScrollView } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
-import { FlipInEasyX } from "react-native-reanimated";
 
-const testFriends = [
-  { _id: "cyd66", username: "Bob" },
-  { _id: "corngw", username: "Amy" },
-  { _id: "mpm6", username: "Kyle" },
-  { _id: "odsnogs9", username: "Tim" },
-  { _id: "orgiid2", username: "Justin" },
-];
+import { getFriends } from "../../models/friends";
 
 const Friends = ({ navigation }) => {
-  const [friendList, setFriendList] = React.useState(testFriends);
+  const [friendList, setFriendList] = React.useState([]);
   const theme = React.useContext(ThemeContext);
 
   function populateFriends() {
@@ -32,6 +23,15 @@ const Friends = ({ navigation }) => {
     }
     return friendsObj;
   }
+
+  React.useEffect(() => {
+    const fetchFriends = async () => {
+      const result = await getFriends();
+      setFriendList(result.friends);
+    };
+
+    fetchFriends();
+  }, []);
 
   return (
     <ScrollView

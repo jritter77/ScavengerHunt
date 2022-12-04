@@ -4,6 +4,7 @@ import React from "react";
 
 import { Styles, ThemeContext } from "../../Styles";
 import RequestComponent from "../../components/RequestComponent";
+import { getFriends } from "../../models/friends";
 
 const testRequests = [
   { _id: 0, username: "Bob" },
@@ -13,7 +14,7 @@ const testRequests = [
 ];
 
 const FriendRequests = ({ navigation }) => {
-  const [reqs, setReqs] = React.useState(testRequests);
+  const [reqs, setReqs] = React.useState([]);
   const theme = React.useContext(ThemeContext);
 
   function populateRequests() {
@@ -25,6 +26,15 @@ const FriendRequests = ({ navigation }) => {
     }
     return requestObj;
   }
+
+  React.useEffect(() => {
+    const fetchFriendReqs = async () => {
+      const result = await getFriends();
+      setReqs(result.friendRequests);
+    };
+
+    fetchFriendReqs();
+  });
 
   return (
     <ScrollView

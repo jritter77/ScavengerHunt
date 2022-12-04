@@ -21,6 +21,8 @@ export const themes = {
     inputBorderColor: "blue",
     inputTextColor: "black",
     inputBgColor: "white",
+    feedbackNegColor: "red",
+    feedbackPosColor: "green",
   },
   dark: {
     topGradient: "#383838",
@@ -33,6 +35,8 @@ export const themes = {
     inputBorderColor: "blue",
     inputTextColor: "white",
     inputBgColor: "#383838",
+    feedbackNegColor: "red",
+    feedbackPosColor: "lightgreen",
   },
 };
 

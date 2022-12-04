@@ -25,7 +25,7 @@ const FriendHeaderButtons = ({ navigation }) => {
           navigation.navigate("AddFriend");
         }}
       >
-        <Text>☩</Text>
+        <Text style={styles.icon}>+</Text>
       </TouchableOpacity>
     );
   };
@@ -42,7 +42,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
   },
-
+  icon: {
+    fontSize: 20,
+  },
   button: {
     backgroundColor: "#1BA1E2",
     position: "relative",

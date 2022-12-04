@@ -10,6 +10,7 @@ const apiRoot = "http://lookout-sh.com/";
 
 const AddFriend = ({ navigation }) => {
   const [friend, setFriend] = React.useState("");
+  const [feedback, setFeedback] = React.useState("");
   const theme = React.useContext(ThemeContext);
 
   async function handleSubmit() {
@@ -18,22 +19,28 @@ const AddFriend = ({ navigation }) => {
     // Verify the username exists
     const user = await getData("user");
 
+    if (user.username === friend) {
+      console.log("Cannot send friend request to self!");
+      setFeedback("Cannot send friend request to self!");
+      return;
+    }
+
     //  check if user exists
     const exists = await axios.get(apiRoot + "users", {
       params: { JWT: user.token, username: friend },
     });
 
-    console.log(exists.data);
-
     // If not notify user
 
     if (exists.data.length === 0) {
       console.log("Not found!");
+      setFeedback("User not found...");
     }
 
     // Else send friend request
     else {
-      sendFriendRequest(friend);
+      const result = await sendFriendRequest(friend);
+      setFeedback(result);
     }
   }
   return (
@@ -42,14 +49,26 @@ const AddFriend = ({ navigation }) => {
         style={theme.StandardStyles.textInput}
         placeholder="Friend Username"
         placeholderTextColor={theme.inputTextColor}
+        onChangeText={setFriend}
       />
-      <StandardButton title="Submit" />
+      <Text
+        style={{
+          ...styles.feedback,
+          color:
+            feedback === "Friend Request Sent!"
+              ? theme.feedbackPosColor
+              : theme.feedbackNegColor,
+        }}
+      >
+        {feedback}
+      </Text>
+      <StandardButton title="Submit" onPress={handleSubmit} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  Text: {
+  feedback: {
     fontSize: 20,
   },
 });
