@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet } from "react-native";
+import CustomDrawer from "./components/CustomDrawer";
 import HomeButton from "./components/HomeButton";
 import { getData } from "./Methods";
 import { getUserSettings } from "./models/users";

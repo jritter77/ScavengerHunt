@@ -7,6 +7,7 @@ import Dashboard from './dashboard/Dashboard';
 import ProfileStack from './profile';
 import HuntStack from './hunts';
 import FriendStack from './friends';
+import CustomDrawer from '../components/CustomDrawer';
 
 
 const Drawer = createDrawerNavigator();
@@ -21,6 +22,7 @@ const MainStack = ({setLoggedIn}) => {
           <Drawer.Navigator
             initialRouteName="Dashboard"
             screenOptions={theme.DrawerHeaderStyle}
+            drawerContent={CustomDrawer}
           >
             <Drawer.Screen name="Dashboard" component={Dashboard} />
             <Drawer.Screen
