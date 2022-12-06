@@ -46,7 +46,7 @@ const FindHunts = ({ navigation }) => {
         <TextInput
           style={{
             ...styles.search,
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: theme.inputBgColor,
             color: theme.inputTextColor,
           }}
           onChangeText={setSearchTerm}

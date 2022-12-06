@@ -55,7 +55,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
       <Text
         style={{
           ...styles.title,
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.inputBgColor,
           color: theme.textColor,
           borderColor: theme.btnBorderColor,
         }}
@@ -74,7 +74,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
       <Text
         style={{
           ...styles.description,
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.inputBgColor,
           color: theme.textColor,
           borderColor: theme.btnBorderColor,
         }}

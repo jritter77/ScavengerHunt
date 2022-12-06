@@ -52,8 +52,9 @@ const StoredHuntInfo = ({ navigation, route }) => {
       <Text
         style={{
           ...styles.title,
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.inputBgColor,
           color: theme.textColor,
+          borderColor: theme.inputBorderColor
         }}
       >
         {title}
@@ -61,13 +62,14 @@ const StoredHuntInfo = ({ navigation, route }) => {
       <Rating
         rating={getAvgRating(ratings).toFixed(1)}
         size={40}
-        backgroundColor={backgroundColor}
+        backgroundColor={theme.backgroundColor}
       />
       <Text
         style={{
           ...styles.description,
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.inputBgColor,
           color: theme.textColor,
+          borderColor: theme.inputBorderColor
         }}
       >
         {description}

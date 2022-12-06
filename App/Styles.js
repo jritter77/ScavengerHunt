@@ -15,8 +15,8 @@ export const themes = {
     bottomGradient: "#F283B3",
     backgroundColor: "#FFFDD1",
     textColor: "black",
-    btnBgColor: "blue",
-    btnTextColor: "white",
+    btnBgColor: "white",
+    btnTextColor: "black",
     btnBorderColor: "blue",
     inputBorderColor: "blue",
     inputTextColor: "black",
@@ -108,9 +108,9 @@ export const ThemeStyles = (theme) => {
       ),
     },
     StackHeaderStyle: {
-      headerTintColor: "white",
+      headerTintColor: theme.textColor,
       headerTitleStyle: {
-        color: "white",
+        color: theme.textColor,
       },
       headerStyle: {
         backgroundColor: theme.backgroundColor,
@@ -119,6 +119,8 @@ export const ThemeStyles = (theme) => {
     StandardStyles: StyleSheet.create({
       scrollContainer: {
         backgroundColor: theme.backgroundColor,
+        paddingTop: '20%'
+
       },
       scrollContainerContent: {
         alignItems: "center",

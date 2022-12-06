@@ -5,6 +5,7 @@ import LocalFriends from "../../components/LocalFriends";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { getFriends } from "../../models/friends";
+import { getUser } from "../../models/users";
 
 const Friends = ({ navigation }) => {
   const [friendList, setFriendList] = React.useState([]);
@@ -27,7 +28,13 @@ const Friends = ({ navigation }) => {
   React.useEffect(() => {
     const fetchFriends = async () => {
       const result = await getFriends();
-      setFriendList(result.friends);
+      let friends = [];
+
+      for (let friend of result.friends) {
+        friends.push(await getUser(friend));
+      }
+
+      setFriendList(friends);
     };
 
     fetchFriends();

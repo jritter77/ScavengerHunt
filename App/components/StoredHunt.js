@@ -19,7 +19,7 @@ const StoredHunt = ({ hunt }) => {
     <TouchableHighlight
       style={{
         ...styles.container,
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.btnBgColor,
         borderColor: theme.btnBorderColor,
       }}
       underlayColor={"cyan"}
@@ -27,18 +27,18 @@ const StoredHunt = ({ hunt }) => {
       onPress={handlePress}
     >
       <View>
-        <Text style={{ ...styles.title, color: theme.textColor }}>
+        <Text style={{ ...styles.title, color: theme.btnTextColor }}>
           {title}{" "}
         </Text>
         <Rating
           style={styles.rating}
           rating={getAvgRating(ratings).toFixed(1)}
           size={20}
-          backgroundColor="white"
+          backgroundColor={theme.btnBgColor}
         />
         <Text
           numberOfLines={1}
-          style={{ ...styles.description, color: theme.textColor }}
+          style={{ ...styles.description, color: theme.btnTextColor }}
         >
           {description}
         </Text>

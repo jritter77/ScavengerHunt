@@ -7,10 +7,10 @@ const Rating = ({ rating, size, backgroundColor, style }) => {
 
   const theme = React.useContext(ThemeContext);
 
-  if (!rating) {
+  if (rating < 0.1) {
     return (
       <View style={{ ...styles.container, ...style }}>
-        <Text style={{ fontSize: size, ...styles.text }}>No&nbsp;Rating</Text>
+        <Text style={{ fontSize: size, ...styles.text, color: theme.textColor }}>No&nbsp;Rating</Text>
       </View>
     );
   }
@@ -28,7 +28,7 @@ const Rating = ({ rating, size, backgroundColor, style }) => {
           style={{
             ...styles.cover,
             width: `${percent}%`,
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: backgroundColor,
           }}
         ></View>
       </View>

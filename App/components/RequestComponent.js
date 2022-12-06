@@ -3,10 +3,13 @@ import React from "react";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Styles";
+import IconButton from "./IconButton";
+import { acceptFriendRequest } from "../models/friends";
 
-const RequestComponent = ({ id, username }) => {
+const RequestComponent = ({ request }) => {
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
+  const {id, username} = request;
   // Finish Hunts Completed after implementation of Hunt History
   return (
     <View
@@ -19,9 +22,8 @@ const RequestComponent = ({ id, username }) => {
       <Text style={{ ...styles.user, color: theme.btnTextColor }}>
         {username}
       </Text>
-      <Text style={{ ...styles.info, color: theme.btnTextColor }}>
-        Hunts Completed: 0{" "}
-      </Text>
+      <IconButton icon={require('../assets/gearIcon.png')} onPress={() => acceptFriendRequest(request)}/>
+      <IconButton icon={require('../assets/gearIcon.png')} onPress={() => console.log('reject')}/>
     </View>
   );
 };
@@ -34,6 +36,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: "2%",
     padding: "5%",
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
 
   user: {

@@ -21,7 +21,7 @@ const FriendRequests = ({ navigation }) => {
     const requestObj = [];
     for (let req of reqs) {
       requestObj.push(
-        <RequestComponent key={req._id} id={req._id} username={req.username} />
+        <RequestComponent key={req._id} request={req} />
       );
     }
     return requestObj;
@@ -34,7 +34,7 @@ const FriendRequests = ({ navigation }) => {
     };
 
     fetchFriendReqs();
-  });
+  }, []);
 
   return (
     <ScrollView

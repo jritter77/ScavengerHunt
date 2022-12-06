@@ -2,10 +2,10 @@ import axios from "axios";
 import { getData } from "../Methods";
 
 // Server API
-const apiRoot = "https://lookout-sh.com/";
+// const apiRoot = "https://lookout-sh.com/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 export async function sendFriendRequest(friendName) {
   try {
@@ -13,7 +13,7 @@ export async function sendFriendRequest(friendName) {
 
     const result = await axios.post(
       apiRoot + "friends",
-      { user: user.username, receiver: friendName },
+      { user: {username: user.username}, receiver: {username: friendName} },
       { params: { JWT: user.token } }
     );
 
@@ -41,3 +41,14 @@ export async function getFriends() {
 }
 
 // accept friend request
+export async function acceptFriendRequest(request) {
+  try {
+    const user = await getData('user');
+    const result = await axios.put(apiRoot + "friends/accept", {request}, {params: {JWT: user.token}});
+    console.log(result.data);
+  }
+  catch (e) {
+    console.log(e);
+  }
+  
+}

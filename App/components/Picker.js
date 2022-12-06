@@ -56,7 +56,7 @@ const Picker = ({ options, val, setVal }) => {
           { ...styles.button, backgroundColor: theme.backgroundColor },
           {
             ...styles.buttonOpen,
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: theme.inputBgColor,
             borderColor: theme.inputBorderColor,
           },
         ]}

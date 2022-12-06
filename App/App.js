@@ -39,7 +39,7 @@ export default function App() {
 
   if (loggedIn) {
     return (
-      <ThemeContext.Provider value={ThemeStyles(themes.dark)}>
+      <ThemeContext.Provider value={ThemeStyles(themes.default)}>
         <MainStack setLoggedIn={setLoggedIn} />
       </ThemeContext.Provider>
     );

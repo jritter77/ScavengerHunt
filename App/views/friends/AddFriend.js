@@ -6,7 +6,10 @@ import { sendFriendRequest } from "../../models/friends";
 import { getData } from "../../Methods";
 import axios from "axios";
 
-const apiRoot = "http://lookout-sh.com/";
+// const apiRoot = "https://lookout-sh.com/";
+
+const apiRoot = "http://localhost:3000/";
+
 
 const AddFriend = ({ navigation }) => {
   const [friend, setFriend] = React.useState("");

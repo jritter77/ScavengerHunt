@@ -4,10 +4,10 @@ import { setData, getData } from "../Methods";
 // PUBLIC HUNT METHODS
 
 // Server API
-const apiRoot = "https://lookout-sh.com/";
+// const apiRoot = "https://lookout-sh.com/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 export async function getPublicHunts(searchTerm, limit) {
   const user = await getData("user");

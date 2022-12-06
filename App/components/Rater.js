@@ -2,12 +2,17 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StandardButton from './StandardButton';
+import { backgroundColor, ThemeContext } from '../Styles';
 
 const Rater = ({rating, setRating}) => {
+
+    const theme = React.useContext(ThemeContext);
+
 
     const RateButton = ({value}) => {
 
         const [bgColor, setBgColor] = React.useState('grey');
+
 
         const handlePress = () => {
             setRating(value);
@@ -30,13 +35,13 @@ const Rater = ({rating, setRating}) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, backgroundColor: theme.inputBgColor, borderColor: theme.inputBorderColor}}>
             <RateButton value={1}/>
             <RateButton value={2}/>
             <RateButton value={3}/>
             <RateButton value={4}/>
             <RateButton value={5}/>
-            <Text style={styles.text}>{rating}</Text>
+            <Text style={{...styles.text, color: theme.textColor}}>{rating}</Text>
         </View>
     )
 }
