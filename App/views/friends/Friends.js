@@ -13,26 +13,17 @@ const Friends = ({ navigation }) => {
 
   function populateFriends() {
     const friendsObj = [];
-    if (!friendList.length) {
+    
+    for (let friend of friendList) {
       friendsObj.push(
-        <Text key={0} style={styles.noFriends}>
-          You have not added any friends yet.
-          <br />
-          <br />
-          Please press the "+" button above to send a friend request.
-        </Text>
+        <LocalFriends
+          key={friend._id}
+          id={friend._id}
+          username={friend.username}
+        />
       );
-    } else {
-      for (let friend of friendList) {
-        friendsObj.push(
-          <LocalFriends
-            key={friend._id}
-            id={friend._id}
-            username={friend.username}
-          />
-        );
-      }
     }
+
     return friendsObj;
   }
 
@@ -56,7 +47,15 @@ const Friends = ({ navigation }) => {
       style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
-      <View style={styles.friendsContainer}>{populateFriends()}</View>
+      
+      <View style={styles.friendsContainer}>
+        {friendList.length === 0 && <Text key={0} style={styles.noFriends}>
+          {`You have not added any friends yet.
+
+          Please press the "+" button above to send a friend request.`}
+        </Text>}
+        {populateFriends()}
+      </View>
     </ScrollView>
   );
 };
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
   noFriends: {
     textAlign: "center",
     width: "70%",
+    fontSize: 20
   },
 });
 

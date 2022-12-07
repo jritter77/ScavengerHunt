@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { CustomAlert } from "../../Methods";
 import { updateUsername } from "../../models/users";
 
-const changeUserName = ({ navigation }) => {
+const ChangeUserName = ({ navigation }) => {
   const [username, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
@@ -15,7 +15,6 @@ const changeUserName = ({ navigation }) => {
 
   return (
     <View style={theme.StandardStyles.page}>
-      <Text>ChangeUsername</Text>
       <TextInput
         onChangeText={setUserName}
         placeholder="UserName"
@@ -43,4 +42,4 @@ const changeUserName = ({ navigation }) => {
   );
 };
 
-export default changeUserName;
+export default ChangeUserName;

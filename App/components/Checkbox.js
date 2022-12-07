@@ -23,7 +23,7 @@ const Checkbox = ({ entry, setEntry }) => {
     >
       {checked === true && (
         <Text style={{ ...styles.text, color: theme.btnTextColor }}>
-          &#9932;
+          X
         </Text>
       )}
     </TouchableWithoutFeedback>

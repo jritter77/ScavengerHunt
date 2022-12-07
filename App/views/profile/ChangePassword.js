@@ -12,7 +12,6 @@ const ChangePassword = ({ navigation }) => {
 
   return (
     <View style={theme.StandardStyles.page}>
-      <Text>ChangePassword</Text>
       <TextInput
         onChangeText={setOldPassword}
         placeholder="Old Password"

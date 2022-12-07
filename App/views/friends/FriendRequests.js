@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import React from "react";
 
@@ -32,7 +32,13 @@ const FriendRequests = ({ navigation }) => {
       style={theme.StandardStyles.scrollContainer}
       contentContainerstyle={theme.StandardStyles.scrollContainerContent}
     >
-      <View style={styles.requestContainer}>{populateRequests()}</View>
+      
+      <View style={styles.requestContainer}>
+        {reqs.length === 0 && <Text key={0} style={styles.noReqs}>
+          You do not currently have any friend requests.
+        </Text>}
+        {populateRequests()}
+        </View>
     </ScrollView>
   );
 };
@@ -42,6 +48,11 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
+  noReqs: {
+    textAlign: 'center',
+    fontSize: 20,
+    width: '100%',
+  }
 });
 
 export default FriendRequests;
