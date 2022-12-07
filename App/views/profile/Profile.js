@@ -16,6 +16,14 @@ const Profile = ({navigation}) => {
         onPress={() => navigation.navigate('ChangeCredentials')}
       />
       <StandardButton 
+        title='Change Username'
+        onPress={() => navigation.navigate('ChangeUsername')}
+      />
+       <StandardButton 
+        title='Change Password'
+        onPress={() => navigation.navigate('ChangePassword')}
+      />
+       <StandardButton 
         title='Settings'
         onPress={() => navigation.navigate('Settings')}
       />

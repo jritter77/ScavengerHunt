@@ -34,8 +34,12 @@ const Styles = {
             borderColor: 'blue',
             borderWidth: 2,
             margin: '5%',
-            backgroundColor: 'white'
-          }
+            backgroundColor: 'white',
+          },
+        feedback: {
+          color: 'red'
+        }
+          
       })
 
 }

@@ -12,6 +12,26 @@ const changeUserName = ({navigation}) => {
   const [username, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [feedback, setFeedback] = React.useState('');
+  const [incompleteField, setIncompleteField] = React.useState('');
+  
+  async function verfiyInputs() {
+    // verify and see if passwords match
+    if(!username || !password) {
+      setIncompleteField('Fields cannot be blank');
+      return;
+    }
+    // send credentials to server for verification 
+    const result = await updateUsername(username, password);
+      console.log(result);
+    if (result) {
+      
+      navigation.navigate('ChangeCredentials')
+    
+    }
+    else {
+      setFeedback('Incorrect Password')
+    }
+  }
 
   return (
     <View style={Styles.StandardStyles.page}>
@@ -29,17 +49,9 @@ const changeUserName = ({navigation}) => {
         <Text>{feedback}</Text>
         <StandardButton 
           title='Submit'
-          onPress={
-            async () => {
-              if (await updateUsername(username, password)) {
-                navigation.navigate('ChangeCredentials');
-              }
-              else {
-                setFeedback('Incorrect Password')
-              }
-            }}
-
+          onPress={verfiyInputs}
         />
+        
     </View>
   )
 }

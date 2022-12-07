@@ -30,7 +30,7 @@ export async function loginUser(username, password) {
     try {
       const user = await getData('user');
       const verify = await loginUser(user.username, password);
-
+      console.log(verify)
       if (verify) {
         const result = await axios.put(
           apiRoot + 'users', 
@@ -48,3 +48,30 @@ export async function loginUser(username, password) {
       return false;
     }
   }
+
+  export async function updatePassword(oldPassword, newPassword) {
+    try {
+      console.log(oldPassword, newPassword)
+      const user = await getData('user');
+      const verify = await loginUser(user.username, oldPassword);
+      console.log(verify)
+      if (verify) {
+        const result = await axios.put(
+          apiRoot + 'users/changePassword', 
+          {user: {_id: user.id}, password: newPassword}, 
+          {params: {JWT: user.token}}
+        );
+        await loginUser(user.username, newPassword);
+        return true;
+
+      }
+
+      return false;
+      
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
+  
