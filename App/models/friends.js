@@ -32,7 +32,6 @@ export async function getFriends() {
     const result = await axios.get(apiRoot + "friends", {
       params: { JWT: user.token },
     });
-    console.log(result.data);
     return result.data;
   } catch (e) {
     console.log(e);

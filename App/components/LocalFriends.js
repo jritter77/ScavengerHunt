@@ -11,7 +11,7 @@ const LocalFriends = ({ id, username }) => {
     <TouchableHighlight
       style={{
         ...styles.container,
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.btnBgColor,
         borderColor: theme.btnBorderColor,
       }}
       underlayColor={"cyan"}

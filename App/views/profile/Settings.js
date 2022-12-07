@@ -8,7 +8,6 @@ const Settings = ({ navigation }) => {
   return (
     <View style={theme.StandardStyles.page}>
       <Text style={styles.text}>Themes</Text>
-      <Text style={styles.text}>Font Size</Text>
       <Text style={styles.text}>Data</Text>
       <StandardButton
         title='Delete Local Data'

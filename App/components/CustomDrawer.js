@@ -18,7 +18,8 @@ const CustomDrawer = (props) => {
     <DrawerContentScrollView {...props}>
         <DrawerItem 
             label={username}
-            style={{borderWidth: 2}}
+            style={{borderBottomWidth: 2}}
+            labelStyle={{fontSize: 20, fontWeight: 'bold'}}
         />
         <DrawerItemList {...props} />
     </DrawerContentScrollView>
