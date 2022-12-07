@@ -9,8 +9,16 @@ import { acceptFriendRequest } from "../models/friends";
 const RequestComponent = ({ request }) => {
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
-  const {id, username} = request;
-  // Finish Hunts Completed after implementation of Hunt History
+  const { id, username } = request;
+
+  const handleAccept = () => {
+    acceptFriendRequest(request);
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Friends" }, { name: "FriendRequests" }],
+    });
+  };
+
   return (
     <View
       style={{
@@ -22,8 +30,14 @@ const RequestComponent = ({ request }) => {
       <Text style={{ ...styles.user, color: theme.btnTextColor }}>
         {username}
       </Text>
-      <IconButton icon={require('../assets/gearIcon.png')} onPress={() => acceptFriendRequest(request)}/>
-      <IconButton icon={require('../assets/gearIcon.png')} onPress={() => console.log('reject')}/>
+      <IconButton
+        icon={require("../assets/checkIcon.png")}
+        onPress={handleAccept}
+      />
+      <IconButton
+        icon={require("../assets/xIcon.png")}
+        onPress={() => console.log("reject")}
+      />
     </View>
   );
 };
@@ -36,8 +50,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: "2%",
     padding: "5%",
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 
   user: {
