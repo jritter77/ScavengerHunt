@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import React from "react";
-import { TouchableHighlight } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Styles";
 
@@ -43,8 +42,6 @@ const styles = StyleSheet.create({
   user: {
     fontSize: 20,
     textAlign: "left",
-    top: "2%",
-    left: "2%",
     paddingBottom: 10,
     fontWeight: "bold",
   },

@@ -20,9 +20,7 @@ const FriendRequests = ({ navigation }) => {
   function populateRequests() {
     const requestObj = [];
     for (let req of reqs) {
-      requestObj.push(
-        <RequestComponent key={req._id} request={req} />
-      );
+      requestObj.push(<RequestComponent key={req._id} request={req} />);
     }
     return requestObj;
   }
@@ -49,8 +47,7 @@ const FriendRequests = ({ navigation }) => {
 const styles = StyleSheet.create({
   requestContainer: {
     width: "100%",
-    paddingLeft: "10%",
-    marginTop: "15%",
+    alignItems: "center",
   },
 });
 

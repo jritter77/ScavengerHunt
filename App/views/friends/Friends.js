@@ -13,14 +13,25 @@ const Friends = ({ navigation }) => {
 
   function populateFriends() {
     const friendsObj = [];
-    for (let friend of friendList) {
+    if (!friendList.length) {
       friendsObj.push(
-        <LocalFriends
-          key={friend._id}
-          id={friend._id}
-          username={friend.username}
-        />
+        <Text key={0} style={styles.noFriends}>
+          You have not added any friends yet.
+          <br />
+          <br />
+          Please press the "+" button above to send a friend request.
+        </Text>
       );
+    } else {
+      for (let friend of friendList) {
+        friendsObj.push(
+          <LocalFriends
+            key={friend._id}
+            id={friend._id}
+            username={friend.username}
+          />
+        );
+      }
     }
     return friendsObj;
   }
@@ -53,8 +64,11 @@ const Friends = ({ navigation }) => {
 const styles = StyleSheet.create({
   friendsContainer: {
     width: "100%",
-    paddingLeft: "10%",
-    marginTop: "15%",
+    alignItems: "center",
+  },
+  noFriends: {
+    textAlign: "center",
+    width: "70%",
   },
 });
 
