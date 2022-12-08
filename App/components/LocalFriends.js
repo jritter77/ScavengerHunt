@@ -3,9 +3,16 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Styles";
 
-const LocalFriends = ({ id, username }) => {
+const LocalFriends = ({friend}) => {
+  const {username} = friend;
+
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
+
+  const handlePress = () => {
+    navigation.navigate("FriendStack", {screen: 'FriendProfile', friend: friend});
+  }
+
   return (
     <TouchableHighlight
       style={{
@@ -15,7 +22,7 @@ const LocalFriends = ({ id, username }) => {
       }}
       underlayColor={"cyan"}
       activeOpacity={0.6}
-      onPress={() => navigation.navigate("FriendProfile")}
+      onPress={handlePress}
     >
       <View>
         <Text style={{ ...styles.user, color: theme.textColor }}>

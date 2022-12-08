@@ -7,7 +7,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { getFriends } from "../../models/friends";
 import { getUser } from "../../models/users";
 
-const Friends = ({ navigation }) => {
+const Friends = (props) => {
   const [friendList, setFriendList] = React.useState([]);
   const theme = React.useContext(ThemeContext);
 
@@ -18,8 +18,7 @@ const Friends = ({ navigation }) => {
       friendsObj.push(
         <LocalFriends
           key={friend._id}
-          id={friend._id}
-          username={friend.username}
+          friend={friend}
         />
       );
     }
