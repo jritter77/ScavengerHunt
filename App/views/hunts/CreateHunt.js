@@ -166,7 +166,6 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
         options={[
           { text: "checkbox", value: "checkbox" },
           { text: "text", value: "text" },
-          { text: "image", value: "image" },
         ]}
         val={pickerVal}
         setVal={setPickerVal}
@@ -211,6 +210,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: "5%",
     flex: 1,
+    marginTop: '10%'
   },
   description: {
     backgroundColor: "white",

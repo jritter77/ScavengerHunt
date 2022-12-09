@@ -4,6 +4,7 @@ import { Styles, ThemeContext } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
 import { useNavigation } from "@react-navigation/native";
 import { updatePassword } from "../../models/users";
+import { ScrollView } from "react-native-gesture-handler";
 
 const ChangePassword = ({ navigation }) => {
   const [oldPassword, setOldPassword] = React.useState('');
@@ -37,7 +38,10 @@ const ChangePassword = ({ navigation }) => {
 
 
   return (
-    <View style={theme.StandardStyles.page}>
+    <ScrollView 
+    style={theme.StandardStyles.scrollContainer}
+    contentContainerStyle={theme.StandardStyles.scrollContainerContent}
+    >
         <TextInput 
           onChangeText={setOldPassword}
           placeholder='Old Password'
@@ -64,7 +68,7 @@ const ChangePassword = ({ navigation }) => {
           title='Submit'
           onPress={verfiyInputs}
         />
-    </View>
+    </ScrollView>
   )
 };
 

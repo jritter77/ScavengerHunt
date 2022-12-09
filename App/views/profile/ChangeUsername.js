@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { CustomAlert } from "../../Methods";
 import { updateUsername } from "../../models/users";
+import { ScrollView } from "react-native-gesture-handler";
 
 const ChangeUserName = ({ navigation }) => {
   const [username, setUserName] = React.useState("");
@@ -14,7 +15,10 @@ const ChangeUserName = ({ navigation }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <View style={theme.StandardStyles.page}>
+    <ScrollView 
+    style={theme.StandardStyles.scrollContainer}
+    contentContainerStyle={theme.StandardStyles.scrollContainerContent}
+    >
       <TextInput
         onChangeText={setUserName}
         placeholder="UserName"
@@ -39,7 +43,7 @@ const ChangeUserName = ({ navigation }) => {
           }
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 

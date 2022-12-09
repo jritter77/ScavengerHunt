@@ -48,7 +48,7 @@ const Friends = (props) => {
     >
       
       <View style={styles.friendsContainer}>
-        {friendList.length === 0 && <Text key={0} style={styles.noFriends}>
+        {friendList.length === 0 && <Text key={0} style={{...styles.noFriends, color: theme.textColor}}>
           {`You have not added any friends yet.
 
           Please press the "+" button above to send a friend request.`}
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   friendsContainer: {
     width: "100%",
     alignItems: "center",
+    marginTop: '10%'
   },
   noFriends: {
     textAlign: "center",

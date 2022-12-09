@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     padding: "5%",
+    marginTop: '10%'
   },
   description: {
     backgroundColor: "white",

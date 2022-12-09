@@ -120,8 +120,6 @@ export const ThemeStyles = (theme) => {
     StandardStyles: StyleSheet.create({
       scrollContainer: {
         backgroundColor: theme.backgroundColor,
-        paddingTop: '20%'
-
       },
       scrollContainerContent: {
         alignItems: "center",

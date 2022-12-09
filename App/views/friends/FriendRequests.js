@@ -34,7 +34,7 @@ const FriendRequests = ({ navigation }) => {
     >
       
       <View style={styles.requestContainer}>
-        {reqs.length === 0 && <Text key={0} style={styles.noReqs}>
+        {reqs.length === 0 && <Text key={0} style={{...styles.noReqs, color: theme.textColor}}>
           You do not currently have any friend requests.
         </Text>}
         {populateRequests()}
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   requestContainer: {
     width: "100%",
     alignItems: "center",
+    marginTop: '10%'
   },
   noReqs: {
     textAlign: 'center',

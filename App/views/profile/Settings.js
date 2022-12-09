@@ -16,12 +16,12 @@ const Settings = ({ navigation, setTheme }) => {
 
   return (
     <View style={theme.StandardStyles.page}>
-      <Text style={styles.text}>Themes</Text>
+      <Text style={{...styles.text, color: theme.textColor}}>Themes</Text>
       <View style={styles.themes}>
         <ThemeButton theme='default' setTheme={setTheme} />
         <ThemeButton theme='dark' setTheme={setTheme} />
       </View>
-      <Text style={styles.text}>Data</Text>
+      <Text style={{...styles.text, color: theme.textColor}}>Data</Text>
       <StandardButton
         title='Delete Local Data'
         onPress={clearUserData}

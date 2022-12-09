@@ -82,10 +82,6 @@ const LocalHuntInfo = ({ navigation, route }) => {
         {description}
       </Text>
       <StandardButton
-        title="Invite Friend"
-        onPress={() => console.log("Invite Friend!")}
-      />
-      <StandardButton
         title="Start/Continue"
         onPress={() =>
           navigation.navigate("HuntStack", {
@@ -120,6 +116,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: "5%",
     fontWeight: "bold",
+    marginTop: '10%'
   },
   description: {
     backgroundColor: "white",

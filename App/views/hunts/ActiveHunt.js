@@ -90,6 +90,7 @@ const ActiveHunt = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   progress: {
     width: "80%",
+    marginTop: '10%'
   },
   clueText: {
     fontSize: 20,
