@@ -6,14 +6,15 @@ import { getData } from '../Methods';
 const CustomDrawer = (props) => {
     const [username, setUsername] = React.useState('');
 
-    React.useState(() => {
+    React.useEffect(() => {
         const getUser = async () => {
             const user = await getData('user');
             setUsername(user.username);
         }
 
         getUser();
-    })
+    }, [])
+
   return (
     <DrawerContentScrollView {...props}>
         <DrawerItem 

@@ -13,7 +13,7 @@ import CustomDrawer from '../components/CustomDrawer';
 const Drawer = createDrawerNavigator();
 
 
-const MainStack = ({setLoggedIn}) => {
+const MainStack = ({setLoggedIn, setTheme}) => {
 
     const theme = React.useContext(ThemeContext);
 
@@ -27,7 +27,7 @@ const MainStack = ({setLoggedIn}) => {
             <Drawer.Screen name="Dashboard" component={Dashboard} />
             <Drawer.Screen
               name="ProfileStack"
-              children={() => <ProfileStack setLoggedIn={setLoggedIn} />}
+              children={() => <ProfileStack setLoggedIn={setLoggedIn} setTheme={setTheme} />}
               options={{ drawerLabel: "Profile" }}
             />
             <Drawer.Screen

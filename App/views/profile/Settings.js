@@ -2,16 +2,29 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Styles, ThemeContext } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
+import ThemeButton from "../../components/ThemeButton";
+import { setData } from "../../Methods";
+import { setUserHunts } from "../../models/hunts";
 
-const Settings = ({ navigation }) => {
+const Settings = ({ navigation, setTheme }) => {
   const theme = React.useContext(ThemeContext);
+
+
+  const clearUserData = async () => {
+    const result = await setUserHunts({});
+  }
+
   return (
     <View style={theme.StandardStyles.page}>
       <Text style={styles.text}>Themes</Text>
+      <View style={styles.themes}>
+        <ThemeButton theme='default' setTheme={setTheme} />
+        <ThemeButton theme='dark' setTheme={setTheme} />
+      </View>
       <Text style={styles.text}>Data</Text>
       <StandardButton
         title='Delete Local Data'
-        onPress={() => console.log('delete data')}
+        onPress={clearUserData}
         
         />
     </View>
@@ -24,6 +37,12 @@ const styles = StyleSheet.create({
     width: '70%',
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  themes: {
+    flexDirection: 'row',
+    justifyContent: "space-around",
+    width: '80%',
+    margin: '10%'
   }
 })
 
