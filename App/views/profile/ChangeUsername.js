@@ -26,13 +26,14 @@ const ChangeUserName = ({ navigation }) => {
         placeholder="Password"
         placeholderTextColor={theme.inputTextColor}
         style={theme.StandardStyles.textInput}
+        secureTextEntry
       />
-      <Text>{feedback}</Text>
+      <Text style={{color: theme.feedbackNegColor}}>{feedback}</Text>
       <StandardButton
         title="Submit"
         onPress={async () => {
           if (await updateUsername(username, password)) {
-            navigation.navigate("ChangeCredentials");
+            navigation.navigate("Profile");
           } else {
             setFeedback("Incorrect Password");
           }

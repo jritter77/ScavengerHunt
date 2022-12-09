@@ -22,7 +22,6 @@ import MainStack from "./views/MainStack";
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  const theme = useContext(ThemeContext);
 
   React.useEffect(() => {
     const checkToken = async () => {

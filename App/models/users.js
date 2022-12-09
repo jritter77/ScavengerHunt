@@ -77,6 +77,32 @@ export async function updateUsername(newUsername, password) {
   }
 }
 
+export async function updatePassword(oldPassword, newPassword) {
+  try {
+    console.log(oldPassword, newPassword)
+    const user = await getData('user');
+    const verify = await loginUser(user.username, oldPassword);
+    console.log(verify)
+    if (verify) {
+      const result = await axios.put(
+        apiRoot + 'users/changePassword', 
+        {user: {_id: user.id}, password: newPassword}, 
+        {params: {JWT: user.token}}
+      );
+      await loginUser(user.username, newPassword);
+      return true;
+
+    }
+
+    return 'invalid password';
+    
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
+
 export async function getUserSettings() {
   const user = await getData('user');
 
