@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import React from "react";
 import { backgroundColor, Styles, ThemeContext } from "../../Styles";
 import ProgressBar from "../../components/ProgressBar";
@@ -8,7 +8,7 @@ import { downloadHunt, getAvgRating, unpublishHunt } from "../../models/hunts";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { getData } from "../../Methods";
+import { CustomAlert, getData } from "../../Methods";
 
 const StoredHuntInfo = ({ navigation, route }) => {
   const [user, setUser] = React.useState({});
@@ -80,7 +80,11 @@ const StoredHuntInfo = ({ navigation, route }) => {
         onPress={() => navigation.navigate("RateHunt")}
       />
       {user.id === authorId && (
-        <StandardButton title="Unpublish Hunt" onPress={handleUnpublish} />
+        <StandardButton title="Unpublish Hunt" onPress={() => CustomAlert(
+          'Unpublish Hunt',
+          'Are you sure you would like to unpublish this hunt?',
+          handleUnpublish
+        )} />
       )}
     </ScrollView>
   );

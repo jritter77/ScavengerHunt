@@ -3,7 +3,7 @@ import React from "react";
 import { Styles, ThemeContext } from "../../Styles";
 import StandardButton from "../../components/StandardButton";
 import ThemeButton from "../../components/ThemeButton";
-import { setData } from "../../Methods";
+import { CustomAlert, setData } from "../../Methods";
 import { setUserHunts } from "../../models/hunts";
 
 const Settings = ({ navigation, setTheme }) => {
@@ -24,7 +24,11 @@ const Settings = ({ navigation, setTheme }) => {
       <Text style={{...styles.text, color: theme.textColor}}>Data</Text>
       <StandardButton
         title='Delete Local Data'
-        onPress={clearUserData}
+        onPress={() => CustomAlert(
+          'Delete Local Data',
+          'Are you sure you would like to delete this user\'s local data?',
+          clearUserData
+          )}
         
         />
     </View>

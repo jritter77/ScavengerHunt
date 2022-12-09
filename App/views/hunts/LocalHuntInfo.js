@@ -8,7 +8,7 @@ import {
   getHuntProgress,
   publishHunt,
 } from "../../models/hunts";
-import { getData } from "../../Methods";
+import { CustomAlert, getData } from "../../Methods";
 import { ScrollView } from "react-native-gesture-handler";
 
 const LocalHuntInfo = ({ navigation, route }) => {
@@ -90,7 +90,11 @@ const LocalHuntInfo = ({ navigation, route }) => {
           })
         }
       />
-      <StandardButton title="Delete Hunt" onPress={handleDelete} />
+      <StandardButton title="Delete Hunt" onPress={() => CustomAlert(
+        'Delete Hunt', 
+        'Are you sure you would like to delete this hunt permanently?',
+        handleDelete
+      )} />
       {authorId === user.id && (
         <StandardButton title="Publish Hunt" onPress={handlePublish} />
       )}

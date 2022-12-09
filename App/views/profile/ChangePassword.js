@@ -5,6 +5,7 @@ import StandardButton from "../../components/StandardButton";
 import { useNavigation } from "@react-navigation/native";
 import { updatePassword } from "../../models/users";
 import { ScrollView } from "react-native-gesture-handler";
+import { CustomAlert } from "../../Methods";
 
 const ChangePassword = ({ navigation }) => {
   const [oldPassword, setOldPassword] = React.useState('');
@@ -14,27 +15,27 @@ const ChangePassword = ({ navigation }) => {
   const theme = React.useContext(ThemeContext);
 
    async function verfiyInputs() {
-  // verify and see if passwords match
-  if(!oldPassword || !newPassword || !passwordConfirm) {
-    setFeedback('Fields cannot be blank');
-    return;
-  }
+    // verify and see if passwords match
+    if(!oldPassword || !newPassword || !passwordConfirm) {
+      setFeedback('Fields cannot be blank');
+      return;
+    }
 
-  if (newPassword !== passwordConfirm) {
-    setFeedback('New password does not match confirmation');
-    return;
-  }
+    if (newPassword !== passwordConfirm) {
+      setFeedback('New password does not match confirmation');
+      return;
+    }
 
-  // send credentials to server for verification 
-  const result = await updatePassword(oldPassword, newPassword);
-    console.log(result);
-  if (result === true) {
-    navigation.navigate('Profile')
+    // send credentials to server for verification 
+    const result = await updatePassword(oldPassword, newPassword);
+      console.log(result);
+    if (result === true) {
+      navigation.navigate('Profile')
+    }
+    else {
+      setFeedback(result)
+    }
   }
-  else {
-    setFeedback(result)
-  }
-}
 
 
   return (
@@ -66,7 +67,12 @@ const ChangePassword = ({ navigation }) => {
         <Text style={{color: theme.feedbackNegColor}}>{feedback}</Text>
         <StandardButton 
           title='Submit'
-          onPress={verfiyInputs}
+          onPress={() => CustomAlert(
+            'Change Password', 
+            'Are you sure you would like to change your password?',
+            verfiyInputs
+            )
+          }
         />
     </ScrollView>
   )

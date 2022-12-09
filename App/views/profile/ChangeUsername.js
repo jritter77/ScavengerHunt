@@ -14,6 +14,15 @@ const ChangeUserName = ({ navigation }) => {
   const [feedback, setFeedback] = React.useState("");
   const theme = React.useContext(ThemeContext);
 
+  const handleSubmit = async () => {
+    const result = await updateUsername(username, password);
+    if (result) {
+      navigation.navigate("Profile");
+    } else {
+      setFeedback("Incorrect Password");
+    }
+  }
+
   return (
     <ScrollView 
     style={theme.StandardStyles.scrollContainer}
@@ -35,13 +44,11 @@ const ChangeUserName = ({ navigation }) => {
       <Text style={{color: theme.feedbackNegColor}}>{feedback}</Text>
       <StandardButton
         title="Submit"
-        onPress={async () => {
-          if (await updateUsername(username, password)) {
-            navigation.navigate("Profile");
-          } else {
-            setFeedback("Incorrect Password");
-          }
-        }}
+        onPress={() => CustomAlert(
+          'Change Username',
+          'Are you sure you would like to change your username?',
+          handleSubmit
+        )}
       />
     </ScrollView>
   );
