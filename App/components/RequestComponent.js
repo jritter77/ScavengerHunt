@@ -6,11 +6,13 @@ import { ThemeContext } from "../Styles";
 import IconButton from "./IconButton";
 import { acceptFriendRequest } from "../models/friends";
 
+// Friend request Component
 const RequestComponent = ({ request }) => {
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
   const { id, username } = request;
 
+  // press handler to accept friend request
   const handleAccept = () => {
     acceptFriendRequest(request);
     navigation.reset({

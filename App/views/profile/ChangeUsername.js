@@ -8,12 +8,14 @@ import { CustomAlert } from "../../Methods";
 import { updateUsername } from "../../models/users";
 import { ScrollView } from "react-native-gesture-handler";
 
+// Change Username View
 const ChangeUserName = ({ navigation }) => {
   const [username, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
   const theme = React.useContext(ThemeContext);
 
+  // Submit Handler
   const handleSubmit = async () => {
     const result = await updateUsername(username, password);
     if (result) {
@@ -21,12 +23,12 @@ const ChangeUserName = ({ navigation }) => {
     } else {
       setFeedback("Incorrect Password");
     }
-  }
+  };
 
   return (
-    <ScrollView 
-    style={theme.StandardStyles.scrollContainer}
-    contentContainerStyle={theme.StandardStyles.scrollContainerContent}
+    <ScrollView
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
       <TextInput
         onChangeText={setUserName}
@@ -41,14 +43,16 @@ const ChangeUserName = ({ navigation }) => {
         style={theme.StandardStyles.textInput}
         secureTextEntry
       />
-      <Text style={{color: theme.feedbackNegColor}}>{feedback}</Text>
+      <Text style={{ color: theme.feedbackNegColor }}>{feedback}</Text>
       <StandardButton
         title="Submit"
-        onPress={() => CustomAlert(
-          'Change Username',
-          'Are you sure you would like to change your username?',
-          handleSubmit
-        )}
+        onPress={() =>
+          CustomAlert(
+            "Change Username",
+            "Are you sure you would like to change your username?",
+            handleSubmit
+          )
+        }
       />
     </ScrollView>
   );

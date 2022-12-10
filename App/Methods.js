@@ -2,13 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 import axios from "axios";
 
+// Cutom alert function
 export function CustomAlert(title, msg, confirmHandler) {
-    return Alert.alert(title, msg, [
-        {text: 'yes', onPress: confirmHandler},
-        {text:'no'}
-    ])
+  return Alert.alert(title, msg, [
+    { text: "yes", onPress: confirmHandler },
+    { text: "no" },
+  ]);
 }
 
+// set local data function
 export async function setData(key, data) {
   try {
     const strData = JSON.stringify(data);
@@ -18,6 +20,7 @@ export async function setData(key, data) {
   }
 }
 
+// get local data function
 export async function getData(key) {
   try {
     const result = await AsyncStorage.getItem(key);
@@ -27,7 +30,7 @@ export async function getData(key) {
   }
 }
 
-
+// remove local data function
 export async function removeData(key) {
   try {
     await AsyncStorage.removeItem(key);
@@ -37,10 +40,3 @@ export async function removeData(key) {
     return false;
   }
 }
-
-
-
-
-
-
-  

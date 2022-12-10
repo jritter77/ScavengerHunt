@@ -5,12 +5,14 @@ import Rating from "./Rating";
 import { getAvgRating } from "../models/hunts";
 import { ThemeContext } from "../Styles";
 
+// Stored Hunt Component
 const StoredHunt = ({ hunt }) => {
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
 
   const { title, ratings, description } = hunt;
 
+  // press handler
   function handlePress() {
     navigation.navigate("HuntStack", { screen: "StoredHuntInfo", hunt: hunt });
   }

@@ -7,6 +7,7 @@ import Checkbox from "../../components/Checkbox";
 import StandardButton from "../../components/StandardButton";
 import { updateLocalHunt, getHuntProgress } from "../../models/hunts";
 
+// Active Hunt View
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
   const theme = React.useContext(ThemeContext);
@@ -14,6 +15,7 @@ const ActiveHunt = ({ navigation, route }) => {
   const [clues, setClues] = React.useState(hunt.clueList);
   const [clueFields, setClueFields] = React.useState([]);
 
+  // Save Hunt Handler
   const handleSave = async () => {
     hunt.clueList = clues;
     await updateLocalHunt(hunt);
@@ -27,6 +29,7 @@ const ActiveHunt = ({ navigation, route }) => {
     });
   };
 
+  // Clue Field Sub-Component
   const ClueField = ({ clue }) => {
     const [entry, setEntry] = React.useState(clue.entry);
     const [valid, setValid] = React.useState("red");
@@ -66,6 +69,7 @@ const ActiveHunt = ({ navigation, route }) => {
     );
   };
 
+  // Effect hook to set Clues
   React.useEffect(() => {
     for (let clue in clues) {
       setClueFields((oldState) => [
@@ -90,7 +94,7 @@ const ActiveHunt = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   progress: {
     width: "80%",
-    marginTop: '10%'
+    marginTop: "10%",
   },
   clueText: {
     fontSize: 20,

@@ -11,11 +11,13 @@ import {
 import { CustomAlert, getData } from "../../Methods";
 import { ScrollView } from "react-native-gesture-handler";
 
+// Local Hunt Info View
 const LocalHuntInfo = ({ navigation, route }) => {
   const { _id, title, description, authorId } = route.params.hunt;
   const [user, setUser] = React.useState({});
   const theme = React.useContext(ThemeContext);
 
+  // Delete Hunt Handler
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
     navigation.reset({
@@ -24,6 +26,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
     });
   };
 
+  // Publish Hunt Handler
   const handlePublish = async () => {
     const publishedHunt = await publishHunt(route.params.hunt);
     if (!publishedHunt) {
@@ -39,6 +42,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
     });
   };
 
+  // Effect Hook to fetch user object
   React.useEffect(() => {
     const getUser = async () => {
       setUser(await getData("user"));
@@ -90,11 +94,16 @@ const LocalHuntInfo = ({ navigation, route }) => {
           })
         }
       />
-      <StandardButton title="Delete Hunt" onPress={() => CustomAlert(
-        'Delete Hunt', 
-        'Are you sure you would like to delete this hunt permanently?',
-        handleDelete
-      )} />
+      <StandardButton
+        title="Delete Hunt"
+        onPress={() =>
+          CustomAlert(
+            "Delete Hunt",
+            "Are you sure you would like to delete this hunt permanently?",
+            handleDelete
+          )
+        }
+      />
       {authorId === user.id && (
         <StandardButton title="Publish Hunt" onPress={handlePublish} />
       )}
@@ -120,7 +129,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: "5%",
     fontWeight: "bold",
-    marginTop: '10%'
+    marginTop: "10%",
   },
   description: {
     backgroundColor: "white",

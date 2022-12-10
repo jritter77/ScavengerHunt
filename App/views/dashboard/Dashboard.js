@@ -3,6 +3,7 @@ import React from "react";
 import { Styles, ThemeContext } from "../../Styles";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 
+// Dashboard View
 const Dashboard = ({ navigation, route }) => {
   const theme = React.useContext(ThemeContext);
 

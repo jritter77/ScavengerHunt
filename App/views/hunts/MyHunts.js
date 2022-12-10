@@ -9,12 +9,14 @@ import { getData } from "../../Methods";
 import IconButton from "../../components/IconButton";
 import { getUserHunts } from "../../models/hunts";
 
+// My Hunts View
 const MyHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
   const [limit, setLimit] = React.useState(5);
   const theme = React.useContext(ThemeContext);
 
+  // Search Handler
   async function handleSubmit() {
     const localHunts = await getUserHunts();
     const filteredHunts = {};
@@ -35,6 +37,7 @@ const MyHunts = ({ navigation }) => {
     setHunts(filteredHunts);
   }
 
+  // Populate Hunts function
   function populateHunts() {
     const huntObjs = [];
 
@@ -53,6 +56,7 @@ const MyHunts = ({ navigation }) => {
     return huntObjs;
   }
 
+  // Effect hook to fetch local hunts
   React.useEffect(() => {
     async function fetchData() {
       const localHunts = await getUserHunts();

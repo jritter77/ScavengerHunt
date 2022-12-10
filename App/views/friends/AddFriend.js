@@ -10,18 +10,17 @@ const apiRoot = "https://lookout-sh.com/";
 
 // const apiRoot = "http://localhost:3000/";
 
-
+// Add Fiend View
 const AddFriend = ({ navigation }) => {
   const [friend, setFriend] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
   const theme = React.useContext(ThemeContext);
 
   async function handleSubmit() {
-    // Send username
-
     // Verify the username exists
     const user = await getData("user");
 
+    // check sending request to self
     if (user.username === friend) {
       console.log("Cannot send friend request to self!");
       setFeedback("Cannot send friend request to self!");

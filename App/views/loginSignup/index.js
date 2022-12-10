@@ -9,6 +9,7 @@ import { Styles } from "../../Styles";
 
 const Stack = createNativeStackNavigator();
 
+// Login Stack Navigator
 const LoginStack = (props) => {
   return (
     <NavigationContainer>

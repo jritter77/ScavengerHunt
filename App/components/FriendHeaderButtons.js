@@ -4,7 +4,9 @@ import { Styles } from "../Styles";
 
 const mail = require("../assets/mailSymbol.png");
 
+// Friend Header Buttons component
 const FriendHeaderButtons = ({ navigation }) => {
+  // Friend Request Button
   const FriendRequestsButton = () => {
     return (
       <TouchableOpacity
@@ -17,6 +19,8 @@ const FriendHeaderButtons = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
+
+  // Add Friend Button
   const AddFriendButton = () => {
     return (
       <TouchableOpacity

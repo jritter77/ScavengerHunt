@@ -9,6 +9,7 @@ const apiRoot = "https://lookout-sh.com/";
 // Local API
 // const apiRoot = "http://localhost:3000/";
 
+// Get public hunts
 export async function getPublicHunts(searchTerm, limit) {
   const user = await getData("user");
   const result = await axios.get(apiRoot + "hunts", {
@@ -17,19 +18,9 @@ export async function getPublicHunts(searchTerm, limit) {
   return result.data;
 }
 
+// Publish Hunt
 export async function publishHunt(localHunt) {
   const user = await getData("user");
-
-  // const exists = await axios.get(apiRoot + "hunts", {
-  //   params: { JWT: user.token, search: localHunt._id },
-  // });
-
-  // if (exists.data.length) {
-  //   alert(
-  //     "Hunt is already published!\n\nPlease unpublish hunt and republish to replace."
-  //   );
-  //   return;
-  // }
 
   for (let clue in localHunt.clueList) {
     localHunt.clueList[clue].entry = "";
@@ -62,20 +53,18 @@ export async function publishHunt(localHunt) {
   return result.data;
 }
 
+// Unpublish Hunt
 export async function unpublishHunt(publishedHuntId) {
   const user = await getData("user");
-
-  console.log(user.token);
 
   const result = await axios.delete(apiRoot + "hunts", {
     params: { JWT: user.token, huntId: publishedHuntId },
   });
 
-  console.log(result);
-
   return true;
 }
 
+// Download Hunt
 export async function downloadHunt(publishedHuntId) {
   const user = await getData("user");
   const currentHunts = (await getUserHunts()) || {};
@@ -102,6 +91,7 @@ export async function downloadHunt(publishedHuntId) {
   return localHunt;
 }
 
+// Rate Hunt
 export async function rateHunt(huntId, rating) {
   const user = await getData("user");
 
@@ -116,6 +106,7 @@ export async function rateHunt(huntId, rating) {
   return result.data;
 }
 
+// Get Average Rating
 export function getAvgRating(ratings) {
   let total = 0;
   let count = 0;
@@ -130,6 +121,7 @@ export function getAvgRating(ratings) {
 
 // LOCAL HUNT METHODS
 
+// Create Local Hunt
 export async function createLocalHunt(huntObj) {
   const user = await getData("user");
   const currentHunts = await getUserHunts();
@@ -149,6 +141,7 @@ export async function createLocalHunt(huntObj) {
   return hunt;
 }
 
+// Delete Local Hunt
 export async function deleteLocalHunt(id) {
   const currentHunts = await getUserHunts();
 
@@ -157,6 +150,7 @@ export async function deleteLocalHunt(id) {
   await setUserHunts(currentHunts);
 }
 
+// Update Local Hunt
 export async function updateLocalHunt(hunt) {
   const currentHunts = await getUserHunts();
 
@@ -167,6 +161,7 @@ export async function updateLocalHunt(hunt) {
   await setUserHunts(currentHunts);
 }
 
+// get Hunt Progress
 export function getHuntProgress(hunt) {
   const clues = hunt.clueList;
 
@@ -186,11 +181,13 @@ export function getHuntProgress(hunt) {
   return Math.round((100 * complete) / total);
 }
 
+// Set User Hunt
 export async function setUserHunts(hunts) {
   const user = await getData("user");
   const localHunts = await setData(user.id + "_hunts", hunts);
 }
 
+// Get User Hunts
 export async function getUserHunts() {
   const user = await getData("user");
   const localHunts = await getData(user.id + "_hunts");

@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { ThemeContext } from "../Styles";
 
+// Progress Bar Component
 const ProgressBar = ({ value, style }) => {
   const theme = React.useContext(ThemeContext);
   return (

@@ -7,6 +7,7 @@ const apiRoot = "https://lookout-sh.com/";
 // Local API
 // const apiRoot = "http://localhost:3000/";
 
+// Create New User
 export async function createNewUser(username, password) {
   try {
     const result = await axios.post(apiRoot + "users", {
@@ -22,6 +23,7 @@ export async function createNewUser(username, password) {
   }
 }
 
+// Login User
 export async function loginUser(username, password) {
   try {
     const result = await axios.post(apiRoot + "users/login", {
@@ -41,12 +43,13 @@ export async function loginUser(username, password) {
   }
 }
 
+// Get User
 export async function getUser(username) {
   try {
-    const user = await getData('user');
-    const result = await axios.get(
-      apiRoot + 'users', 
-      {params: {JWT: user.token, username: username}})
+    const user = await getData("user");
+    const result = await axios.get(apiRoot + "users", {
+      params: { JWT: user.token, username: username },
+    });
 
     return result.data;
   } catch (e) {
@@ -54,6 +57,7 @@ export async function getUser(username) {
   }
 }
 
+// Update Username
 export async function updateUsername(newUsername, password) {
   console.log("");
   try {
@@ -77,42 +81,38 @@ export async function updateUsername(newUsername, password) {
   }
 }
 
+// Update Password
 export async function updatePassword(oldPassword, newPassword) {
   try {
-    console.log(oldPassword, newPassword)
-    const user = await getData('user');
+    const user = await getData("user");
     const verify = await loginUser(user.username, oldPassword);
-    console.log(verify)
     if (verify) {
       const result = await axios.put(
-        apiRoot + 'users/changePassword', 
-        {user: {_id: user.id}, password: newPassword}, 
-        {params: {JWT: user.token}}
+        apiRoot + "users/changePassword",
+        { user: { _id: user.id }, password: newPassword },
+        { params: { JWT: user.token } }
       );
       await loginUser(user.username, newPassword);
       return true;
-
     }
 
-    return 'invalid password';
-    
+    return "invalid password";
   } catch (e) {
     console.log(e);
     return false;
   }
 }
 
-
+// Get User Settings
 export async function getUserSettings() {
-  const user = await getData('user');
+  const user = await getData("user");
 
-  let userSettings = await getData(user.id + '_settings');
+  let userSettings = await getData(user.id + "_settings");
 
   if (!userSettings) {
-    userSettings = {theme: 'default'};
-    await setData(user.id + '_settings', userSettings);
+    userSettings = { theme: "default" };
+    await setData(user.id + "_settings", userSettings);
   }
 
   return userSettings;
-
 }

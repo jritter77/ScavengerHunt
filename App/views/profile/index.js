@@ -12,13 +12,20 @@ import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
+// Profile Stack Navigator
 const ProfileStack = (props) => {
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
   return (
     <Stack.Navigator screenOptions={theme.StackHeaderStyle}>
-      <Stack.Screen name="Profile" children={() => <Profile navigation={navigation} {...props} />} />
-      <Stack.Screen name="Settings" children={() => <Settings navigation={navigation} {...props} />} />
+      <Stack.Screen
+        name="Profile"
+        children={() => <Profile navigation={navigation} {...props} />}
+      />
+      <Stack.Screen
+        name="Settings"
+        children={() => <Settings navigation={navigation} {...props} />}
+      />
       <Stack.Screen
         name="ChangePassword"
         children={() => <ChangePassword navigation={navigation} {...props} />}

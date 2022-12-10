@@ -19,11 +19,12 @@ import { Styles, ThemeStyles, themes, ThemeContext } from "./Styles";
 import { getUserSettings } from "./models/users";
 import MainStack from "./views/MainStack";
 
+// Main App
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [theme, setTheme] = React.useState(ThemeStyles(themes.default));
 
-
+  // Effect hook to detect user token
   React.useEffect(() => {
     const checkToken = async () => {
       const user = await getData("user");

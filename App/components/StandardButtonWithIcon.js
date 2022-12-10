@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { ThemeContext } from "../Styles";
 
+// Standard Button with Icon Component
 const StandardButtonWithIcon = ({ title, onPress, icon }) => {
   const theme = React.useContext(ThemeContext);
 

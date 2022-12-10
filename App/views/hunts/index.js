@@ -15,6 +15,7 @@ import RateHunt from "./RateHunt";
 
 const Stack = createNativeStackNavigator();
 
+// Hunt Stack Navigator
 const HuntStack = (props) => {
   const theme = React.useContext(ThemeContext);
   return (

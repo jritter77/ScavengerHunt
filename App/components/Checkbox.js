@@ -3,10 +3,12 @@ import React from "react";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { ThemeContext } from "../Styles";
 
+// Checkbox component
 const Checkbox = ({ entry, setEntry }) => {
   const [checked, setChecked] = React.useState(entry);
   const theme = React.useContext(ThemeContext);
 
+  // press handler
   const handlePress = () => {
     setEntry(!entry);
     setChecked(!checked);
@@ -22,9 +24,7 @@ const Checkbox = ({ entry, setEntry }) => {
       onPress={handlePress}
     >
       {checked === true && (
-        <Text style={{ ...styles.text, color: theme.btnTextColor }}>
-          X
-        </Text>
+        <Text style={{ ...styles.text, color: theme.btnTextColor }}>X</Text>
       )}
     </TouchableWithoutFeedback>
   );

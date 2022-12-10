@@ -7,6 +7,7 @@ import StoredHunt from "../../components/StoredHunt";
 import { getPublicHunts } from "../../models/hunts";
 import IconButton from "../../components/IconButton";
 
+// Find Hunts View
 const FindHunts = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [hunts, setHunts] = React.useState([]);
@@ -14,11 +15,13 @@ const FindHunts = ({ navigation }) => {
 
   const theme = React.useContext(ThemeContext);
 
+  // Search Handler
   async function handleSubmit() {
     const result = await getPublicHunts(searchTerm, limit);
     setHunts(result);
   }
 
+  // Populate Hunts function
   function populateHunts() {
     let objs = [];
 
@@ -29,6 +32,7 @@ const FindHunts = ({ navigation }) => {
     return objs;
   }
 
+  // Effect hook to fetch public hunts
   React.useEffect(() => {
     async function fetchData() {
       setHunts(await getPublicHunts(searchTerm, limit));

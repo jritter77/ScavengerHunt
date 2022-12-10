@@ -5,27 +5,27 @@ import { TextInput } from "react-native-gesture-handler";
 import { createNewUser, loginUser } from "../../models/users";
 import StandardButton from "../../components/StandardButton";
 
+// Sign Up View
 const SignUp = ({ setLoggedIn, navigation }) => {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPass, setConfirmPass] = React.useState("");
+  const [feedback, setFeedback] = React.useState("");
 
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPass, setConfirmPass] = React.useState('');
-  const [feedback, setFeedback] = React.useState('');
-
+  // Submit Handler
   const handleSubmit = async () => {
-
     if (!username) {
-      setFeedback('Please enter a Username');
+      setFeedback("Please enter a Username");
       return;
     }
 
     if (!password) {
-      setFeedback('Please enter a password');
+      setFeedback("Please enter a password");
       return;
     }
 
     if (password !== confirmPass) {
-      setFeedback('Passwords do not match');
+      setFeedback("Passwords do not match");
       return;
     }
 
@@ -33,14 +33,13 @@ const SignUp = ({ setLoggedIn, navigation }) => {
       const result = await loginUser(username, password);
       if (result) {
         setLoggedIn(true);
-      }
-      else {
-        setFeedback('Something went wrong...')
+      } else {
+        setFeedback("Something went wrong...");
       }
     } else {
       setFeedback("Something went wrong...");
     }
-  }
+  };
 
   return (
     <View style={Styles.StandardStyles.page}>
@@ -63,10 +62,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
         style={Styles.StandardStyles.textInput}
       />
       <Text style={styles.feedback}>{feedback}</Text>
-      <StandardButton
-        title="Submit"
-        onPress={handleSubmit}
-      />
+      <StandardButton title="Submit" onPress={handleSubmit} />
     </View>
   );
 };
@@ -74,14 +70,14 @@ const SignUp = ({ setLoggedIn, navigation }) => {
 const styles = StyleSheet.create({
   formTitle: {
     fontSize: 20,
-    width: '70%',
-    fontWeight: 'bold'
+    width: "70%",
+    fontWeight: "bold",
   },
   feedback: {
     fontSize: 20,
-    color: 'red',
-    fontWeight: 'bold'
-  }
-})
+    color: "red",
+    fontWeight: "bold",
+  },
+});
 
 export default SignUp;

@@ -9,6 +9,7 @@ import { Styles, ThemeContext } from "../../Styles";
 import FriendHeaderButtons from "../../components/FriendHeaderButtons";
 const Stack = createNativeStackNavigator();
 
+// Friend Navigator Stack
 const FriendStack = (props) => {
   const theme = React.useContext(ThemeContext);
   return (

@@ -7,25 +7,23 @@ import { ScrollView } from "react-native-gesture-handler";
 import { getFriends } from "../../models/friends";
 import { getUser } from "../../models/users";
 
+// Friends View
 const Friends = (props) => {
   const [friendList, setFriendList] = React.useState([]);
   const theme = React.useContext(ThemeContext);
 
+  // Populate Friends
   function populateFriends() {
     const friendsObj = [];
-    
+
     for (let friend of friendList) {
-      friendsObj.push(
-        <LocalFriends
-          key={friend._id}
-          friend={friend}
-        />
-      );
+      friendsObj.push(<LocalFriends key={friend._id} friend={friend} />);
     }
 
     return friendsObj;
   }
 
+  // Effect Hook to fetch friends
   React.useEffect(() => {
     const fetchFriends = async () => {
       const result = await getFriends();
@@ -46,13 +44,14 @@ const Friends = (props) => {
       style={theme.StandardStyles.scrollContainer}
       contentContainerStyle={theme.StandardStyles.scrollContainerContent}
     >
-      
       <View style={styles.friendsContainer}>
-        {friendList.length === 0 && <Text key={0} style={{...styles.noFriends, color: theme.textColor}}>
-          {`You have not added any friends yet.
+        {friendList.length === 0 && (
+          <Text key={0} style={{ ...styles.noFriends, color: theme.textColor }}>
+            {`You have not added any friends yet.
 
           Please press the "+" button above to send a friend request.`}
-        </Text>}
+          </Text>
+        )}
         {populateFriends()}
       </View>
     </ScrollView>
@@ -63,12 +62,12 @@ const styles = StyleSheet.create({
   friendsContainer: {
     width: "100%",
     alignItems: "center",
-    marginTop: '10%'
+    marginTop: "10%",
   },
   noFriends: {
     textAlign: "center",
     width: "70%",
-    fontSize: 20
+    fontSize: 20,
   },
 });
 

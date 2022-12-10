@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Styles } from "../../Styles";
 import { loginUser } from "../../models/users";
 
+// Login View
 const Login = ({ setLoggedIn }) => {
   const navigation = useNavigation();
 
@@ -13,14 +14,14 @@ const Login = ({ setLoggedIn }) => {
   const [password, setPassword] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
 
+  // Submit Handler
   async function handleSubmit() {
     // Verify credentials are not blank or violate syntax
     if (!username || !password) {
       setFeedback("Please enter a username and password");
       return;
-    }
-    else {
-      setFeedback('');
+    } else {
+      setFeedback("");
     }
 
     // Send credentials to server for verification
@@ -28,9 +29,8 @@ const Login = ({ setLoggedIn }) => {
 
     if (result) {
       setLoggedIn(true);
-    }
-    else {
-      setFeedback('Invalid Credentials')
+    } else {
+      setFeedback("Invalid Credentials");
     }
   }
 
@@ -67,9 +67,9 @@ const Login = ({ setLoggedIn }) => {
 const styles = StyleSheet.create({
   feedback: {
     fontSize: 20,
-    color: 'red',
-    width: '70%'
-  }
-})
+    color: "red",
+    width: "70%",
+  },
+});
 
 export default Login;

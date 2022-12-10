@@ -3,15 +3,20 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Styles";
 
-const LocalFriends = ({friend}) => {
-  const {username} = friend;
+// Local Friends Component
+const LocalFriends = ({ friend }) => {
+  const { username } = friend;
 
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
 
+  // Press Handler
   const handlePress = () => {
-    navigation.navigate("FriendStack", {screen: 'FriendProfile', friend: friend});
-  }
+    navigation.navigate("FriendStack", {
+      screen: "FriendProfile",
+      friend: friend,
+    });
+  };
 
   return (
     <TouchableHighlight

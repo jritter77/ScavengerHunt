@@ -6,6 +6,7 @@ import StandardButton from "../../components/StandardButton";
 import Picker from "../../components/Picker";
 import { createLocalHunt } from "../../models/hunts";
 
+// Create Hunt View
 const CreateHunt = ({ navigation }) => {
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
@@ -17,6 +18,7 @@ const CreateHunt = ({ navigation }) => {
 
   const theme = React.useContext(ThemeContext);
 
+  // Save Handler
   const handleSave = async () => {
     if (!title && !desc) {
       setFeedback("Please enter a Title and Description");
@@ -45,6 +47,7 @@ const CreateHunt = ({ navigation }) => {
     });
   };
 
+  // Add clue Handler
   const handleAddClue = () => {
     const arr = [...clueFields];
     if (arr.length) {
@@ -70,6 +73,7 @@ const CreateHunt = ({ navigation }) => {
     setClueFields(arr);
   };
 
+  // Effect hook to set clue fields
   React.useEffect(() => {
     let fields = [];
 
@@ -124,6 +128,7 @@ const CreateHunt = ({ navigation }) => {
   );
 };
 
+// Clue Field Sub-Component
 const ClueField = ({ id, setClueVals, setClueFields }) => {
   const [clue, setClue] = React.useState("");
   const [answer, setAnswer] = React.useState("");
@@ -142,6 +147,7 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
     });
   };
 
+  // Effect hook for fields
   React.useEffect(() => {
     setClueVals((oldState) => {
       oldState[id] = { id, clue, answer, entry: "", type: pickerVal };
@@ -210,7 +216,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: "5%",
     flex: 1,
-    marginTop: '10%'
+    marginTop: "10%",
   },
   description: {
     backgroundColor: "white",

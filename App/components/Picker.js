@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import { ThemeContext } from "../Styles";
 
+// Picker Component
 const Picker = ({ options, val, setVal }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const theme = React.useContext(ThemeContext);
 
+  // Picer Option Sub-Component
   const PickerOption = ({ text, value }) => (
     <Pressable
       style={styles.option}
@@ -19,6 +21,7 @@ const Picker = ({ options, val, setVal }) => {
     </Pressable>
   );
 
+  // Populate Options function
   const populateOptions = () => {
     const pickerOptions = [];
 

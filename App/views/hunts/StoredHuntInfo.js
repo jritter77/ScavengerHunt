@@ -10,11 +10,13 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { CustomAlert, getData } from "../../Methods";
 
+// Stored Hunt Info View
 const StoredHuntInfo = ({ navigation, route }) => {
   const [user, setUser] = React.useState({});
   const { _id, authorId, ratings, title, description } = route.params.hunt;
   const theme = React.useContext(ThemeContext);
 
+  // Download Handler
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
     console.log("newhunt:", newHunt);
@@ -28,6 +30,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
     });
   };
 
+  // Unpublish Handler
   const handleUnpublish = async () => {
     const result = await unpublishHunt(_id);
     navigation.reset({
@@ -36,6 +39,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
     });
   };
 
+  // Effect hook to fetch user object
   React.useEffect(() => {
     const getUser = async () => {
       setUser(await getData("user"));
@@ -54,7 +58,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
           ...styles.title,
           backgroundColor: theme.inputBgColor,
           color: theme.textColor,
-          borderColor: theme.inputBorderColor
+          borderColor: theme.inputBorderColor,
         }}
       >
         {title}
@@ -69,7 +73,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
           ...styles.description,
           backgroundColor: theme.inputBgColor,
           color: theme.textColor,
-          borderColor: theme.inputBorderColor
+          borderColor: theme.inputBorderColor,
         }}
       >
         {description}
@@ -80,11 +84,16 @@ const StoredHuntInfo = ({ navigation, route }) => {
         onPress={() => navigation.navigate("RateHunt")}
       />
       {user.id === authorId && (
-        <StandardButton title="Unpublish Hunt" onPress={() => CustomAlert(
-          'Unpublish Hunt',
-          'Are you sure you would like to unpublish this hunt?',
-          handleUnpublish
-        )} />
+        <StandardButton
+          title="Unpublish Hunt"
+          onPress={() =>
+            CustomAlert(
+              "Unpublish Hunt",
+              "Are you sure you would like to unpublish this hunt?",
+              handleUnpublish
+            )
+          }
+        />
       )}
     </ScrollView>
   );
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     padding: "5%",
-    marginTop: '10%'
+    marginTop: "10%",
   },
   description: {
     backgroundColor: "white",
