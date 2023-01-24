@@ -4,7 +4,7 @@ import { setData, getData } from "../Methods";
 // PUBLIC HUNT METHODS
 
 // Server API
-const apiRoot = "https://lookout-sh.com/";
+const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
 // const apiRoot = "http://localhost:3000/";
@@ -21,6 +21,15 @@ export async function getPublicHunts(searchTerm, limit) {
 // Publish Hunt
 export async function publishHunt(localHunt) {
   const user = await getData("user");
+
+  const exists = await axios.get(apiRoot + "hunts/exists", {
+    params: { JWT: user.token, title: localHunt.title },
+  });
+
+  if (exists.data.length) {
+    alert("Title already in use. Please choose a new title to publish.");
+    return;
+  }
 
   for (let clue in localHunt.clueList) {
     localHunt.clueList[clue].entry = "";

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getData } from "../Methods";
 
 // Server API
-const apiRoot = "https://lookout-sh.com/";
+const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
 // const apiRoot = "http://localhost:3000/";
