@@ -136,6 +136,13 @@ export async function createLocalHunt(huntObj) {
   const currentHunts = await getUserHunts();
   const hunts = currentHunts ? currentHunts : {};
 
+  for (let h in currentHunts) {
+    if (currentHunts[h].title === huntObj.title) {
+      alert("Hunt with title already exists. Please select a new title.");
+      return;
+    }
+  }
+
   const _id = huntObj.title;
   const author = user.username;
   const authorId = user.id;

@@ -37,14 +37,17 @@ const CreateHunt = ({ navigation }) => {
       description: desc,
       clueList: clueVals,
     });
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Hunts" }, { name: "MyHunts" }],
-    });
-    navigation.navigate("HuntStack", {
-      screen: "LocalHuntInfo",
-      hunt: newHunt,
-    });
+
+    if (newHunt) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Hunts" }, { name: "MyHunts" }],
+      });
+      navigation.navigate("HuntStack", {
+        screen: "LocalHuntInfo",
+        hunt: newHunt,
+      });
+    }
   };
 
   // Add clue Handler
