@@ -148,6 +148,10 @@ const ClueField = ({ id, setClueVals, setClueFields }) => {
       );
       return [...oldState];
     });
+    setClueVals((oldState) => {
+      delete oldState[id];
+      return { ...oldState };
+    });
   };
 
   // Effect hook for fields
