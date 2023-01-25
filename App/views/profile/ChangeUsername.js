@@ -17,12 +17,24 @@ const ChangeUserName = ({ navigation }) => {
 
   // Submit Handler
   const handleSubmit = async () => {
-    const result = await updateUsername(username, password);
-    if (result) {
-      navigation.navigate("Profile");
-    } else {
-      setFeedback("Incorrect Password");
+    // verify and see if passwords match
+    if (!username || !password) {
+      setFeedback("Fields cannot be blank");
+      return;
     }
+
+    CustomAlert(
+      "Change Username",
+      "Are you sure you would like to change your username?",
+      async () => {
+        const result = await updateUsername(username, password);
+        if (result) {
+          navigation.navigate("Profile");
+        } else {
+          setFeedback("Incorrect Password");
+        }
+      }
+    );
   };
 
   return (
@@ -44,16 +56,7 @@ const ChangeUserName = ({ navigation }) => {
         secureTextEntry
       />
       <Text style={{ color: theme.feedbackNegColor }}>{feedback}</Text>
-      <StandardButton
-        title="Submit"
-        onPress={() =>
-          CustomAlert(
-            "Change Username",
-            "Are you sure you would like to change your username?",
-            handleSubmit
-          )
-        }
-      />
+      <StandardButton title="Submit" onPress={handleSubmit} />
     </ScrollView>
   );
 };

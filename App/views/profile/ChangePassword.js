@@ -28,14 +28,19 @@ const ChangePassword = ({ navigation }) => {
       return;
     }
 
-    // send credentials to server for verification
-    const result = await updatePassword(oldPassword, newPassword);
-    console.log(result);
-    if (result === true) {
-      navigation.navigate("Profile");
-    } else {
-      setFeedback(result);
-    }
+    CustomAlert(
+      "Change Password",
+      "Are you sure you would like to change your password?",
+      async () => {
+        // send credentials to server for verification
+        const result = await updatePassword(oldPassword, newPassword);
+        if (result === true) {
+          navigation.navigate("Profile");
+        } else {
+          setFeedback(result);
+        }
+      }
+    );
   }
 
   return (
@@ -65,16 +70,7 @@ const ChangePassword = ({ navigation }) => {
         secureTextEntry
       />
       <Text style={{ color: theme.feedbackNegColor }}>{feedback}</Text>
-      <StandardButton
-        title="Submit"
-        onPress={() =>
-          CustomAlert(
-            "Change Password",
-            "Are you sure you would like to change your password?",
-            verfiyInputs
-          )
-        }
-      />
+      <StandardButton title="Submit" onPress={verfiyInputs} />
     </ScrollView>
   );
 };
