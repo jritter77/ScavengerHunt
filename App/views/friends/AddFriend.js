@@ -7,10 +7,6 @@ import { getData } from "../../Methods";
 import axios from "axios";
 import { userExists } from "../../models/users";
 
-// const apiRoot = "https://lookout.jrive.space/";
-
-const apiRoot = "http://localhost:3000/";
-
 // Add Fiend View
 const AddFriend = ({ navigation }) => {
   const [friend, setFriend] = React.useState("");
