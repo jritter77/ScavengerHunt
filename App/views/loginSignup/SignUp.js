@@ -29,7 +29,9 @@ const SignUp = ({ setLoggedIn, navigation }) => {
       return;
     }
 
-    if (await createNewUser(username, password)) {
+    const userCreated = await createNewUser(username, password);
+
+    if (userCreated === "SUCCESS") {
       const result = await loginUser(username, password);
       if (result) {
         setLoggedIn(true);
@@ -37,7 +39,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
         setFeedback("Something went wrong...");
       }
     } else {
-      setFeedback("Something went wrong...");
+      setFeedback(userCreated);
     }
   };
 

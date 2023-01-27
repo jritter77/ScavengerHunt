@@ -2,10 +2,10 @@ import axios from "axios";
 import { getData } from "../Methods";
 
 // Server API
-const apiRoot = "https://lookout.jrive.space/";
+// const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 // Send friend request
 export async function sendFriendRequest(friendName) {

@@ -2,10 +2,10 @@ import axios from "axios";
 import { setData, getData } from "../Methods";
 
 // Server API
-const apiRoot = "https://lookout.jrive.space/";
+// const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 // Create New User
 export async function createNewUser(username, password) {
@@ -14,9 +14,7 @@ export async function createNewUser(username, password) {
       username: username,
       password: password,
     });
-    if (result.data) {
-      return true;
-    }
+    return result.data;
   } catch (e) {
     console.log(e);
     return false;
@@ -55,6 +53,17 @@ export async function getUser(username) {
   } catch (e) {
     console.log(e);
   }
+}
+
+// Check user exists
+export async function userExists(username) {
+  const user = await getData("user");
+
+  const exists = await axios.get(apiRoot + "users", {
+    params: { JWT: user.token, username: username },
+  });
+
+  return exists.data.length !== 0;
 }
 
 // Update Username

@@ -4,10 +4,10 @@ import { setData, getData } from "../Methods";
 // PUBLIC HUNT METHODS
 
 // Server API
-const apiRoot = "https://lookout.jrive.space/";
+// const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 // Get public hunts
 export async function getPublicHunts(searchTerm, limit) {

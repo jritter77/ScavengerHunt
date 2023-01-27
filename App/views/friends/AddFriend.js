@@ -5,10 +5,11 @@ import StandardButton from "../../components/StandardButton";
 import { sendFriendRequest } from "../../models/friends";
 import { getData } from "../../Methods";
 import axios from "axios";
+import { userExists } from "../../models/users";
 
-const apiRoot = "https://lookout.jrive.space/";
+// const apiRoot = "https://lookout.jrive.space/";
 
-// const apiRoot = "http://localhost:3000/";
+const apiRoot = "http://localhost:3000/";
 
 // Add Fiend View
 const AddFriend = ({ navigation }) => {
@@ -27,14 +28,9 @@ const AddFriend = ({ navigation }) => {
       return;
     }
 
-    //  check if user exists
-    const exists = await axios.get(apiRoot + "users", {
-      params: { JWT: user.token, username: friend },
-    });
-
     // If not notify user
 
-    if (exists.data.length === 0) {
+    if (!(await userExists(friend))) {
       console.log("Not found!");
       setFeedback("User not found...");
     }
