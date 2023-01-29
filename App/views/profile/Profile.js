@@ -4,12 +4,17 @@ import StandardButton from "../../components/StandardButton";
 import { Styles, ThemeContext } from "../../Styles";
 
 import { useNavigation } from "@react-navigation/native";
-import { removeData } from "../../Methods";
+import { getData, removeData } from "../../Methods";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
+import HuntHistory from "../../components/HuntHistory";
+import { getUser } from "../../models/users";
+import { ScrollView } from "react-native-gesture-handler";
 
 // Profile View
 const Profile = ({ navigation, setLoggedIn }) => {
   const theme = React.useContext(ThemeContext);
+  const [username, setUsername] = React.useState("");
+  const [huntHistory, setHuntHistory] = React.useState("");
 
   // Sign out handler
   const handleSignOut = async () => {
@@ -17,8 +22,23 @@ const Profile = ({ navigation, setLoggedIn }) => {
     setLoggedIn(false);
   };
 
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getData("user");
+      const user = await getUser(currentUser.username);
+      setUsername(user.username);
+      setHuntHistory(user.huntHistory);
+    };
+
+    fetchUser();
+  }, []);
+
   return (
-    <View style={theme.StandardStyles.page}>
+    <ScrollView
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={theme.StandardStyles.scrollContainerContent}
+    >
+      <HuntHistory username={username} huntHistory={huntHistory} />
       <StandardButtonWithIcon
         title="Change User Name"
         icon={require("../../assets/editIcon.png")}
@@ -43,7 +63,7 @@ const Profile = ({ navigation, setLoggedIn }) => {
         icon={require("../../assets/backIcon.png")}
         onPress={handleSignOut}
       />
-    </View>
+    </ScrollView>
   );
 };
 
