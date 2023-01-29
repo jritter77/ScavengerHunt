@@ -5,7 +5,7 @@ import { ThemeContext } from "../Styles";
 
 // Local Friends Component
 const LocalFriends = ({ friend }) => {
-  const { username } = friend;
+  const { username, huntHistory } = friend;
 
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
@@ -34,7 +34,7 @@ const LocalFriends = ({ friend }) => {
           {username}
         </Text>
         <Text style={{ ...styles.hunts, color: theme.textColor }}>
-          Hunts Completed:{" "}
+          Hunts Completed: {huntHistory.huntsCompleted}
         </Text>
       </View>
     </TouchableHighlight>
