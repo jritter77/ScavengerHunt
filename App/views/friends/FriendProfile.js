@@ -3,6 +3,7 @@ import React from "react";
 import { Styles, ThemeContext } from "../../Styles";
 import HuntHistory from "../../components/HuntHistory";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
+import { removeFriend } from "../../models/friends";
 
 // Firend Profile View
 const FriendProfile = ({ navigation, route }) => {
@@ -16,8 +17,12 @@ const FriendProfile = ({ navigation, route }) => {
       <StandardButtonWithIcon
         title="Remove Friend"
         icon={require("../../assets/xIcon.png")}
-        onPress={() => {
-          navigation.navigate("Friends");
+        onPress={async () => {
+          await removeFriend(username);
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Friends" }],
+          });
         }}
       />
     </View>

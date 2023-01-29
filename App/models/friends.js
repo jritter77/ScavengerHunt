@@ -54,3 +54,17 @@ export async function acceptFriendRequest(request) {
     console.log(e);
   }
 }
+
+export async function removeFriend(friendName) {
+  try {
+    const user = await getData("user");
+    const result = await axios.put(
+      apiRoot + "friends/remove",
+      { user: { username: user.username }, friend: { username: friendName } },
+      { params: { JWT: user.token } }
+    );
+    console.log(result.data);
+  } catch (e) {
+    console.log(e);
+  }
+}
