@@ -55,6 +55,21 @@ export async function acceptFriendRequest(request) {
   }
 }
 
+// decline friend request
+export async function declineFriendRequest(request) {
+  try {
+    const user = await getData("user");
+    const result = await axios.put(
+      apiRoot + "friends/decline",
+      { request },
+      { params: { JWT: user.token } }
+    );
+    console.log(result.data);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function removeFriend(friendName) {
   try {
     const user = await getData("user");

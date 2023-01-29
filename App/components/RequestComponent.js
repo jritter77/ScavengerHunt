@@ -4,7 +4,7 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Styles";
 import IconButton from "./IconButton";
-import { acceptFriendRequest } from "../models/friends";
+import { acceptFriendRequest, declineFriendRequest } from "../models/friends";
 
 // Friend request Component
 const RequestComponent = ({ request }) => {
@@ -13,8 +13,16 @@ const RequestComponent = ({ request }) => {
   const { id, username } = request;
 
   // press handler to accept friend request
-  const handleAccept = () => {
-    acceptFriendRequest(request);
+  const handleAccept = async () => {
+    await acceptFriendRequest(request);
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Friends" }, { name: "FriendRequests" }],
+    });
+  };
+
+  const handleDecline = async () => {
+    await declineFriendRequest(request);
     navigation.reset({
       index: 0,
       routes: [{ name: "Friends" }, { name: "FriendRequests" }],
@@ -38,7 +46,7 @@ const RequestComponent = ({ request }) => {
       />
       <IconButton
         icon={require("../assets/xIcon.png")}
-        onPress={() => console.log("reject")}
+        onPress={handleDecline}
       />
     </View>
   );
