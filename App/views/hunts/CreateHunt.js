@@ -4,15 +4,22 @@ import { Styles, ThemeContext } from "../../Styles";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import StandardButton from "../../components/StandardButton";
 import Picker from "../../components/Picker";
-import { createLocalHunt } from "../../models/hunts";
+import { createLocalHunt, editLocalHunt } from "../../models/hunts";
+import ClueField from "../../components/ClueField";
 
 // Create Hunt View
-const CreateHunt = ({ navigation }) => {
-  const [title, setTitle] = React.useState("");
-  const [desc, setDesc] = React.useState("");
+const CreateHunt = ({ navigation, route }) => {
+  const [title, setTitle] = React.useState(
+    route?.params?.hunt ? route.params.hunt.title : ""
+  );
+  const [desc, setDesc] = React.useState(
+    route?.params?.hunt ? route.params.hunt.description : ""
+  );
 
   const [clueFields, setClueFields] = React.useState([]);
-  const [clueVals, setClueVals] = React.useState({});
+  const [clueVals, setClueVals] = React.useState(
+    route?.params?.hunt ? route.params.hunt.clueList : {}
+  );
 
   const [feedback, setFeedback] = React.useState("");
 
@@ -32,21 +39,43 @@ const CreateHunt = ({ navigation }) => {
       }
     }
 
-    const newHunt = await createLocalHunt({
-      title: title,
-      description: desc,
-      clueList: clueVals,
-    });
+    if (route?.params?.hunt) {
+      const editedHunt = await editLocalHunt({
+        ...route.params.hunt,
+        title: title,
+        description: desc,
+        clueList: clueVals,
+      });
 
-    if (newHunt) {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Hunts" }, { name: "MyHunts" }],
+      console.log(editedHunt);
+
+      if (editedHunt) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Hunts" }, { name: "MyHunts" }],
+        });
+        navigation.navigate("HuntStack", {
+          screen: "LocalHuntInfo",
+          hunt: editedHunt,
+        });
+      }
+    } else {
+      const newHunt = await createLocalHunt({
+        title: title,
+        description: desc,
+        clueList: clueVals,
       });
-      navigation.navigate("HuntStack", {
-        screen: "LocalHuntInfo",
-        hunt: newHunt,
-      });
+
+      if (newHunt) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Hunts" }, { name: "MyHunts" }],
+        });
+        navigation.navigate("HuntStack", {
+          screen: "LocalHuntInfo",
+          hunt: newHunt,
+        });
+      }
     }
   };
 
@@ -80,15 +109,30 @@ const CreateHunt = ({ navigation }) => {
   React.useEffect(() => {
     let fields = [];
 
-    for (let i = 0; i < 3; i++) {
-      fields.push(
-        <ClueField
-          key={i}
-          id={i}
-          setClueVals={setClueVals}
-          setClueFields={setClueFields}
-        />
-      );
+    if (route?.params?.hunt) {
+      for (let clue in clueVals) {
+        console.log(clueVals[clue]);
+        fields.push(
+          <ClueField
+            key={clueVals[clue].id}
+            id={clueVals[clue].id}
+            setClueVals={setClueVals}
+            setClueFields={setClueFields}
+            clueObj={clueVals[clue]}
+          />
+        );
+      }
+    } else {
+      for (let i = 0; i < 3; i++) {
+        fields.push(
+          <ClueField
+            key={i}
+            id={i}
+            setClueVals={setClueVals}
+            setClueFields={setClueFields}
+          />
+        );
+      }
     }
 
     setClueFields(fields);
@@ -109,6 +153,7 @@ const CreateHunt = ({ navigation }) => {
           borderColor: theme.inputBorderColor,
         }}
         onChangeText={setTitle}
+        value={title}
       />
       <TextInput
         multiline
@@ -122,93 +167,13 @@ const CreateHunt = ({ navigation }) => {
           borderColor: theme.inputBorderColor,
         }}
         onChangeText={setDesc}
+        value={desc}
       />
       {clueFields}
       <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton title={"Add Clue"} onPress={handleAddClue} />
       <StandardButton title={"Save Changes"} onPress={handleSave} />
     </ScrollView>
-  );
-};
-
-// Clue Field Sub-Component
-const ClueField = ({ id, setClueVals, setClueFields }) => {
-  const [clue, setClue] = React.useState("");
-  const [answer, setAnswer] = React.useState("");
-
-  const [pickerVal, setPickerVal] = React.useState("checkbox");
-
-  const theme = React.useContext(ThemeContext);
-
-  const handleRemoveClue = () => {
-    setClueFields((oldState) => {
-      oldState.splice(
-        oldState.findIndex((e) => e.props.id === id),
-        1
-      );
-      return [...oldState];
-    });
-    setClueVals((oldState) => {
-      delete oldState[id];
-      return { ...oldState };
-    });
-  };
-
-  // Effect hook for fields
-  React.useEffect(() => {
-    setClueVals((oldState) => {
-      oldState[id] = { id, clue, answer, entry: "", type: pickerVal };
-      return { ...oldState };
-    });
-  }, [clue, answer]);
-
-  return (
-    <View style={styles.clue}>
-      <View style={styles.clueHeader}>
-        <Text style={{ ...styles.text, color: theme.textColor }}>Type:</Text>
-        <TouchableOpacity
-          style={styles.removeClueBtn}
-          onPress={handleRemoveClue}
-        >
-          <Text style={{ ...styles.removeClueText, color: theme.textColor }}>
-            X
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <Picker
-        options={[
-          { text: "checkbox", value: "checkbox" },
-          { text: "text", value: "text" },
-        ]}
-        val={pickerVal}
-        setVal={setPickerVal}
-      />
-      <Text style={{ ...styles.text, color: theme.textColor }}>Clue:</Text>
-      <TextInput
-        placeholder="clue"
-        placeholderTextColor={theme.inputTextColor}
-        onChangeText={setClue}
-        style={{
-          ...styles.field,
-          backgroundColor: theme.inputBgColor,
-          color: theme.textColor,
-          borderColor: theme.inputBorderColor,
-        }}
-      />
-      {pickerVal === "text" && (
-        <TextInput
-          placeholder="answer"
-          placeholderTextColor={theme.inputTextColor}
-          onChangeText={setAnswer}
-          style={{
-            ...styles.field,
-            backgroundColor: theme.inputBgColor,
-            color: theme.textColor,
-            borderColor: theme.inputBorderColor,
-          }}
-        />
-      )}
-    </View>
   );
 };
 
@@ -233,36 +198,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: "5%",
     padding: "5%",
-  },
-  field: {
-    backgroundColor: "white",
-    fontSize: 20,
-    padding: "2%",
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-  clue: {
-    marginBottom: "5%",
-    width: "70%",
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  feedback: {
-    color: "red",
-    fontSize: 20,
-  },
-  removeClueBtn: {},
-  removeClueText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    padding: 4,
-  },
-  clueHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
   },
 });
 

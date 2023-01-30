@@ -27,7 +27,10 @@ const Hunts = ({ navigation }) => {
         title="Create New Hunt"
         icon={require("../../assets/editIcon.png")}
         onPress={() => {
-          navigation.navigate("CreateHunt");
+          navigation.navigate("HuntStack", {
+            screen: "CreateHunt",
+            hunt: null,
+          });
         }}
       />
     </View>

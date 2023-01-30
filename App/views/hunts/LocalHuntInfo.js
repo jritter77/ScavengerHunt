@@ -94,6 +94,21 @@ const LocalHuntInfo = ({ navigation, route }) => {
           })
         }
       />
+      {authorId === user.id && (
+        <>
+          <StandardButton
+            title="Edit Hunt"
+            onPress={() =>
+              navigation.navigate("HuntStack", {
+                screen: "CreateHunt",
+                hunt: route.params.hunt,
+              })
+            }
+          />
+          <StandardButton title="Publish Hunt" onPress={handlePublish} />
+        </>
+      )}
+
       <StandardButton
         title="Delete Hunt"
         onPress={() =>
@@ -104,9 +119,6 @@ const LocalHuntInfo = ({ navigation, route }) => {
           )
         }
       />
-      {authorId === user.id && (
-        <StandardButton title="Publish Hunt" onPress={handlePublish} />
-      )}
     </ScrollView>
   );
 };

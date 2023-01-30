@@ -157,6 +157,27 @@ export async function createLocalHunt(huntObj) {
   return hunt;
 }
 
+export async function editLocalHunt(editedHunt) {
+  const currentHunts = await getUserHunts();
+
+  for (let h in currentHunts) {
+    console.log(currentHunts[h]._id, editedHunt._id);
+    if (
+      currentHunts[h]._id !== editedHunt._id &&
+      currentHunts[h].title === editedHunt.title
+    ) {
+      alert("Hunt with title already exists. Please select a new title.");
+      return;
+    }
+  }
+
+  currentHunts[editedHunt._id] = editedHunt;
+
+  await setUserHunts(currentHunts);
+
+  return editedHunt;
+}
+
 // Delete Local Hunt
 export async function deleteLocalHunt(id) {
   const currentHunts = await getUserHunts();
