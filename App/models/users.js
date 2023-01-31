@@ -125,3 +125,39 @@ export async function getUserSettings() {
 
   return userSettings;
 }
+
+export async function incrementCreated() {
+  const user = await getData("user");
+
+  const result = await axios.put(
+    apiRoot + "users/hunts/created",
+    {},
+    { params: { JWT: user.token } }
+  );
+
+  return result.data;
+}
+
+export async function incrementPlayed() {
+  const user = await getData("user");
+
+  const result = await axios.put(
+    apiRoot + "users/hunts/played",
+    {},
+    { params: { JWT: user.token } }
+  );
+
+  return result.data;
+}
+
+export async function incrementCompleted() {
+  const user = await getData("user");
+
+  const result = await axios.put(
+    apiRoot + "users/hunts/completed",
+    {},
+    { params: { JWT: user.token } }
+  );
+
+  return result.data;
+}
