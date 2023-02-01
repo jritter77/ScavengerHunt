@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "App",
-    "slug": "App",
+    "name": "Lookout! Scavenger Hunt App",
+    "slug": "Lookout_Scavenger_Hunt_App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

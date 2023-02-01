@@ -13,7 +13,9 @@ const Stack = createNativeStackNavigator();
 const LoginStack = (props) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={Styles.DrawerHeaderStyle}>
+      <Stack.Navigator
+        screenOptions={{ ...Styles.DrawerHeaderStyle, headerRight: null }}
+      >
         <Stack.Screen name="Login" children={() => <Login {...props} />} />
         <Stack.Screen name="SignUp" children={() => <SignUp {...props} />} />
       </Stack.Navigator>
