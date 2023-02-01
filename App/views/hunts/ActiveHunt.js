@@ -5,7 +5,12 @@ import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Checkbox from "../../components/Checkbox";
 import StandardButton from "../../components/StandardButton";
-import { updateLocalHunt, getHuntProgress } from "../../models/hunts";
+import {
+  updateLocalHunt,
+  getHuntProgress,
+  getUserHunts,
+} from "../../models/hunts";
+import { incrementCompleted, incrementPlayed } from "../../models/users";
 
 // Active Hunt View
 const ActiveHunt = ({ navigation, route }) => {
@@ -17,8 +22,21 @@ const ActiveHunt = ({ navigation, route }) => {
 
   // Save Hunt Handler
   const handleSave = async () => {
+    const oldHunt = { ...hunt };
     hunt.clueList = clues;
     await updateLocalHunt(hunt);
+
+    const oldProgress = getHuntProgress(oldHunt);
+    const newProgress = getHuntProgress(hunt);
+
+    if (oldProgress < newProgress && newProgress === 100) {
+      await incrementCompleted();
+    }
+
+    if (oldProgress === 0 && newProgress > 0) {
+      await incrementPlayed();
+    }
+
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "MyHunts" }],

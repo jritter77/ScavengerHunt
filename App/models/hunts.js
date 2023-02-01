@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setData, getData } from "../Methods";
+import { incrementCompleted, incrementCreated } from "./users";
 
 // PUBLIC HUNT METHODS
 
@@ -153,6 +154,8 @@ export async function createLocalHunt(huntObj) {
   hunts[_id] = hunt;
 
   await setUserHunts(hunts);
+
+  await incrementCreated();
 
   return hunt;
 }
