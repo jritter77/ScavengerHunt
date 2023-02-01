@@ -19,7 +19,6 @@ const AddFriend = ({ navigation }) => {
 
     // check sending request to self
     if (user.username === friend) {
-      console.log("Cannot send friend request to self!");
       setFeedback("Cannot send friend request to self!");
       return;
     }
@@ -27,7 +26,6 @@ const AddFriend = ({ navigation }) => {
     // If not notify user
 
     if (!(await userExists(friend))) {
-      console.log("Not found!");
       setFeedback("User not found...");
     }
 

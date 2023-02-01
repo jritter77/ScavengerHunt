@@ -5,10 +5,10 @@ import { incrementCompleted, incrementCreated } from "./users";
 // PUBLIC HUNT METHODS
 
 // Server API
-// const apiRoot = "https://lookout.jrive.space/";
+const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
-const apiRoot = "http://localhost:3000/";
+// const apiRoot = "http://localhost:3000/";
 
 // Get public hunts
 export async function getPublicHunts(searchTerm, limit) {
@@ -164,7 +164,6 @@ export async function editLocalHunt(editedHunt) {
   const currentHunts = await getUserHunts();
 
   for (let h in currentHunts) {
-    console.log(currentHunts[h]._id, editedHunt._id);
     if (
       currentHunts[h]._id !== editedHunt._id &&
       currentHunts[h].title === editedHunt.title
@@ -193,8 +192,6 @@ export async function deleteLocalHunt(id) {
 // Update Local Hunt
 export async function updateLocalHunt(hunt) {
   const currentHunts = await getUserHunts();
-
-  console.log(hunt);
 
   currentHunts[hunt._id] = hunt;
 

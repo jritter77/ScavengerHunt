@@ -19,7 +19,6 @@ const StoredHuntInfo = ({ navigation, route }) => {
   // Download Handler
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
-    console.log("newhunt:", newHunt);
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "MyHunts" }],

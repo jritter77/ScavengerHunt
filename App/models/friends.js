@@ -2,10 +2,10 @@ import axios from "axios";
 import { getData } from "../Methods";
 
 // Server API
-// const apiRoot = "https://lookout.jrive.space/";
+const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
-const apiRoot = "http://localhost:3000/";
+// const apiRoot = "http://localhost:3000/";
 
 // Send friend request
 export async function sendFriendRequest(friendName) {
@@ -18,7 +18,6 @@ export async function sendFriendRequest(friendName) {
       { params: { JWT: user.token } }
     );
 
-    console.log(result.data);
     return result.data;
   } catch (e) {
     console.log(e);
@@ -49,7 +48,6 @@ export async function acceptFriendRequest(request) {
       { request },
       { params: { JWT: user.token } }
     );
-    console.log(result.data);
   } catch (e) {
     console.log(e);
   }
@@ -64,7 +62,6 @@ export async function declineFriendRequest(request) {
       { request },
       { params: { JWT: user.token } }
     );
-    console.log(result.data);
   } catch (e) {
     console.log(e);
   }
@@ -78,7 +75,6 @@ export async function removeFriend(friendName) {
       { user: { username: user.username }, friend: { username: friendName } },
       { params: { JWT: user.token } }
     );
-    console.log(result.data);
   } catch (e) {
     console.log(e);
   }

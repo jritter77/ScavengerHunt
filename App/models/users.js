@@ -2,10 +2,10 @@ import axios from "axios";
 import { setData, getData } from "../Methods";
 
 // Server API
-// const apiRoot = "https://lookout.jrive.space/";
+const apiRoot = "https://lookout.jrive.space/";
 
 // Local API
-const apiRoot = "http://localhost:3000/";
+// const apiRoot = "http://localhost:3000/";
 
 // Create New User
 export async function createNewUser(username, password) {
@@ -68,7 +68,6 @@ export async function userExists(username) {
 
 // Update Username
 export async function updateUsername(newUsername, password) {
-  console.log("");
   try {
     const user = await getData("user");
     const verify = await loginUser(user.username, password);

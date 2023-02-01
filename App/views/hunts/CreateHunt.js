@@ -47,8 +47,6 @@ const CreateHunt = ({ navigation, route }) => {
         clueList: clueVals,
       });
 
-      console.log(editedHunt);
-
       if (editedHunt) {
         navigation.reset({
           index: 0,
@@ -111,7 +109,6 @@ const CreateHunt = ({ navigation, route }) => {
 
     if (route?.params?.hunt) {
       for (let clue in clueVals) {
-        console.log(clueVals[clue]);
         fields.push(
           <ClueField
             key={clueVals[clue].id}
