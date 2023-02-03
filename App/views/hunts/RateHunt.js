@@ -5,16 +5,18 @@ import { Styles, ThemeContext } from "../../Styles";
 import Rater from "../../components/Rater";
 import StandardButton from "../../components/StandardButton";
 import { rateHunt } from "../../models/hunts";
+import { ToastContext } from "../../components/Toast";
 
 // Rate Hunt View
 const RateHunt = ({ navigation, route }) => {
   const [rating, setRating] = React.useState(1);
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Submit Handler
   const handleSubmit = async () => {
     const result = await rateHunt(route.params.hunt._id, { rating });
-
+    setToast("Rating Saved");
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "FindHunts" }],

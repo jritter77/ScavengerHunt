@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { ThemeContext } from "../Styles";
 import Dashboard from "./dashboard/Dashboard";
@@ -8,11 +8,12 @@ import ProfileStack from "./profile";
 import HuntStack from "./hunts";
 import FriendStack from "./friends";
 import CustomDrawer from "../components/CustomDrawer";
+import { useAnimatedGestureHandler } from "react-native-reanimated";
 
 const Drawer = createDrawerNavigator();
 
 // Main Stack Drawer Navigator
-const MainStack = ({ setLoggedIn, setTheme }) => {
+const MainStack = (props) => {
   const theme = React.useContext(ThemeContext);
 
   return (
@@ -25,9 +26,7 @@ const MainStack = ({ setLoggedIn, setTheme }) => {
         <Drawer.Screen name="Dashboard" component={Dashboard} />
         <Drawer.Screen
           name="ProfileStack"
-          children={() => (
-            <ProfileStack setLoggedIn={setLoggedIn} setTheme={setTheme} />
-          )}
+          children={() => <ProfileStack {...props} />}
           options={{ drawerLabel: "Profile" }}
         />
         <Drawer.Screen

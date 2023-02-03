@@ -18,11 +18,14 @@ import { getData, setData } from "./Methods";
 import { Styles, ThemeStyles, themes, ThemeContext } from "./Styles";
 import { getUser, getUserSettings, userExists } from "./models/users";
 import MainStack from "./views/MainStack";
+import { Toast, ToastContext } from "./components/Toast";
 
 // Main App
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [theme, setTheme] = React.useState(ThemeStyles(themes.default));
+
+  const [message, setMessage] = React.useState("");
 
   // Effect hook to detect user token
   React.useEffect(() => {
@@ -31,6 +34,7 @@ export default function App() {
       if (user && user.token) {
         if (await userExists(user.username)) {
           setLoggedIn(true);
+          setMessage("Welcome " + user.username + "!");
         } else {
           setLoggedIn(false);
         }
@@ -45,13 +49,18 @@ export default function App() {
   if (loggedIn) {
     return (
       <ThemeContext.Provider value={theme}>
-        <MainStack setLoggedIn={setLoggedIn} setTheme={setTheme} />
+        <ToastContext.Provider value={setMessage}>
+          <MainStack setLoggedIn={setLoggedIn} setTheme={setTheme} />
+          <Toast message={message} />
+        </ToastContext.Provider>
       </ThemeContext.Provider>
     );
   } else {
     return (
       <ThemeContext.Provider value={theme}>
-        <LoginStack setLoggedIn={setLoggedIn} />
+        <ToastContext.Provider value={setMessage}>
+          <LoginStack setLoggedIn={setLoggedIn} />
+        </ToastContext.Provider>
       </ThemeContext.Provider>
     );
   }

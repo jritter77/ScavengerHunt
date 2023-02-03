@@ -9,16 +9,19 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { CustomAlert, getData } from "../../Methods";
+import { ToastContext } from "../../components/Toast";
 
 // Stored Hunt Info View
 const StoredHuntInfo = ({ navigation, route }) => {
   const [user, setUser] = React.useState({});
   const { _id, authorId, ratings, title, description } = route.params.hunt;
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Download Handler
   const handleDownload = async () => {
     const newHunt = await downloadHunt(_id);
+    setToast("Hunt Downloaded");
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "MyHunts" }],
@@ -32,6 +35,7 @@ const StoredHuntInfo = ({ navigation, route }) => {
   // Unpublish Handler
   const handleUnpublish = async () => {
     const result = await unpublishHunt(_id);
+    setToast("Hunt Unpublished");
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "FindHunts" }],

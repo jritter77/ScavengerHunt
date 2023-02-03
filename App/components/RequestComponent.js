@@ -5,16 +5,19 @@ import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../Styles";
 import IconButton from "./IconButton";
 import { acceptFriendRequest, declineFriendRequest } from "../models/friends";
+import { ToastContext } from "./Toast";
 
 // Friend request Component
 const RequestComponent = ({ request }) => {
   const navigation = useNavigation();
   const theme = React.useContext(ThemeContext);
   const { id, username } = request;
+  const setToast = React.useContext(ToastContext);
 
   // press handler to accept friend request
   const handleAccept = async () => {
     await acceptFriendRequest(request);
+    setToast("Friend Request Accepted");
     navigation.reset({
       index: 0,
       routes: [{ name: "Friends" }, { name: "FriendRequests" }],
@@ -23,6 +26,7 @@ const RequestComponent = ({ request }) => {
 
   const handleDecline = async () => {
     await declineFriendRequest(request);
+    setToast("Friend Request Declined");
     navigation.reset({
       index: 0,
       routes: [{ name: "Friends" }, { name: "FriendRequests" }],

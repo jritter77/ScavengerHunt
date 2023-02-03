@@ -4,6 +4,7 @@ import { Styles } from "../../Styles";
 import { TextInput } from "react-native-gesture-handler";
 import { createNewUser, loginUser } from "../../models/users";
 import StandardButton from "../../components/StandardButton";
+import { ToastContext } from "../../components/Toast";
 
 // Sign Up View
 const SignUp = ({ setLoggedIn, navigation }) => {
@@ -11,6 +12,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
   const [password, setPassword] = React.useState("");
   const [confirmPass, setConfirmPass] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+  const setToast = React.useContext(ToastContext);
 
   // Submit Handler
   const handleSubmit = async () => {
@@ -35,6 +37,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
       const result = await loginUser(username, password);
       if (result) {
         setLoggedIn(true);
+        setToast("Welcome " + username + "!");
       } else {
         setFeedback("Something went wrong...");
       }

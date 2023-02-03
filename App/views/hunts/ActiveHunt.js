@@ -11,11 +11,13 @@ import {
   getUserHunts,
 } from "../../models/hunts";
 import { incrementCompleted, incrementPlayed } from "../../models/users";
+import { ToastContext } from "../../components/Toast";
 
 // Active Hunt View
 const ActiveHunt = ({ navigation, route }) => {
   const hunt = route.params.hunt;
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   const [clues, setClues] = React.useState(hunt.clueList);
   const [clueFields, setClueFields] = React.useState([]);
@@ -36,6 +38,8 @@ const ActiveHunt = ({ navigation, route }) => {
     if (oldProgress === 0 && newProgress > 0) {
       await incrementPlayed();
     }
+
+    setToast("Progress Saved");
 
     navigation.reset({
       index: 0,

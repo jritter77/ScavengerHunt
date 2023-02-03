@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { CustomAlert } from "../../Methods";
 import { updateUsername, userExists } from "../../models/users";
 import { ScrollView } from "react-native-gesture-handler";
+import { ToastContext } from "../../components/Toast";
 
 // Change Username View
 const ChangeUserName = ({ navigation }) => {
@@ -14,6 +15,7 @@ const ChangeUserName = ({ navigation }) => {
   const [password, setPassword] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Submit Handler
   const handleSubmit = async () => {
@@ -35,6 +37,7 @@ const ChangeUserName = ({ navigation }) => {
         const result = await updateUsername(username, password);
         if (result) {
           navigation.navigate("Profile");
+          setToast("Username Changed");
         } else {
           setFeedback("Incorrect Password");
         }

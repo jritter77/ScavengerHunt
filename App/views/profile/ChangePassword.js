@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { updatePassword } from "../../models/users";
 import { ScrollView } from "react-native-gesture-handler";
 import { CustomAlert } from "../../Methods";
+import { ToastContext } from "../../components/Toast";
 
 // Change password View
 const ChangePassword = ({ navigation }) => {
@@ -14,6 +15,7 @@ const ChangePassword = ({ navigation }) => {
   const [passwordConfirm, setPasswordConfirm] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Submit Handler
   async function verfiyInputs() {
@@ -36,6 +38,7 @@ const ChangePassword = ({ navigation }) => {
         const result = await updatePassword(oldPassword, newPassword);
         if (result === true) {
           navigation.navigate("Profile");
+          setToast("Password Changed");
         } else {
           setFeedback(result);
         }

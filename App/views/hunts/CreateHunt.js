@@ -6,6 +6,7 @@ import StandardButton from "../../components/StandardButton";
 import Picker from "../../components/Picker";
 import { createLocalHunt, editLocalHunt } from "../../models/hunts";
 import ClueField from "../../components/ClueField";
+import { ToastContext } from "../../components/Toast";
 
 // Create Hunt View
 const CreateHunt = ({ navigation, route }) => {
@@ -24,6 +25,7 @@ const CreateHunt = ({ navigation, route }) => {
   const [feedback, setFeedback] = React.useState("");
 
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Save Handler
   const handleSave = async () => {
@@ -48,6 +50,7 @@ const CreateHunt = ({ navigation, route }) => {
       });
 
       if (editedHunt) {
+        setToast("Hunt Updated");
         navigation.reset({
           index: 0,
           routes: [{ name: "Hunts" }, { name: "MyHunts" }],
@@ -65,6 +68,7 @@ const CreateHunt = ({ navigation, route }) => {
       });
 
       if (newHunt) {
+        setToast("Hunt Created");
         navigation.reset({
           index: 0,
           routes: [{ name: "Hunts" }, { name: "MyHunts" }],

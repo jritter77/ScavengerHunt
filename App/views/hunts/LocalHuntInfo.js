@@ -10,16 +10,19 @@ import {
 } from "../../models/hunts";
 import { CustomAlert, getData } from "../../Methods";
 import { ScrollView } from "react-native-gesture-handler";
+import { ToastContext } from "../../components/Toast";
 
 // Local Hunt Info View
 const LocalHuntInfo = ({ navigation, route }) => {
   const { _id, title, description, authorId } = route.params.hunt;
   const [user, setUser] = React.useState({});
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Delete Hunt Handler
   const handleDelete = async () => {
     await deleteLocalHunt(_id);
+    setToast("Hunt Deleted");
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "MyHunts" }],
@@ -32,6 +35,7 @@ const LocalHuntInfo = ({ navigation, route }) => {
     if (!publishedHunt) {
       return;
     }
+    setToast("Hunt Published");
     navigation.reset({
       index: 0,
       routes: [{ name: "Hunts" }, { name: "FindHunts" }],

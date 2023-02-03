@@ -5,14 +5,17 @@ import StandardButton from "../../components/StandardButton";
 import ThemeButton from "../../components/ThemeButton";
 import { CustomAlert, setData } from "../../Methods";
 import { setUserHunts } from "../../models/hunts";
+import { ToastContext } from "../../components/Toast";
 
 // Settings View
 const Settings = ({ navigation, setTheme }) => {
   const theme = React.useContext(ThemeContext);
+  const setToast = React.useContext(ToastContext);
 
   // Clear User Data Handler
   const clearUserData = async () => {
     const result = await setUserHunts({});
+    setToast("Local data deleted");
   };
 
   return (
