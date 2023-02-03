@@ -5,7 +5,7 @@ import StandardButton from "../../components/StandardButton";
 import { useNavigation } from "@react-navigation/native";
 
 import { CustomAlert } from "../../Methods";
-import { updateUsername } from "../../models/users";
+import { updateUsername, userExists } from "../../models/users";
 import { ScrollView } from "react-native-gesture-handler";
 
 // Change Username View
@@ -20,6 +20,11 @@ const ChangeUserName = ({ navigation }) => {
     // verify and see if passwords match
     if (!username || !password) {
       setFeedback("Fields cannot be blank");
+      return;
+    }
+
+    if (await userExists(username)) {
+      setFeedback("Username already exists");
       return;
     }
 

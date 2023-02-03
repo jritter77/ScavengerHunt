@@ -1,9 +1,9 @@
-import { View, Text, Button, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
+import React, { useContext } from "react";
 import StandardButton from "../../components/StandardButton";
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import { loginUser } from "../../models/users";
 
 // Login View
@@ -13,6 +13,8 @@ const Login = ({ setLoggedIn }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+
+  const theme = useContext(ThemeContext);
 
   // Submit Handler
   async function handleSubmit() {
@@ -35,7 +37,14 @@ const Login = ({ setLoggedIn }) => {
   }
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <ScrollView
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={{
+        ...theme.StandardStyles.scrollContainerContent,
+        minHeight: "100%",
+        justifyContent: "center",
+      }}
+    >
       <TextInput
         onChangeText={setUsername}
         placeholder="Username"
@@ -60,7 +69,7 @@ const Login = ({ setLoggedIn }) => {
           navigation.navigate("SignUp");
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 

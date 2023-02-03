@@ -16,7 +16,7 @@ import LoginStack from "./views/loginSignup";
 import { LinearGradient } from "expo-linear-gradient";
 import { getData, setData } from "./Methods";
 import { Styles, ThemeStyles, themes, ThemeContext } from "./Styles";
-import { getUserSettings } from "./models/users";
+import { getUser, getUserSettings, userExists } from "./models/users";
 import MainStack from "./views/MainStack";
 
 // Main App
@@ -29,7 +29,11 @@ export default function App() {
     const checkToken = async () => {
       const user = await getData("user");
       if (user && user.token) {
-        setLoggedIn(true);
+        if (await userExists(user.username)) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
       } else {
         setLoggedIn(false);
       }
@@ -45,6 +49,10 @@ export default function App() {
       </ThemeContext.Provider>
     );
   } else {
-    return <LoginStack setLoggedIn={setLoggedIn} />;
+    return (
+      <ThemeContext.Provider value={theme}>
+        <LoginStack setLoggedIn={setLoggedIn} />
+      </ThemeContext.Provider>
+    );
   }
 }
