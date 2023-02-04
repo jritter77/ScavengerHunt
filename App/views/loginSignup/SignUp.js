@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
-import { Styles } from "../../Styles";
+import { Styles, ThemeContext } from "../../Styles";
 import { TextInput } from "react-native-gesture-handler";
 import { createNewUser, loginUser } from "../../models/users";
 import StandardButton from "../../components/StandardButton";
@@ -12,6 +12,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
   const [password, setPassword] = React.useState("");
   const [confirmPass, setConfirmPass] = React.useState("");
   const [feedback, setFeedback] = React.useState("");
+  const theme = React.useContext(ThemeContext);
   const setToast = React.useContext(ToastContext);
 
   // Submit Handler
@@ -47,7 +48,14 @@ const SignUp = ({ setLoggedIn, navigation }) => {
   };
 
   return (
-    <View style={Styles.StandardStyles.page}>
+    <ScrollView
+      style={theme.StandardStyles.scrollContainer}
+      contentContainerStyle={{
+        ...theme.StandardStyles.scrollContainerContent,
+        minHeight: "100%",
+        justifyContent: "center",
+      }}
+    >
       <Text style={styles.formTitle}>Create New User</Text>
       <TextInput
         onChangeText={setUsername}
@@ -68,7 +76,7 @@ const SignUp = ({ setLoggedIn, navigation }) => {
       />
       <Text style={styles.feedback}>{feedback}</Text>
       <StandardButton title="Submit" onPress={handleSubmit} />
-    </View>
+    </ScrollView>
   );
 };
 
