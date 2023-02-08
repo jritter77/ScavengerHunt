@@ -4,7 +4,7 @@ import StandardButton from "../../components/StandardButton";
 import { Styles, ThemeContext } from "../../Styles";
 
 import { useNavigation } from "@react-navigation/native";
-import { getData, removeData } from "../../Methods";
+import { CustomAlert, getData, removeData } from "../../Methods";
 import StandardButtonWithIcon from "../../components/StandardButtonWithIcon";
 import HuntHistory from "../../components/HuntHistory";
 import { getUser } from "../../models/users";
@@ -18,8 +18,14 @@ const Profile = ({ navigation, setLoggedIn }) => {
 
   // Sign out handler
   const handleSignOut = async () => {
-    await removeData("user");
-    setLoggedIn(false);
+    CustomAlert(
+      "Sign Out",
+      "Are you sure you would like to sign out?",
+      async () => {
+        await removeData("user");
+        setLoggedIn(false);
+      }
+    );
   };
 
   React.useEffect(() => {
