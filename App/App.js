@@ -20,8 +20,6 @@ import { getUser, getUserSettings, userExists } from "./models/users";
 import MainStack from "./views/MainStack";
 import { Toast, ToastContext } from "./components/Toast";
 
-// Testing
-
 // Main App
 export default function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
